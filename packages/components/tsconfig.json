@@ -1,0 +1,29 @@
+{
+  "extends": "../../tsconfig.json",
+  "compilerOptions": {
+    "outDir": "dist",
+    "rootDir": "src",
+    "declaration": true,
+    "declarationMap": true,
+    "composite": true,
+    "module": "NodeNext",
+    "moduleResolution": "NodeNext",
+    "target": "ES2022",
+    "strict": true,
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "jsx": "react-jsx",
+    "baseUrl": ".",
+    "paths": {
+      "packages/lib": ["../lib/src"],
+      "packages/lib/*": ["../lib/src/*"],
+      "packages/ui": ["src/ui"],
+      "packages/ui/*": ["src/ui/*"]
+    }
+  },
+  "include": ["src"],
+  "references": [
+    { "path": "../lib" }
+  ]
+}
+

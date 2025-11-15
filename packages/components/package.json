@@ -1,0 +1,22 @@
+{
+  "name": "@openchat/components",
+  "version": "1.0.0",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "files": ["dist"],
+  "scripts": {
+    "build": "tsc -b",
+    "dev": "tsc -b --watch",
+    "shadcn": "npx --yes shadcn-ui@latest"
+  },
+  "dependencies": {
+    "@openchat/lib": "workspace:*"
+  },
+  "peerDependencies": {
+    "react": "^19.0.0"
+  },
+  "devDependencies": {
+    "typescript": "^5.0.0"
+  }
+}
+

@@ -1,17 +1,30 @@
 {
   "files": [],
   "references": [
-    {
-      "path": "./tsconfig.app.json"
-    },
-    {
-      "path": "./tsconfig.node.json"
-    }
+    { "path": "./apps/frontend/tsconfig.app.json" },
+    { "path": "./apps/backend/tsconfig.json" },
+    { "path": "./packages/components" },
+    { "path": "./packages/lib" }
   ],
   "compilerOptions": {
+    "composite": true,
+    "declaration": true,
+    "declarationMap": true,
     "baseUrl": ".",
     "paths": {
-      "@/*": ["./src/*"]
+      "@/*": ["./packages/*/src"],
+      "@openchat/components": ["./packages/components/src"],
+      "@openchat/lib": ["./packages/lib/src"],
+      "@openchat/types": ["./packages/types/src"],
+      "web/*": ["./apps/frontend/src/*"],
+      "packages/ui": ["./packages/components/src/ui"],
+      "packages/ui/*": ["./packages/components/src/ui/*"],
+  "packages/lib": ["./packages/lib/src"],
+  "packages/lib/*": ["./packages/lib/src/*"],
+  "packages/lib/utils": ["./packages/lib/src/utils"],
+      "packages/hooks": ["./apps/frontend/src/hooks"],
+      "server/*": ["./apps/backend/*"]
     }
   }
 }
+
