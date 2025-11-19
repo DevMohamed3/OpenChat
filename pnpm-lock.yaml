@@ -90,7 +90,6 @@ importers:
 
   apps/backend:
     dependencies:
-<<<<<<< HEAD
       '@prisma/client':
         specifier: ^6.19.0
         version: 6.19.0(prisma@6.19.0(typescript@5.9.3))(typescript@5.9.3)
@@ -100,11 +99,9 @@ importers:
       bcrypt:
         specifier: ^6.0.0
         version: 6.0.0
-=======
       bcryptjs:
         specifier: ^3.0.3
         version: 3.0.3
->>>>>>> 86353ff774e67d8a05bc95852e232a8785e7a463
       cors:
         specifier: ^2.8.5
         version: 2.8.5
@@ -121,9 +118,6 @@ importers:
         specifier: ^4.8.1
         version: 4.8.1
     devDependencies:
-      '@prisma/client':
-        specifier: ^6.19.0
-        version: 6.19.0(prisma@6.19.0(typescript@5.9.3))(typescript@5.9.3)
       '@types/cors':
         specifier: ^2.8.19
         version: 2.8.19
@@ -1888,15 +1882,13 @@ packages:
     resolution: {integrity: sha512-sXdt2elaVnhpDNRDz+1BDx1JQoJRuNk7oVlAlbGiFkLikHCAQiccexF/9e91zVi6RCgqspl04aP+6Cnl9zRLrA==}
     hasBin: true
 
-<<<<<<< HEAD
   bcrypt@6.0.0:
     resolution: {integrity: sha512-cU8v/EGSrnH+HnxV2z0J7/blxH8gq7Xh2JFT6Aroax7UohdmiJJlxApMxtKfuI7z68NvvVcmR78k2LbT6efhRg==}
     engines: {node: '>= 18'}
-=======
+
   bcryptjs@3.0.3:
     resolution: {integrity: sha512-GlF5wPWnSa/X5LKM1o0wz0suXIINz1iHRLvTS+sLyi7XPbe5ycmYI3DlZqVGZZtDgl4DmasFg7gOB3JYbphV5g==}
     hasBin: true
->>>>>>> 86353ff774e67d8a05bc95852e232a8785e7a463
 
   binary-extensions@2.3.0:
     resolution: {integrity: sha512-Ceh+7ox5qe7LJuLHoY0feh3pHuUDHAcRUeyL2VYghZwfpkNIy/+8Ocg0a3UuSoYzavmylwuLWQOf3hl0jjMMIw==}
@@ -5513,14 +5505,12 @@ snapshots:
 
   baseline-browser-mapping@2.8.29: {}
 
-<<<<<<< HEAD
   bcrypt@6.0.0:
     dependencies:
       node-addon-api: 8.5.0
       node-gyp-build: 4.8.4
-=======
+
   bcryptjs@3.0.3: {}
->>>>>>> 86353ff774e67d8a05bc95852e232a8785e7a463
 
   binary-extensions@2.3.0: {}
 

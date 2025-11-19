@@ -16,13 +16,10 @@
   "license": "ISC",
   "description": "",
   "dependencies": {
-<<<<<<< HEAD
     "@prisma/client": "^6.19.0",
     "@types/bcrypt": "^6.0.0",
     "bcrypt": "^6.0.0",
-=======
     "bcryptjs": "^3.0.3",
->>>>>>> 86353ff774e67d8a05bc95852e232a8785e7a463
     "cors": "^2.8.5",
     "dotenv": "^17.2.3",
     "express": "^5.1.0",
