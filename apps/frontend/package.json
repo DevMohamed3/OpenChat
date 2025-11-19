@@ -40,5 +40,10 @@
     "url": "^0.11.4",
     "vite": "^7.2.2",
     "vite-tsconfig-paths": "^5.1.4"
+  },
+  "next": {
+  "turbopack": {
+    "root": "../.."
   }
+}
 }
