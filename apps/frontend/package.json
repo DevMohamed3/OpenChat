@@ -26,6 +26,7 @@
     "tailwind-merge": "^3.4.0"
   },
   "devDependencies": {
+<<<<<<< HEAD
     "@types/node": "^24.10.1",
     "@types/react": "^19.2.5",
     "@types/react-dom": "^19.2.3",
@@ -35,6 +36,15 @@
     "path": "^0.12.7",
     "postcss": "^8.5.6",
     "tailwindcss": "^3.4.18",
+=======
+    "@tailwindcss/postcss": "^4.1.17",
+    "@tailwindcss/vite": "^4.1.17",
+    "@vitejs/plugin-react": "^5.1.1",
+    "autoprefixer": "^10.4.22",
+    "path": "^0.12.7",
+    "postcss": "^8.5.6",
+    "tailwindcss": "^4.1.17",
+>>>>>>> main
     "tailwindcss-animate": "^1.0.7",
     "typescript": "~5.9.3",
     "url": "^0.11.4",
