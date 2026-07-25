@@ -4,6 +4,7 @@ import helmet from "helmet";
 import authRoutes from "./routes/auth.routes.js";
 import zonesRoutes from "./routes/zones.routes.js";
 import cookieParser from "cookie-parser";
+import { csrfProtection, issueCsrfToken } from "./middlewares/csrf.js";
 import friendRoutes from "./routes/friend.routes.js";
 import chatRoutes from "./routes/chat.routes.js";
 import userRoutes from "./routes/user.routes.js";
@@ -51,9 +52,12 @@ app.use((_req, res, next) => {
 });
 
 app.use(cookieParser());
+app.use(csrfProtection);
 app.use(express.json());
 
 // API routes
+
+app.get('/csrf-token', issueCsrfToken);
 
 app.get('/health', (_req, res) => {
   res.status(200).send('Server is working')
