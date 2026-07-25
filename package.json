@@ -23,10 +23,13 @@
     "build": "pnpm -r build",
     "lint": "pnpm -r lint",
     "test": "pnpm --filter backend test",
-    "test:watch": "pnpm --filter backend test:watch"
+    "test:watch": "pnpm --filter backend test:watch",
+    "test:e2e": "playwright test",
+    "test:e2e:ui": "playwright test --ui"
   },
   "devDependencies": {
     "@eslint/js": "^9.39.1",
+    "@playwright/test": "^1.62.0",
     "@radix-ui/react-dropdown-menu": "^2.1.16",
     "@radix-ui/react-separator": "^1.1.8",
     "@radix-ui/react-slot": "^1.2.4",
