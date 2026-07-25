@@ -48,13 +48,13 @@ export const createGroupBodySchema = z
     name: z.string().trim().min(1),
     users: z.preprocess(coerceNumberArray, z.array(z.number().int().positive()).max(50).optional()).optional(),
   })
-  .passthrough()
+  .strict()
 
 export const updateZoneBodySchema = z
   .object({
     name: z.string().trim().min(1).optional(),
   })
-  .passthrough()
+  .strict()
 
 export const addUsersBodySchema = z
   .object({
