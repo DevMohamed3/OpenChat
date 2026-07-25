@@ -1,5 +1,5 @@
 {
-  "name": "openchat",
+  "name": "zerozone",
   "private": true,
   "version": "0.0.0",
   "packageManager": "pnpm@10.20.0",
@@ -17,11 +17,13 @@
     "dev": "concurrently \"pnpm dev:frontend\" \"pnpm dev:backend\"",
     "dev:all": "pnpm -w -r --parallel dev",
     "start": "pnpm -w -r start",
-    "shadcn": "pnpm --filter @openchat/components run shadcn --",
+    "shadcn": "pnpm --filter @zerozone/components run shadcn --",
     "clean": "pnpm -w -r run clean:src || true",
     "preview": "pnpm --filter frontend preview",
     "build": "pnpm -r build",
-    "lint": "pnpm -r lint"
+    "lint": "pnpm -r lint",
+    "test": "pnpm --filter backend test",
+    "test:watch": "pnpm --filter backend test:watch"
   },
   "devDependencies": {
     "@eslint/js": "^9.39.1",
