@@ -47,6 +47,7 @@ export function decryptMessage(encryptedData: string): string {
     
     return decrypted;
   } catch {
+    console.warn("[CRYPTO] Decryption failed — returning raw data for legacy compatibility");
     // Graceful fallback for legacy unencrypted messages that happen to have colons
     // or if the key has changed.
     return encryptedData;
