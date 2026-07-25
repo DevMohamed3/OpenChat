@@ -54,7 +54,7 @@ app.use((_req, res, next) => {
 
 app.use(cookieParser());
 app.use(csrfProtection);
-app.use(express.json());
+app.use(express.json({ limit: "1mb" }));
 
 // API routes
 
@@ -79,6 +79,6 @@ app.use((err: any, req: express.Request, res: express.Response, _next: express.N
   console.error('[ERROR] Stack:', err?.stack)
   res.status(500).json({ 
     message: err?.message || "Internal Server Error",
-    ...(process.env.NODE_ENV === 'development' && { stack: err?.stack })
+    ...(process.env.NODE_ENV === 'development' || process.env.NODE_ENV === 'local' ? { stack: err?.stack } : {})
   })
 })
