@@ -1,5 +1,6 @@
 import express, { Express } from "express";
 import cors from "cors";
+import helmet from "helmet";
 import authRoutes from "./routes/auth.routes.js";
 import zonesRoutes from "./routes/zones.routes.js";
 import cookieParser from "cookie-parser";
@@ -11,7 +12,7 @@ import webrtcRoutes from "./routes/webrtc.routes.js"
 
 export const app: Express = express();
 
-app.set("trust proxy", true);
+app.set("trust proxy", 1);
 
 
 app.use(
@@ -34,6 +35,11 @@ app.options(/.*/, cors({
     callback(new Error("Not allowed by CORS"));
   },
   credentials: true,
+}));
+
+app.use(helmet({
+  contentSecurityPolicy: false,
+  crossOriginEmbedderPolicy: false,
 }));
 
 app.use((_req, res, next) => {
