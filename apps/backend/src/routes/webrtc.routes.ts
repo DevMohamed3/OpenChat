@@ -4,7 +4,7 @@ import { authMiddleware } from "../middlewares/auth.middleware.js"
 
 const router = Router()
 
-router.get("/ice", getIceServers)
+router.get("/ice", authMiddleware, getIceServers)
 router.get("/token", authMiddleware, getLiveKitToken)
 
 export default router
