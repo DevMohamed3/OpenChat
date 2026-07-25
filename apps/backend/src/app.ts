@@ -5,6 +5,7 @@ import authRoutes from "./routes/auth.routes.js";
 import zonesRoutes from "./routes/zones.routes.js";
 import cookieParser from "cookie-parser";
 import { csrfProtection, issueCsrfToken } from "./middlewares/csrf.js";
+import { authMiddleware } from "./middlewares/auth.middleware.js";
 import friendRoutes from "./routes/friend.routes.js";
 import chatRoutes from "./routes/chat.routes.js";
 import userRoutes from "./routes/user.routes.js";
@@ -69,7 +70,7 @@ app.use("/friends", friendRoutes);
 app.use("/chats", chatRoutes);
 app.use("/zones", zonesRoutes)
 
-app.use("/uploads", express.static("uploads"))
+app.use("/uploads", authMiddleware, express.static("uploads"))
 app.use("/webrtc", webrtcRoutes)
 
 // Error handler to catch all unhandled errors
