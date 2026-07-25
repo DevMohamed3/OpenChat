@@ -13,6 +13,10 @@ router.post("/google", googleLogin)
 router.post("/resend-email", authMiddleware, AuthController.resendEmailOTP);
 router.post("/verify-email", authMiddleware, AuthController.verifyEmail);
 
+// Password reset (no auth required)
+router.post("/forgot-password", AuthController.forgotPassword);
+router.post("/reset-password", AuthController.resetPassword);
+
 // Protected
 router.get("/me", authMiddleware, AuthController.me)
 

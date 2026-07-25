@@ -41,9 +41,12 @@ function getCookieDomain(req: Request) {
   return normalizeCookieDomain(req.hostname);
 }
 
-export function getCookieOptions(req: Request) {
+export function getCookieOptions(req: Request, rememberMe?: boolean) {
 
   const isLocal = process.env.NODE_ENV !== "production";
+  const maxAge = rememberMe
+    ? 1000 * 60 * 60 * 24 * 30
+    : 1000 * 60 * 60 * 24;
 
   return {
     httpOnly: true,
@@ -51,6 +54,6 @@ export function getCookieOptions(req: Request) {
     sameSite: isLocal ? "lax" : "none",
     path: "/",
     domain: isLocal ? undefined : getCookieDomain(req),
-    maxAge: 1000 * 60 * 60 * 24 * 7,
+    maxAge,
   } as const;
 }

@@ -3,12 +3,14 @@ import { AuthService } from '../services/auth.service.js'
 import { prisma } from '../config/prisma.js'
 import { serialize } from 'cookie'
 import { getCookieOptions } from '../utils/cookie.js'
-import { sendOTPEmail } from '../utils/email.js'
+import { sendOTPEmail, sendPasswordResetEmail } from '../utils/email.js'
 import { generateOTP } from '../utils/otp.js'
 import {
   loginBodySchema,
   registerBodySchema,
   verifyEmailBodySchema,
+  forgotPasswordBodySchema,
+  resetPasswordBodySchema,
 } from "../validations/auth.validation.js"
 import { respondWithZodError } from "../utils/zodError.js"
 
@@ -197,7 +199,7 @@ export class AuthController {
         })
       }
 
-      const { name, username, email, password } = parsed.data
+      const { name, username, email, password, rememberMe } = parsed.data
 
       const validationErrors = validateRegistration({ name, username, email, password })
       if (validationErrors.length > 0) {
@@ -215,11 +217,10 @@ export class AuthController {
       )
 
       const cookie = serialize("token", token, {
-        ...getCookieOptions(req),
+        ...getCookieOptions(req, rememberMe),
         httpOnly: true,
         secure: process.env.NODE_ENV === 'production',
         sameSite: 'lax',
-        maxAge: 7 * 24 * 60 * 60,
       })
       res.setHeader("Set-Cookie", cookie)
 
@@ -274,7 +275,7 @@ export class AuthController {
         })
       }
 
-      const { email, password } = parsed.data
+      const { email, password, rememberMe } = parsed.data
 
       const validationErrors = validateLogin({ email, password })
       if (validationErrors.length > 0) {
@@ -287,11 +288,10 @@ export class AuthController {
       const { user, token } = await AuthService.login(email.trim().toLowerCase(), password)
 
       const cookie = serialize('token', token, {
-        ...getCookieOptions(req),
+        ...getCookieOptions(req, rememberMe),
         httpOnly: true,
         secure: process.env.NODE_ENV === 'production',
         sameSite: 'lax',
-        maxAge: 7 * 24 * 60 * 60,
       })
       res.setHeader('Set-Cookie', cookie)
       res.json({ 
@@ -348,6 +348,105 @@ export class AuthController {
     } catch (err: unknown) {
       console.error("LOGOUT ERROR:", err)
       res.status(500).json({ message: 'Server error' })
+    }
+  }
+
+  static async forgotPassword(req: Request, res: Response) {
+    try {
+      const parsed = forgotPasswordBodySchema.safeParse(req.body)
+      if (!parsed.success) {
+        return respondWithZodError(res, parsed.error)
+      }
+
+      const { email } = parsed.data
+
+      const user = await prisma.user.findUnique({
+        where: { email: email.toLowerCase() },
+      })
+
+      if (!user) {
+        return res.json({ message: "If an account exists, a reset code has been sent." })
+      }
+
+      await prisma.emailOTP.deleteMany({
+        where: { email: email.toLowerCase() },
+      })
+
+      const code = generateOTP()
+
+      await prisma.emailOTP.create({
+        data: {
+          email: email.toLowerCase(),
+          code,
+          expiresAt: new Date(Date.now() + 10 * 60 * 1000),
+        },
+      })
+
+      try {
+        await sendPasswordResetEmail(email.toLowerCase(), code)
+      } catch (emailError) {
+        console.error("Email send error:", emailError)
+        return res.status(500).json({ message: "Failed to send reset email. Please try again." })
+      }
+
+      res.json({ message: "If an account exists, a reset code has been sent." })
+    } catch (error) {
+      console.error("FORGOT PASSWORD ERROR:", error)
+      res.status(500).json({ message: "An error occurred. Please try again." })
+    }
+  }
+
+  static async resetPassword(req: Request, res: Response) {
+    try {
+      const parsed = resetPasswordBodySchema.safeParse(req.body)
+      if (!parsed.success) {
+        return respondWithZodError(res, parsed.error)
+      }
+
+      const { email, code, newPassword } = parsed.data
+
+      const user = await prisma.user.findUnique({
+        where: { email: email.toLowerCase() },
+      })
+
+      if (!user) {
+        return res.status(400).json({ message: "Invalid request" })
+      }
+
+      const otp = await prisma.emailOTP.findFirst({
+        where: {
+          email: email.toLowerCase(),
+          code: code.trim(),
+        },
+        orderBy: { createdAt: "desc" },
+      })
+
+      if (!otp) {
+        return res.status(400).json({ message: "Invalid reset code" })
+      }
+
+      if (otp.expiresAt < new Date()) {
+        await prisma.emailOTP.delete({ where: { id: otp.id } })
+        return res.status(400).json({ message: "Reset code has expired. Please request a new one." })
+      }
+
+      const bcrypt = await import("bcrypt")
+      const hashedPassword = await bcrypt.hash(newPassword, 10)
+
+      await prisma.$transaction([
+        prisma.user.update({
+          where: { id: user.id },
+          data: { password: hashedPassword },
+        }),
+        prisma.emailOTP.deleteMany({
+          where: { email: email.toLowerCase() },
+        }),
+      ])
+
+      res.json({ message: "Password reset successfully" })
+    } catch (error) {
+      console.error("RESET PASSWORD ERROR:", error)
+      res.status(500).json({ message: "An error occurred. Please try again." })
     }
   }
 }
