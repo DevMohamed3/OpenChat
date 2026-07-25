@@ -148,12 +148,7 @@ export class AuthController {
         password
       )
 
-      const cookie = serialize("token", token, {
-        ...getCookieOptions(req, rememberMe),
-        httpOnly: true,
-        secure: process.env.NODE_ENV === 'production',
-        sameSite: 'lax',
-      })
+      const cookie = serialize("token", token, getCookieOptions(req, rememberMe))
       res.setHeader("Set-Cookie", cookie)
 
       return res.status(201).json({ 
@@ -211,12 +206,7 @@ export class AuthController {
 
       const { user, token } = await AuthService.login(email.trim().toLowerCase(), password)
 
-      const cookie = serialize('token', token, {
-        ...getCookieOptions(req, rememberMe),
-        httpOnly: true,
-        secure: process.env.NODE_ENV === 'production',
-        sameSite: 'lax',
-      })
+      const cookie = serialize('token', token, getCookieOptions(req, rememberMe))
       res.setHeader('Set-Cookie', cookie)
       res.json({ 
         user,
