@@ -1,3 +1,5 @@
-export function generateOTP() {
-  return Math.floor(100000 + Math.random() * 900000).toString();
+import crypto from "crypto";
+
+export function generateOTP(): string {
+  return crypto.randomInt(100000, 999999).toString();
 }
