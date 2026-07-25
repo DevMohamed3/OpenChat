@@ -14,66 +14,6 @@ import {
 } from "../validations/auth.validation.js"
 import { respondWithZodError } from "../utils/zodError.js"
 
-const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
-const USERNAME_REGEX = /^[a-zA-Z0-9_]+$/
-const PASSWORD_MIN_LENGTH = 8
-
-interface ValidationError {
-  field: string;
-  message: string;
-}
-
-const validateRegistration = (data: { name?: string; username?: string; email?: string; password?: string }): ValidationError[] => {
-  const errors: ValidationError[] = []
-
-  if (!data.name || data.name.trim().length < 2) {
-    errors.push({ field: 'name', message: 'Name must be at least 2 characters' })
-  } else if (data.name.length > 50) {
-    errors.push({ field: 'name', message: 'Name must be less than 50 characters' })
-  }
-
-  if (!data.username || data.username.trim().length < 3) {
-    errors.push({ field: 'username', message: 'Username must be at least 3 characters' })
-  } else if (data.username.length > 30) {
-    errors.push({ field: 'username', message: 'Username must be less than 30 characters' })
-  } else if (!USERNAME_REGEX.test(data.username)) {
-    errors.push({ field: 'username', message: 'Username can only contain letters, numbers, and underscores' })
-  }
-
-  if (!data.email || !EMAIL_REGEX.test(data.email)) {
-    errors.push({ field: 'email', message: 'Please enter a valid email address' })
-  }
-
-  if (!data.password) {
-    errors.push({ field: 'password', message: 'Password is required' })
-  } else {
-    if (data.password.length < PASSWORD_MIN_LENGTH) {
-      errors.push({ field: 'password', message: 'Password must be at least 8 characters' })
-    }
-    if (!/[A-Z]/.test(data.password)) {
-      errors.push({ field: 'password', message: 'Password must contain at least one uppercase letter' })
-    }
-    if (!/[0-9]/.test(data.password)) {
-      errors.push({ field: 'password', message: 'Password must contain at least one number' })
-    }
-  }
-
-  return errors
-}
-
-const validateLogin = (data: { email?: string; password?: string }): ValidationError[] => {
-  const errors: ValidationError[] = []
-
-  if (!data.email || !EMAIL_REGEX.test(data.email)) {
-    errors.push({ field: 'email', message: 'Please enter a valid email address' })
-  }
-
-  if (!data.password) {
-    errors.push({ field: 'password', message: 'Password is required' })
-  }
-
-  return errors
-}
 
 export class AuthController {
 
@@ -201,14 +141,6 @@ export class AuthController {
 
       const { name, username, email, password, rememberMe } = parsed.data
 
-      const validationErrors = validateRegistration({ name, username, email, password })
-      if (validationErrors.length > 0) {
-        return res.status(400).json({
-          message: validationErrors[0].message,
-          errors: validationErrors,
-        })
-      }
-
       const { user, token } = await AuthService.register(
         name.trim(),
         username.trim().toLowerCase(),
@@ -276,14 +208,6 @@ export class AuthController {
       }
 
       const { email, password, rememberMe } = parsed.data
-
-      const validationErrors = validateLogin({ email, password })
-      if (validationErrors.length > 0) {
-        return res.status(400).json({
-          message: validationErrors[0].message,
-          errors: validationErrors,
-        })
-      }
 
       const { user, token } = await AuthService.login(email.trim().toLowerCase(), password)
 
