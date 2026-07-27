@@ -1,15 +1,14 @@
 import jwt from "jsonwebtoken"
 import { Socket } from "socket.io"
+import cookie from "cookie"
 
 export const socketAuth = (socket: Socket, next: (err?: Error) => void) => {
   try {
-    const cookie = socket.request.headers.cookie
-    if (!cookie) return next(new Error("No auth cookie"))
+    const rawCookie = socket.request.headers.cookie
+    if (!rawCookie) return next(new Error("No auth cookie"))
 
-    const token = cookie
-      .split("; ")
-      .find(c => c.startsWith("token="))
-      ?.split("=")[1]
+    const cookies = cookie.parse(rawCookie)
+    const token = cookies.token
 
     if (!token) return next(new Error("No token"))
 

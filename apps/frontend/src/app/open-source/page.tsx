@@ -10,7 +10,7 @@ import { useUserStore } from '../stores/user-store'
 
 export default function OpenSourcePage() {
   const user = useUserStore(s => s.user)
-  const GITHUB_URL = "https://github.com/DevMuhammed3/OpenChat"
+  const GITHUB_URL = "https://github.com/DevMuhammed3/ZeroZone"
 
   return (
     <div className="dark min-h-screen bg-background selection:bg-cyan-500/30">
@@ -40,7 +40,7 @@ export default function OpenSourcePage() {
             </h1>
 
             <p className="text-sm md:text-base text-zinc-400 max-w-2xl mx-auto mb-12 leading-relaxed font-medium">
-              OpenChat is built by contributors around the world who believe free speech and privacy should be the default, not an option.
+              ZeroZone is built by contributors around the world who believe free speech and privacy should be the default, not an option.
             </p>
 
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
@@ -109,7 +109,7 @@ export default function OpenSourcePage() {
                     </div>
                     <h2 className="text-3xl md:text-4xl font-bold text-white mb-6 tracking-tight leading-tight">Your Server. <br /> Your Community.</h2>
                     <p className="text-zinc-400 text-sm leading-relaxed mb-10 max-w-sm">
-                      Self-hosting OpenChat puts the power back where it belongs. Manage your own keys, database, and voice infrastructure without being tied to a centralized platform.
+                      Self-hosting ZeroZone puts the power back where it belongs. Manage your own keys, database, and voice infrastructure without being tied to a centralized platform.
                     </p>
                     <div className="flex flex-wrap gap-4">
                        {[

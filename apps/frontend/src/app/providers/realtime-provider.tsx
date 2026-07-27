@@ -2,7 +2,7 @@
 
 import { useEffect } from 'react'
 import { useQueryClient } from '@tanstack/react-query'
-import { socket } from '@openchat/lib'
+import { socket } from '@zerozone/lib'
 import {
   type BlockedUser,
   type Friend,

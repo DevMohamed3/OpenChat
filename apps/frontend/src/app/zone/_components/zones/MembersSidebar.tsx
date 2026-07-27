@@ -5,7 +5,7 @@ import { useParams } from 'next/navigation'
 import { Avatar, AvatarFallback, AvatarImage, ScrollArea } from 'packages/ui'
 import { useZoneMembers } from '@/features/zones/queries'
 import { useFriendsStore } from '@/app/stores/friends-store'
-import { cn } from '@openchat/lib'
+import { cn } from '@zerozone/lib'
 
 export function MembersSidebar() {
   const params = useParams<{ zonePublicId?: string }>()

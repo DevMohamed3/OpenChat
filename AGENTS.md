@@ -4,9 +4,9 @@
 
 - `apps/frontend` — Next.js 16 (App Router, Turbopack), React 19, Zustand, Tailwind CSS
 - `apps/backend` — Express 5, Socket.io 4, Prisma ORM, PostgreSQL, ESM
-- `packages/components` — shared shadcn/ui component library (`@openchat/components`)
-- `packages/lib` — shared utilities, types re-exported (`@openchat/lib`)
-- `packages/types` — TypeScript type definitions (`@openchat/types`)
+- `packages/components` — shared shadcn/ui component library (`@zerozone/components`)
+- `packages/lib` — shared utilities, types re-exported (`@zerozone/lib`)
+- `packages/types` — TypeScript type definitions (`@zerozone/types`)
 - `desktop` — Electron wrapper (built on top of frontend)
 
 ## Required versions
@@ -42,7 +42,7 @@ pnpm shadcn <component-name>
 
 ## Environment variables
 
-Backend (`apps/backend/.env`): `DATABASE_URL`, `JWT_SECRET`, `PORT`, `BASE_URL`, `OPENCHAT_ALLOWED_ORIGINS`, `COOKIE_DOMAIN`, `LIVEKIT_URL`, `LIVEKIT_API_KEY`, `LIVEKIT_API_SECRET`
+Backend (`apps/backend/.env`): `DATABASE_URL`, `JWT_SECRET`, `PORT`, `BASE_URL`, `ZEROZONE_ALLOWED_ORIGINS`, `COOKIE_DOMAIN`, `LIVEKIT_URL`, `LIVEKIT_API_KEY`, `LIVEKIT_API_SECRET`
 
 Frontend (`apps/frontend/.env.local`): `NEXT_PUBLIC_API_URL`, `NEXT_PUBLIC_GOOGLE_CLIENT_ID`
 

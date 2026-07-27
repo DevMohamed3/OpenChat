@@ -19,6 +19,7 @@ import {
   getZoneOnlineUsers,
 } from "./socket/presence.js"
 import { emitFriendState } from "./services/friendRealtime.js"
+import { safeHandler } from "./socket/safeHandler.js"
 
 const port = process.env.PORT || 4000
 
@@ -76,9 +77,21 @@ io.on('connection', async (socket) => {
     refreshConnection(userId, socket.id)
   })
 
-  socket.on("zone:join", (data: { zonePublicId: string }) => {
+  socket.on("zone:join", safeHandler(async (data: { zonePublicId: string }) => {
     const { zonePublicId } = data
     if (!zonePublicId) return
+
+    const member = await prisma.chatParticipant.findFirst({
+      where: {
+        userId,
+        chat: {
+          publicId: zonePublicId,
+          type: "ZONE",
+        },
+      },
+    })
+
+    if (!member) return
 
     socket.join(`zone:${zonePublicId}`)
     addUserToZone(zonePublicId, userId)
@@ -88,7 +101,7 @@ io.on('connection', async (socket) => {
       zonePublicId,
       onlineUsers,
     })
-  })
+  }))
 
   socket.on("zone:leave", (data: { zonePublicId: string }) => {
     const { zonePublicId } = data
@@ -104,13 +117,13 @@ io.on('connection', async (socket) => {
     })
   })
 
-  socket.on('disconnect', async () => {
+  socket.on('disconnect', safeHandler(async () => {
     await unregisterConnection(io, userId, socket.id)
-  })
+  }))
 })
 
 server.listen(port, () => { console.log(`Server running on port ${port}`) })
 
 process.on("exit", () => {
-  clearInterval(presenceCleanup)
+  presenceCleanup.stop()
 })

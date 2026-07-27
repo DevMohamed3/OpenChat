@@ -1,6 +1,6 @@
 'use client'
 
-import { cn } from '@openchat/lib'
+import { cn } from '@zerozone/lib'
 import {
     type ChannelVoiceParticipant,
     useCallStore,

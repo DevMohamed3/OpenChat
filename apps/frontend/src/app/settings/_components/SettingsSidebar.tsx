@@ -3,7 +3,7 @@
 import Link from 'next/link'
 import { usePathname, useRouter } from 'next/navigation'
 import { useState } from 'react'
-import { api, cn } from '@openchat/lib'
+import { api, cn } from '@zerozone/lib'
 import { User, Shield, Lock, Bell, Trash2, LogOut, ArrowLeft, Keyboard, Menu, X } from 'lucide-react'
 import { useUserStore } from '@/app/stores/user-store'
 import { useChatsStore } from '@/app/stores/chat-store'

@@ -4,9 +4,10 @@ import { generateRandomNumericId } from "../utils/generateRandomNumericId.js";
 import { io } from "../index.js"
 import multer from "multer"
 import path from "path"
-import fs from "fs"
 import crypto from "crypto"
+import { uploadsDir } from "../config/uploads.js"
 import { encryptMessage, decryptMessage } from "../utils/crypto.js"
+import { validateFileMagicBytes } from "../middlewares/upload.middleware.js"
 import {
   getChatMessagesQuerySchema,
   getChatParamsSchema,
@@ -14,14 +15,8 @@ import {
 } from "../validations/chat.validation.js"
 import { isZodError, respondWithZodError } from "../utils/zodError.js"
 
-const uploadDir = "uploads"
-
-if (!fs.existsSync(uploadDir)) {
-  fs.mkdirSync(uploadDir, { recursive: true })
-}
-
 const storage = multer.diskStorage({
-  destination: uploadDir,
+  destination: uploadsDir,
   filename: (_, file, cb) => {
     cb(null, crypto.randomUUID() + path.extname(file.originalname))
   },
@@ -321,6 +316,7 @@ export const startChat = async (req: Request, res: Response) => {
 
 export const uploadFile = [
   upload.single("file"),
+  validateFileMagicBytes,
   async (req: Request, res: Response) => {
     try {
       const userId = req.user?.id
@@ -398,6 +394,10 @@ export const editMessage = async (req: Request, res: Response) => {
 
     if (!message) {
       return res.status(404).json({ message: "Message not found" });
+    }
+
+    if (message.senderId !== userId) {
+      return res.status(403).json({ message: "Forbidden" });
     }
 
     if (message.isDeleted) {

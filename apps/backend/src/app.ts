@@ -4,8 +4,9 @@ import helmet from "helmet";
 import authRoutes from "./routes/auth.routes.js";
 import zonesRoutes from "./routes/zones.routes.js";
 import cookieParser from "cookie-parser";
-import { csrfProtection, issueCsrfToken } from "./middlewares/csrf.js";
 import { authMiddleware } from "./middlewares/auth.middleware.js";
+import { csrfGuard } from "./middlewares/csrf.js";
+import { uploadsDir } from "./config/uploads.js";
 import friendRoutes from "./routes/friend.routes.js";
 import chatRoutes from "./routes/chat.routes.js";
 import userRoutes from "./routes/user.routes.js";
@@ -53,12 +54,10 @@ app.use((_req, res, next) => {
 });
 
 app.use(cookieParser());
-app.use(csrfProtection);
+app.use(csrfGuard);
 app.use(express.json({ limit: "1mb" }));
 
 // API routes
-
-app.get('/csrf-token', issueCsrfToken);
 
 app.get('/health', (_req, res) => {
   res.status(200).send('Server is working')
@@ -70,14 +69,18 @@ app.use("/friends", friendRoutes);
 app.use("/chats", chatRoutes);
 app.use("/zones", zonesRoutes)
 
-app.use("/uploads", authMiddleware, express.static("uploads"))
+app.use("/uploads", authMiddleware, express.static(uploadsDir))
 app.use("/webrtc", webrtcRoutes)
 
 // Error handler to catch all unhandled errors
-app.use((err: any, req: express.Request, res: express.Response, _next: express.NextFunction) => {
-  console.error('[ERROR] Unhandled error:', err)
-  console.error('[ERROR] Stack:', err?.stack)
-  res.status(500).json({ 
+app.use((err: any, req: express.Request, res: express.Response, next: express.NextFunction) => {
+  if (process.env.NODE_ENV === 'development' || process.env.NODE_ENV === 'local') {
+    console.error('[ERROR] Unhandled error:', err)
+    console.error('[ERROR] Stack:', err?.stack)
+  } else {
+    console.error('[ERROR]', err?.message || 'Unknown error')
+  }
+  res.status(500).json({
     message: err?.message || "Internal Server Error",
     ...(process.env.NODE_ENV === 'development' || process.env.NODE_ENV === 'local' ? { stack: err?.stack } : {})
   })

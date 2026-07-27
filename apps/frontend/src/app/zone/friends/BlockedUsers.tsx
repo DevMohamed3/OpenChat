@@ -3,7 +3,7 @@
 import { useEffect, useState } from 'react'
 import { Button, Card } from 'packages/ui'
 import { ShieldCheck } from 'lucide-react'
-import { api } from '@openchat/lib'
+import { api } from '@zerozone/lib'
 import { useFriendsStore } from '@/app/stores/friends-store'
 import { UserAvatar } from '@/components/UserAvatar'
 

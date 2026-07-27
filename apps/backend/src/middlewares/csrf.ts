@@ -1,54 +1,30 @@
-import crypto from "crypto";
-import { Request, Response, NextFunction } from "express";
+import { Request, Response, NextFunction } from "express"
+import { isAllowedOrigin } from "../config/origin.js"
 
-const CSRF_SECRET = crypto.randomBytes(32).toString("hex");
-
-export function generateCsrfToken(): string {
-  const token = crypto.randomBytes(32).toString("hex");
-  const signature = crypto
-    .createHmac("sha256", CSRF_SECRET)
-    .update(token)
-    .digest("hex");
-  return `${token}.${signature}`;
-}
-
-export function csrfProtection(req: Request, res: Response, next: NextFunction) {
+export function csrfGuard(req: Request, res: Response, next: NextFunction) {
   if (["GET", "HEAD", "OPTIONS"].includes(req.method)) {
-    return next();
+    return next()
   }
 
-  const token =
-    req.cookies?.["csrf-token"] ||
-    req.headers["x-csrf-token"] as string;
+  const origin = req.headers.origin || extractOriginFromReferer(req.headers.referer)
 
-  if (!token) {
-    return res.status(403).json({ message: "CSRF token missing" });
+  if (!origin) {
+    return res.status(403).json({ message: "CSRF validation failed: missing origin" })
   }
 
-  const [tokenPart, signature] = token.split(".");
-  if (!tokenPart || !signature) {
-    return res.status(403).json({ message: "Invalid CSRF token" });
+  if (!isAllowedOrigin(origin)) {
+    return res.status(403).json({ message: "CSRF validation failed: origin not allowed" })
   }
 
-  const expectedSig = crypto
-    .createHmac("sha256", CSRF_SECRET)
-    .update(tokenPart)
-    .digest("hex");
-
-  if (!crypto.timingSafeEqual(Buffer.from(signature), Buffer.from(expectedSig))) {
-    return res.status(403).json({ message: "Invalid CSRF token" });
-  }
-
-  next();
+  next()
 }
 
-export function issueCsrfToken(req: Request, res: Response) {
-  const token = generateCsrfToken();
-  res.cookie("csrf-token", token, {
-    httpOnly: false,
-    sameSite: "lax",
-    secure: process.env.NODE_ENV === "production",
-    path: "/",
-  });
-  res.json({ csrfToken: token });
+function extractOriginFromReferer(referer?: string): string | undefined {
+  if (!referer) return undefined
+  try {
+    const url = new URL(referer)
+    return url.origin
+  } catch {
+    return undefined
+  }
 }

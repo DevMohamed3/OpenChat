@@ -1,11 +1,11 @@
 'use client'
 
 import { useState } from "react"
-import { api } from "@openchat/lib"
+import { api } from "@zerozone/lib"
 import { useQueryClient } from "@tanstack/react-query"
 import { userKeys } from "@/features/user/queries"
 import type { AppUser } from "@/features/user/types"
-import { Dialog, DialogContent } from "@openchat/components/ui/dialog"
+import { Dialog, DialogContent } from "@zerozone/components/ui/dialog"
 import { Mail, Copy, CheckCircle, AlertCircle, Loader2 } from "lucide-react"
 
 interface VerifyEmailDialogProps {

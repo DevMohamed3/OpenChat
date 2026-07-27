@@ -25,7 +25,7 @@ export function MobileNav({ user }: { user: any }) {
         </SheetContent>
       </Sheet>
       
-      <div className="font-bold text-sm">OpenChat</div>
+      <div className="font-bold text-sm">ZeroZone</div>
       <div className="w-8" /> {/* spacer */}
     </div>
   )

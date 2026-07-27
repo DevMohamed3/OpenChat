@@ -12,7 +12,7 @@ export default function TermsPage() {
         <section>
           <h2 className="text-lg font-semibold mb-2">1. Acceptance of Terms</h2>
           <p>
-            By accessing or using OpenChat, you agree to be bound
+            By accessing or using ZeroZone, you agree to be bound
             by these Terms of Service.
           </p>
         </section>
@@ -39,7 +39,7 @@ export default function TermsPage() {
           <h2 className="text-lg font-semibold mb-2">4. User Content</h2>
           <p>
             You retain ownership of the content you create.
-            By using OpenChat, you grant us a limited license
+            By using ZeroZone, you grant us a limited license
             to host and display that content for service operation.
           </p>
         </section>
@@ -73,7 +73,7 @@ export default function TermsPage() {
           <h2 className="text-lg font-semibold mb-2">8. Changes to Terms</h2>
           <p>
             We may update these Terms from time to time.
-            Continued use of OpenChat means acceptance of changes.
+            Continued use of ZeroZone means acceptance of changes.
           </p>
         </section>
 

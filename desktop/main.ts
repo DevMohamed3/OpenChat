@@ -25,7 +25,7 @@ function normalizeAndValidateApiUrl(value: string | undefined) {
 
 function getApiUrl() {
   return (
-    normalizeAndValidateApiUrl(process.env.OPENCHAT_API_URL || process.env.NEXT_PUBLIC_API_URL) ??
+    normalizeAndValidateApiUrl(process.env.ZEROZONE_API_URL || process.env.NEXT_PUBLIC_API_URL) ??
     DEFAULT_API_URL
   );
 }
@@ -147,7 +147,7 @@ async function createWindow() {
       nodeIntegration: false,
       contextIsolation: true,
       preload: resolveAppFile("preload.cjs"),
-      additionalArguments: [`--openchat-api-url=${encodeURIComponent(getApiUrl())}`],
+      additionalArguments: [`--zerozone-api-url=${encodeURIComponent(getApiUrl())}`],
     },
     icon: resolveAppFile("icon.png"),
     autoHideMenuBar: true,
@@ -252,7 +252,7 @@ function setAppMenu() {
         {
           label: "Learn More",
           click: async () => {
-            await shell.openExternal("https://openchat.io");
+            await shell.openExternal("https://zerozone.io");
           },
         },
       ],
@@ -279,7 +279,7 @@ app.whenReady().then(() => {
   void createWindow();
 });
 
-ipcMain.on("openchat:open-external", (event, url) => {
+ipcMain.on("zerozone:open-external", (event, url) => {
   if (!event.senderFrame?.url?.startsWith("file:")) return;
   if (!isSafeHttpUrl(url)) return;
   void shell.openExternal(url);

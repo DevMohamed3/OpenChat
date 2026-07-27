@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useRef, useState } from "react"
 import { Room, RoomEvent, Track, type RemoteTrack } from "livekit-client"
-import { api, socket } from "@openchat/lib"
+import { api, socket } from "@zerozone/lib"
 import { useCallStore } from "@/app/stores/call-store"
 import { registerVoiceController } from "@/app/lib/session-runtime"
 import { useUserStore } from "@/app/stores/user-store"
@@ -52,6 +52,11 @@ export function useChannelVoiceCall() {
       useCallStore.getState().setSpeaking(analyzerUserId, false)
     })
     analyzersRef.current.clear()
+
+    if (audioContextRef.current && audioContextRef.current.state !== "closed") {
+      audioContextRef.current.close().catch(() => {})
+    }
+    audioContextRef.current = null
   }, [])
 
   const startAnalyzing = useCallback((userId: number, stream: MediaStream) => {
@@ -112,6 +117,11 @@ export function useChannelVoiceCall() {
     setRemoteStreams(new Map())
     setChannelParticipants([])
     stopAnalyzing()
+
+    if (audioContextRef.current && audioContextRef.current.state !== "closed") {
+      audioContextRef.current.close().catch(() => {})
+    }
+    audioContextRef.current = null
 
     if (activeChannelId) {
       socket.emit("channel:leave-call", { channelPublicId: activeChannelId })

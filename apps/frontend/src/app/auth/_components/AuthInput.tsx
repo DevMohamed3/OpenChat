@@ -2,7 +2,7 @@
 
 import { forwardRef, useState } from "react"
 import { Eye, EyeOff, type LucideIcon } from "lucide-react"
-import { cn } from "@openchat/components/utils"
+import { cn } from "@zerozone/components/utils"
 
 interface AuthInputProps extends React.InputHTMLAttributes<HTMLInputElement> {
     label?: string

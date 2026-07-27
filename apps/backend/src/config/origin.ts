@@ -4,7 +4,7 @@ export function isAllowedOrigin(origin?: string) {
   try {
     const { hostname } = new URL(origin);
 
-    const configuredAllowlist = process.env.OPENCHAT_ALLOWED_ORIGINS?.trim();
+    const configuredAllowlist = process.env.ZEROZONE_ALLOWED_ORIGINS?.trim();
     if (configuredAllowlist) {
       const entries = configuredAllowlist
         .split(/[,\s]+/g)
@@ -37,15 +37,19 @@ export function isAllowedOrigin(origin?: string) {
       if (suffixHostnames.some((suffix) => lowerHostname.endsWith(suffix))) return true;
     }
 
+    const isDev = process.env.NODE_ENV !== "production";
+
+    if (isDev) {
+      if (hostname === "localhost" || hostname === "127.0.0.1") {
+        return true;
+      }
+    }
+
     if (
-      hostname === "localhost" ||
-      hostname === "127.0.0.1" ||
       hostname === "0zone.site" ||
       hostname === "www.0zone.site" ||
       hostname.endsWith(".0zone.site") ||
-      hostname.endsWith(".qzz.io") ||
-      hostname.endsWith(".vercel.app") ||
-      hostname.endsWith(".trycloudflare.com")
+      hostname.endsWith(".qzz.io")
     ) {
       return true;
     }

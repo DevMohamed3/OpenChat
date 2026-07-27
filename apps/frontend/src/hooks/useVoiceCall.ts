@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useRef } from "react"
 import { Room, RoomEvent, Track, type RemoteTrack } from "livekit-client"
-import { api, socket } from "@openchat/lib"
+import { api, socket } from "@zerozone/lib"
 import { useCallStore } from "@/app/stores/call-store"
 import { registerCallController } from "@/app/lib/session-runtime"
 

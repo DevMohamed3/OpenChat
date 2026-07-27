@@ -7,7 +7,7 @@ export interface KeyboardShortcut {
   keys: string[]
 }
 
-export const STORAGE_KEY = 'openchat-keyboard-shortcuts'
+export const STORAGE_KEY = 'zerozone-keyboard-shortcuts'
 
 export const MODIFIER_KEYS = new Set(['control', 'shift', 'alt', 'meta', 'ctrl'])
 

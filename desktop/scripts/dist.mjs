@@ -30,13 +30,13 @@ function printLinuxDebHint() {
       "",
       "NOTE: Skipping .deb packaging because `libcrypt.so.1` is missing.",
       "On Fedora you can enable .deb builds by installing: `sudo dnf install -y libxcrypt-compat`",
-      "Or set `OPENCHAT_SKIP_DEB=1` to silence this message and always build AppImage only.",
+      "Or set `ZEROZONE_SKIP_DEB=1` to silence this message and always build AppImage only.",
       "",
     ].join("\n"),
   );
 }
 
-const skipDeb = process.env.OPENCHAT_SKIP_DEB === "1" || process.env.OPENCHAT_SKIP_DEB === "true";
+const skipDeb = process.env.ZEROZONE_SKIP_DEB === "1" || process.env.ZEROZONE_SKIP_DEB === "true";
 const electronBuilderCli = resolveElectronBuilderCli();
 
 // electron-builder will build what’s configured in `desktop/electron-builder.json` by default.

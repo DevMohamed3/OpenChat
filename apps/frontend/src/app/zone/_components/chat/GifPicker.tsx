@@ -3,7 +3,7 @@
 import { useState } from 'react'
 import { Button, Card, ScrollArea, Input } from 'packages/ui'
 import { Search, X, Gift } from 'lucide-react'
-import { cn } from '@openchat/lib'
+import { cn } from '@zerozone/lib'
 
 export default function GifPicker({ 
   onSelect, 

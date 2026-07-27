@@ -18,7 +18,7 @@ import { useUserStore } from '@/app/stores/user-store'
 import { toast } from 'sonner'
 import { useForm } from 'react-hook-form'
 import { useState, useRef, useEffect } from 'react'
-import { api, getAvatarUrl } from '@openchat/lib'
+import { api, getAvatarUrl } from '@zerozone/lib'
 
 type FormValues = {
   name: string
@@ -164,9 +164,12 @@ export default function ProfilePage() {
       const data = await res.json()
 
       if (!res.ok) {
+        URL.revokeObjectURL(preview)
+        updateUser({ avatar: user?.avatar ?? null })
         throw new Error(data.message)
       }
 
+      URL.revokeObjectURL(preview)
       updateUser(data.user) // update with real filename
       toast.success('Avatar updated')
     } catch (err: any) {

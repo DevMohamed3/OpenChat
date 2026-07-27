@@ -1,7 +1,7 @@
 'use client'
 
 import { useEffect } from "react"
-import { socket } from "@openchat/lib"
+import { socket } from "@zerozone/lib"
 import { useCallStore } from "@/app/stores/call-store"
 
 export default function GlobalCallListener() {

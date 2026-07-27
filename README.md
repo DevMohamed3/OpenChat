@@ -1,10 +1,10 @@
-# OpenChat
+# ZeroZone
 
-A production-grade real-time chat and voice communication platform designed to demonstrate scalable, enterprise-level real-time system architecture. OpenChat implements a complete messaging infrastructure with peer-to-peer voice calls, persistent session management, and a community-based communication model.
+A production-grade real-time chat and voice communication platform designed to demonstrate scalable, enterprise-level real-time system architecture. ZeroZone implements a complete messaging infrastructure with peer-to-peer voice calls, persistent session management, and a community-based communication model.
 
 ## Overview
 
-OpenChat is not a basic chat demo. It models a Discord-like communication platform with:
+ZeroZone is not a basic chat demo. It models a Discord-like communication platform with:
 
 - **Real-time messaging** with instant delivery, typing indicators, and read receipts over WebSocket connections
 - **Voice communication** using WebRTC with custom Socket.io-based signaling, supporting both direct calls and group channels
@@ -100,7 +100,7 @@ The database uses Prisma ORM with the following key entities:
 
 ### WebRTC Signaling with Socket.io
 
-Instead of relying on external STUN/TURN servers for all signaling, OpenChat implements a custom WebRTC handshake over Socket.io:
+Instead of relying on external STUN/TURN servers for all signaling, ZeroZone implements a custom WebRTC handshake over Socket.io:
 
 1. **Call Initiation**
     - Caller (A) emits `call:user` to target user (B)
@@ -274,7 +274,7 @@ The most critical feature: **calls survive page refreshes**.
 ## Project Structure
 
 ```
-openchat/
+zerozone/
 ├── apps/
 │   ├── backend/
 │   │   ├── src/
@@ -376,8 +376,8 @@ On page refresh while in call:
 1. **Clone and Install**
 
     ```bash
-    git clone https://github.com/DevMuhammed3/OpenChat
-    cd openchat
+    git clone https://github.com/DevMuhammed3/ZeroZone
+    cd zerozone
     pnpm install
     ```
 
@@ -386,7 +386,7 @@ On page refresh while in call:
     Create `apps/backend/.env`:
 
     ```env
-    DATABASE_URL=postgresql://user:password@localhost:5432/openchat
+    DATABASE_URL=postgresql://user:password@localhost:5432/zerozone
     JWT_SECRET=your-secret-key-at-least-32-characters
     PORT=4000
     BASE_URL=http://localhost:4000
@@ -468,7 +468,7 @@ NODE_ENV=production pnpm start
 
 ## Contributing
 
-OpenChat accepts contributions via pull requests. See the repository for guidelines.
+ZeroZone accepts contributions via pull requests. See the repository for guidelines.
 
 ## License
 

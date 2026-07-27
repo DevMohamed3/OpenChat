@@ -3,7 +3,7 @@
 import { useEffect, useState } from 'react'
 import { useRouter } from 'next/navigation'
 import { Settings, Shield, Bell, Lock, LogOut, ChevronRight, User, LogOut as LogOutIcon, Heart, UserPlus, Users, MessageCircle } from 'lucide-react'
-import { cn, getApiBaseUrl, getAvatarUrl } from '@openchat/lib'
+import { cn, getApiBaseUrl, getAvatarUrl } from '@zerozone/lib'
 
 interface UserProfile {
   id: string
@@ -175,7 +175,7 @@ export default function ProfilePage() {
 
       {/* Footer */}
       <div className="text-center py-6 text-xs text-zinc-600">
-        <p>OpenChat v1.0.0</p>
+        <p>ZeroZone v1.0.0</p>
         <p className="flex items-center justify-center gap-1 mt-1">
           Made with <Heart className="w-3 h-3 text-red-500 fill-red-500" /> by the community
         </p>

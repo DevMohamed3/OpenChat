@@ -1,7 +1,7 @@
 'use client'
 
 import { useEffect, useRef } from "react"
-import { socket } from "@openchat/lib"
+import { socket } from "@zerozone/lib"
 import { useCallStore } from "@/app/stores/call-store"
 import CallOverlay from "@/app/zone/_components/global/CallOverlay"
 import { useVoiceCall } from "@/hooks/useVoiceCall"
@@ -126,6 +126,7 @@ export default function GlobalCallProvider() {
     socket.on("call:rejoined", rejoinedHandler)
     
     const partnerDisconnectedHandler = ({ userId }: { userId: number }) => {
+      endCall({ notifyServer: false, clearState: false })
     }
 
     socket.on("call:partner-disconnected", partnerDisconnectedHandler)
@@ -138,7 +139,7 @@ export default function GlobalCallProvider() {
       socket.off("call:rejoined", rejoinedHandler)
       socket.off("call:partner-disconnected", partnerDisconnectedHandler)
     }
-  }, [setIncoming, setConnected, clear, startCall])
+  }, [setIncoming, setConnected, clear, startCall, endCall])
 
   useEffect(() => {
     const handleDisconnect = () => {

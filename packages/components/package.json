@@ -1,5 +1,5 @@
 {
-  "name": "@openchat/components",
+  "name": "@zerozone/components",
   "version": "1.0.0",
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
@@ -12,7 +12,7 @@
     "shadcn": "npx --yes shadcn-ui@latest"
   },
   "dependencies": {
-    "@openchat/lib": "workspace:*"
+    "@zerozone/lib": "workspace:*"
   },
   "peerDependencies": {
     "react": "^19.0.0"

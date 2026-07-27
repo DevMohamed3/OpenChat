@@ -5,7 +5,7 @@ import { useQueryClient } from '@tanstack/react-query'
 import { useParams, usePathname, useRouter } from 'next/navigation'
 import { ChevronDown, Hash, Plus, Users, Volume2 } from 'lucide-react'
 import { Button, ScrollArea, Skeleton } from 'packages/ui'
-import { cn, socket } from '@openchat/lib'
+import { cn, socket } from '@zerozone/lib'
 import ChatList from '../chat/ChatList'
 import UserBar from './UserBar'
 import { CreateChannelModal } from './zones/CreateChannelModal'
@@ -90,7 +90,7 @@ export default function ZoneSidebar({
 
   useEffect(() => {
     if (zonePublicId && typeof window !== 'undefined') {
-      window.localStorage.setItem('openchat:last-zone-public-id', zonePublicId)
+      window.localStorage.setItem('zerozone:last-zone-public-id', zonePublicId)
     }
   }, [zonePublicId])
 

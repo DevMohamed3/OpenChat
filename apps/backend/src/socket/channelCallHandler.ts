@@ -164,11 +164,14 @@ export function channelCallHandler(io: Server, socket: AuthenticatedSocket) {
   })
 
   socket.on("disconnect", () => {
-    // Clean up all channel calls this user was in
+    const channelsToLeave: string[] = []
     for (const [channelPublicId, call] of activeChannelCalls.entries()) {
       if (call.participants.has(userId)) {
-        leaveChannelCall(channelPublicId)
+        channelsToLeave.push(channelPublicId)
       }
+    }
+    for (const channelPublicId of channelsToLeave) {
+      leaveChannelCall(channelPublicId)
     }
   })
 

@@ -85,7 +85,18 @@ export const googleLogin = async (req: Request, res: Response) => {
 
     res.cookie("token", jwt, getCookieOptions(req));
 
-    res.json(user);
+    res.json({
+      user: {
+        id: user.id,
+        name: user.name,
+        username: user.username,
+        email: user.email,
+        avatar: user.avatar,
+        emailVerified: user.emailVerified,
+        createdAt: user.createdAt,
+      },
+      message: "Login successful",
+    });
   } catch (error) {
     console.error("Google auth error:", error);
     res.status(500).json({ message: "Google login failed" });

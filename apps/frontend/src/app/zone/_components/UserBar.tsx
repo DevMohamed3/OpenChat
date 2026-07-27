@@ -3,7 +3,7 @@
 import { Avatar, AvatarFallback } from 'packages/ui'
 import { Settings, LogOut, Mic, MicOff, Headphones } from 'lucide-react'
 import { useRouter } from 'next/navigation'
-import { getApiBaseUrl, getAvatarUrl, cn } from '@openchat/lib'
+import { getApiBaseUrl, getAvatarUrl, cn } from '@zerozone/lib'
 import { useUserStore } from '@/app/stores/user-store'
 import { useState, useRef, useEffect } from 'react'
 import { useCallStore } from '@/app/stores/call-store'

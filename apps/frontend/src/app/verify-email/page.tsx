@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react"
 import { useRouter } from "next/navigation"
 import { motion } from "framer-motion"
-import { api } from "@openchat/lib"
+import { api } from "@zerozone/lib"
 import { useQueryClient } from "@tanstack/react-query"
 import { userKeys } from "@/features/user/queries"
 import type { AppUser } from "@/features/user/types"

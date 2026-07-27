@@ -1,7 +1,7 @@
 "use client"
 
 import { useEffect } from "react"
-import { socket, playMessageSound } from "@openchat/lib"
+import { socket, playMessageSound } from "@zerozone/lib"
 import { useChatsStore } from "../stores/chat-store"
 
 export function NotificationsProvider({

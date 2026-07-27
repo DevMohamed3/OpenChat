@@ -11,8 +11,8 @@ router.post("/register", authLimiter, AuthController.register);
 router.post("/login", authLimiter, AuthController.login);
 router.post("/google", authLimiter, googleLogin)
 
-router.post("/resend-email", authMiddleware, AuthController.resendEmailOTP);
-router.post("/verify-email", authMiddleware, AuthController.verifyEmail);
+router.post("/resend-email", authMiddleware, strictLimiter, AuthController.resendEmailOTP);
+router.post("/verify-email", authMiddleware, strictLimiter, AuthController.verifyEmail);
 
 // Password reset (no auth required)
 router.post("/forgot-password", strictLimiter, AuthController.forgotPassword);

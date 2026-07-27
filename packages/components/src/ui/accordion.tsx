@@ -2,7 +2,7 @@ import * as React from "react"
 import * as AccordionPrimitive from "@radix-ui/react-accordion"
 import { ChevronDown } from "lucide-react"
 
-import { cn } from "@openchat/lib"
+import { cn } from "@zerozone/lib"
 
 const Accordion = AccordionPrimitive.Root
 

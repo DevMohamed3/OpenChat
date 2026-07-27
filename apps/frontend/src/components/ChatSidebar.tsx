@@ -2,7 +2,7 @@
 
 import { Button } from 'packages/ui'
 import { UserAvatar } from '@/components/UserAvatar'
-import { cn } from '@openchat/lib'
+import { cn } from '@zerozone/lib'
 
 export type Profile = {
   id: string | number

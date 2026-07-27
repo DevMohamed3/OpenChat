@@ -173,7 +173,7 @@ export const useCallStore = create<CallStore>()(
         }),
     }),
     {
-      name: "openchat-call-state",
+      name: "zerozone-call-state",
       partialize: (state) => ({
         isMuted: state.isMuted,
         isSpeaker: state.isSpeaker,

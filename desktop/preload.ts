@@ -1,6 +1,6 @@
 import { contextBridge, ipcRenderer } from "electron";
 
-const apiArgPrefix = "--openchat-api-url=";
+const apiArgPrefix = "--zerozone-api-url=";
 const apiUrlArg = process.argv.find((arg) => arg.startsWith(apiArgPrefix));
 const apiUrl = apiUrlArg ? decodeURIComponent(apiUrlArg.slice(apiArgPrefix.length)) : undefined;
 
@@ -35,15 +35,15 @@ contextBridge.exposeInMainWorld("electron", {
   },
 });
 
-contextBridge.exposeInMainWorld("openchatConfig", {
+contextBridge.exposeInMainWorld("zerozoneConfig", {
   apiUrl,
 });
 
 // Only for local error/offline pages shipped with the app (file:// origin).
-contextBridge.exposeInMainWorld("openchatDesktop", {
+contextBridge.exposeInMainWorld("zerozoneDesktop", {
   openExternal: (url: unknown) => {
     if (globalThis.location?.protocol !== "file:") return;
     if (!isSafeHttpUrl(url)) return;
-    ipcRenderer.send("openchat:open-external", url);
+    ipcRenderer.send("zerozone:open-external", url);
   },
 });

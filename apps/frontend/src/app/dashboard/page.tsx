@@ -28,7 +28,7 @@ import {
 import { useUserStore } from '@/app/stores/user-store'
 import { useFriendsStore } from '@/app/stores/friends-store'
 import { useChatsStore } from '@/app/stores/chat-store'
-import { api, getAvatarUrl } from '@openchat/lib'
+import { api, getAvatarUrl } from '@zerozone/lib'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 
@@ -108,7 +108,7 @@ export default function DashboardPage() {
             Welcome back, {user.name || user.username}
           </h1>
           <p className="text-muted-foreground mt-2">
-            Here's what's happening with your OpenChat account today.
+            Here's what's happening with your ZeroZone account today.
           </p>
         </motion.div>
 
@@ -265,7 +265,7 @@ export default function DashboardPage() {
               <div className="space-y-4">
                 {/* Simplified view since we'd need more logic for actual notifictions */}
                 <div className="p-3 rounded-lg bg-white/5 border border-white/5 text-sm">
-                  <p className="font-medium">Welcome to OpenChat!</p>
+                  <p className="font-medium">Welcome to ZeroZone!</p>
                   <p className="text-xs text-muted-foreground mt-1">Start by inviting your friends to join your private zones.</p>
                 </div>
                 

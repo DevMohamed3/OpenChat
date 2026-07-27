@@ -14,7 +14,7 @@ import {
   Checkbox
 } from "packages/ui"
 import { UserPlus, Info, Link2, Check } from "lucide-react"
-import { getAvatarUrl, api } from "@openchat/lib"
+import { getAvatarUrl, api } from "@zerozone/lib"
 import { useUserStore } from "@/app/stores/user-store"
 
 type Member = {
@@ -95,6 +95,7 @@ export function ChatHeader({ name, avatar, zonePublicId, members }: Props) {
   const handleAvatarChange = (e: ChangeEvent<HTMLInputElement>) => {
     if (!e.target.files || !e.target.files[0]) return
     const file = e.target.files[0]
+    if (preview) URL.revokeObjectURL(preview)
     setUpdatedAvatar(file)
     setPreview(URL.createObjectURL(file))
   }
@@ -112,6 +113,7 @@ export function ChatHeader({ name, avatar, zonePublicId, members }: Props) {
       })
       const data = await res.json()
       if (data.zone) {
+        if (preview) URL.revokeObjectURL(preview)
         setZoneName(data.zone.name)
         setCurrentAvatar(data.zone.avatar)
         setPreview(null)

@@ -3,14 +3,14 @@
 ## Monorepo structure
 
 ```
-openchat/
+zerozone/
 ├── apps/
 │   ├── backend/           # Express 5 + Socket.io + Prisma
 │   └── frontend/          # Next.js 16 + React 19 + Zustand
 ├── packages/
-│   ├── components/        # @openchat/components — shared shadcn/ui
-│   ├── lib/               # @openchat/lib — shared utilities
-│   └── types/             # @openchat/types — TypeScript types
+│   ├── components/        # @zerozone/components — shared shadcn/ui
+│   ├── lib/               # @zerozone/lib — shared utilities
+│   └── types/             # @zerozone/types — TypeScript types
 ├── desktop/               # Electron wrapper
 ├── .agent/skills/         # AI agent skills (project + general)
 └── .opencode/             # OpenCode config + plans
@@ -19,13 +19,13 @@ openchat/
 ## Package dependency graph
 
 ```
-@openchat/types          (no deps — pure types)
+@zerozone/types          (no deps — pure types)
        ↑
-@openchat/lib            (depends on: socket.io-client, clsx, tailwind-merge)
+@zerozone/lib            (depends on: socket.io-client, clsx, tailwind-merge)
        ↑
-@openchat/components     (depends on: @openchat/lib)
+@zerozone/components     (depends on: @zerozone/lib)
        ↑
-frontend                 (depends on: @openchat/components, @openchat/lib, @openchat/types)
+frontend                 (depends on: @zerozone/components, @zerozone/lib, @zerozone/types)
 desktop                  (wraps frontend, no direct package deps)
 
 backend                  (standalone — uses @prisma/client, express, socket.io, livekit)
@@ -127,7 +127,7 @@ Server Component (layout.tsx)
 Client Components
   → TanStack Query hooks (features/*/queries.ts) fetch data
   → apiClient makes HTTP requests with credentials:include
-  → Socket.io (from @openchat/lib) handles real-time events
+  → Socket.io (from @zerozone/lib) handles real-time events
   → Zustand stores manage client state (calls, chat list, friends)
   → React Query cache invalidated on Socket.io events
 ```
@@ -163,7 +163,7 @@ src/
 
 ```
 main.ts             ← Main process — creates BrowserWindow, loads https://0zone.site/auth
-preload.ts          ← Context bridge (exposes openchatConfig, electron IPC)
+preload.ts          ← Context bridge (exposes zerozoneConfig, electron IPC)
 electron-builder.json ← Build targets: macOS (dmg), Windows (nsis), Linux (AppImage+deb)
 renderer/           ← Embedded frontend for offline fallback
 scripts/dist.mjs    ← Distribution build script

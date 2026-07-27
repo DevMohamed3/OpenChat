@@ -162,26 +162,47 @@ export async function resetPresenceState() {
 }
 
 export function startPresenceCleanup(io: Server) {
-  return setInterval(async () => {
-    const cutoff = Date.now() - STALE_CONNECTION_MS
-    const removals: Array<{ userId: number; socketId: string }> = []
+  let timerId: ReturnType<typeof setTimeout> | null = null
+  let stopped = false
 
-    userConnections.forEach((sockets, userId) => {
-      sockets.forEach((lastSeen, socketId) => {
-        if (lastSeen < cutoff) {
-          removals.push({ userId, socketId })
-        }
+  async function cleanup() {
+    try {
+      const cutoff = Date.now() - STALE_CONNECTION_MS
+      const removals: Array<{ userId: number; socketId: string }> = []
+
+      userConnections.forEach((sockets, userId) => {
+        sockets.forEach((lastSeen, socketId) => {
+          if (lastSeen < cutoff) {
+            removals.push({ userId, socketId })
+          }
+        })
       })
-    })
 
-    for (const removal of removals) {
-      const socket = io.sockets.sockets.get(removal.socketId)
-      if (socket?.connected) {
-        refreshConnection(removal.userId, removal.socketId)
-        continue
+      for (const removal of removals) {
+        const socket = io.sockets.sockets.get(removal.socketId)
+        if (socket?.connected) {
+          refreshConnection(removal.userId, removal.socketId)
+          continue
+        }
+
+        await unregisterConnection(io, removal.userId, removal.socketId)
       }
-
-      await unregisterConnection(io, removal.userId, removal.socketId)
+    } finally {
+      if (!stopped) {
+        timerId = setTimeout(cleanup, CLEANUP_INTERVAL_MS)
+      }
     }
-  }, CLEANUP_INTERVAL_MS)
+  }
+
+  timerId = setTimeout(cleanup, CLEANUP_INTERVAL_MS)
+
+  return {
+    stop() {
+      stopped = true
+      if (timerId !== null) {
+        clearTimeout(timerId)
+        timerId = null
+      }
+    }
+  }
 }

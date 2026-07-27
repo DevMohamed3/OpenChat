@@ -1,7 +1,7 @@
 'use client'
 
 import { useState, useEffect } from 'react'
-import { api, socket, getAvatarUrl } from '@openchat/lib'
+import { api, socket, getAvatarUrl } from '@zerozone/lib'
 import { useRouter } from 'next/navigation'
 import { Search, MessageCircle, Plus } from 'lucide-react'
 

@@ -12,7 +12,7 @@ import AddFriend from "./AddFriend"
 import FriendRequests from "./FriendRequests"
 import BlockedUsers from "./BlockedUsers"
 
-import { api } from "@openchat/lib"
+import { api } from "@zerozone/lib"
 import { useRouter } from "next/navigation"
 import { useChatsStore } from "@/app/stores/chat-store"
 import PendingRequests from "./PendingRequests"

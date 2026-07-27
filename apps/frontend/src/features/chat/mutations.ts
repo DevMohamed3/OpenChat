@@ -1,5 +1,5 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query"
-import { socket } from "@openchat/lib"
+import { socket } from "@zerozone/lib"
 import { apiClient } from "@/lib/api/client"
 import { mergeIntoFirstPage, updateInAllPages, messageKeys, type ChatMessagePage } from "@/features/chat/queries"
 import type { ChannelMessage, SendChannelMessageInput } from "@/features/chat/types"

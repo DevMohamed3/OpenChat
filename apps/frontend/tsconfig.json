@@ -23,15 +23,15 @@
       "@/index.css": ["./src/index.css"],
       "packages/ui": ["../../packages/components/src"],
       "packages/ui/*": ["../../packages/components/src/*"],
-      "@openchat/components": ["../../packages/components/src"],
-      "@openchat/components/*": ["../../packages/components/src/*"],
-      "@openchat/ui": ["../../packages/components/src"],
-      "@openchat/ui/*": ["../../packages/components/src/*"],
-      "@openchat/components": ["../../packages/components/src"],
-      "@openchat/lib": ["../../packages/lib/src"],
-      "@openchat/lib/*": ["../../packages/lib/src/*"],
-      "@openchat/types": ["../../packages/types/src"],
-      "@openchat/types/*": ["../../packages/types/src/*"]
+      "@zerozone/components": ["../../packages/components/src"],
+      "@zerozone/components/*": ["../../packages/components/src/*"],
+      "@zerozone/ui": ["../../packages/components/src"],
+      "@zerozone/ui/*": ["../../packages/components/src/*"],
+      "@zerozone/components": ["../../packages/components/src"],
+      "@zerozone/lib": ["../../packages/lib/src"],
+      "@zerozone/lib/*": ["../../packages/lib/src/*"],
+      "@zerozone/types": ["../../packages/types/src"],
+      "@zerozone/types/*": ["../../packages/types/src/*"]
     }
   },
   "references": [
