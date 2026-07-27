@@ -1,5 +1,6 @@
 import { Router } from "express";
 import { authMiddleware } from "../middlewares/auth.middleware.js";
+import { apiLimiter, uploadLimiter } from "../middlewares/rateLimit.js";
 import {
   addUserToGroup,
   createGroup,
@@ -21,22 +22,22 @@ import { uploadFile } from "../controllers/chat.controller.js";
 
 const router = Router();
 
-router.get("/", authMiddleware, getZones);
-router.get("/invites/:code", authMiddleware, getZoneInvite);
-router.get("/:chatPublicId/members", authMiddleware, getZoneMembers);
-router.get("/:chatPublicId/channels", authMiddleware, getZoneChannels);
-router.get("/:chatPublicId/voice-presence", authMiddleware, getZoneVoicePresence);
-router.post("/:chatPublicId/upload", authMiddleware, uploadFile);
-router.post("/", authMiddleware, createGroup);
-router.post("/invites/:code/join", authMiddleware, joinZoneInvite);
-router.post("/:chatPublicId/channels", authMiddleware, createChannel);
-router.post("/:chatPublicId/invites", authMiddleware, createZoneInvite);
-router.post("/:chatPublicId/members", authMiddleware, addUserToGroup);
-router.post("/:chatPublicId/leave", authMiddleware, leaveZone);
-router.patch("/:chatPublicId", authMiddleware, ...updateZone);
-router.patch("/:chatPublicId/members/:userId/role", authMiddleware, updateZoneMemberRole);
-router.delete("/:chatPublicId/members/:userId", authMiddleware, removeUserFromGroup);
-router.delete("/:chatPublicId", authMiddleware, deleteZone);
+router.get("/", authMiddleware, apiLimiter, getZones);
+router.get("/invites/:code", authMiddleware, apiLimiter, getZoneInvite);
+router.get("/:chatPublicId/members", authMiddleware, apiLimiter, getZoneMembers);
+router.get("/:chatPublicId/channels", authMiddleware, apiLimiter, getZoneChannels);
+router.get("/:chatPublicId/voice-presence", authMiddleware, apiLimiter, getZoneVoicePresence);
+router.post("/:chatPublicId/upload", authMiddleware, uploadLimiter, uploadFile);
+router.post("/", authMiddleware, apiLimiter, createGroup);
+router.post("/invites/:code/join", authMiddleware, apiLimiter, joinZoneInvite);
+router.post("/:chatPublicId/channels", authMiddleware, apiLimiter, createChannel);
+router.post("/:chatPublicId/invites", authMiddleware, apiLimiter, createZoneInvite);
+router.post("/:chatPublicId/members", authMiddleware, apiLimiter, addUserToGroup);
+router.post("/:chatPublicId/leave", authMiddleware, apiLimiter, leaveZone);
+router.patch("/:chatPublicId", authMiddleware, apiLimiter, ...updateZone);
+router.patch("/:chatPublicId/members/:userId/role", authMiddleware, apiLimiter, updateZoneMemberRole);
+router.delete("/:chatPublicId/members/:userId", authMiddleware, apiLimiter, removeUserFromGroup);
+router.delete("/:chatPublicId", authMiddleware, apiLimiter, deleteZone);
 
 
 export default router

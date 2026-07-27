@@ -182,7 +182,20 @@ export function callHandler(io: Server, socket: AuthenticatedSocket) {
   /* =========================
      ROOM
   ========================== */
-  socket.on("join-room", ({ chatPublicId }) => {
+  socket.on("join-room", async ({ chatPublicId }: { chatPublicId: string }) => {
+    if (!chatPublicId) return
+
+    const chat = await prisma.chat.findUnique({
+      where: { publicId: chatPublicId },
+      include: {
+        participants: {
+          where: { userId },
+        },
+      },
+    })
+
+    if (!chat || chat.participants.length === 0) return
+
     socket.join(`chat:${chatPublicId}`)
     const call = activeCalls.get(chatPublicId)
     if (call) {

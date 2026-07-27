@@ -14,10 +14,21 @@ export class AuthService {
   ) {
     const hashed = await bcrypt.hash(password, 10);
 
-    let publicNumericId = generateRandomNumericId(16);
-    while (await prisma.user.findUnique({ where: { publicNumericId } })) {
+    const MAX_ID_RETRIES = 10;
+    let publicNumericId: string;
+    let attempts = 0;
+
+    do {
       publicNumericId = generateRandomNumericId(16);
-    }
+      attempts++;
+
+      const exists = await prisma.user.findUnique({ where: { publicNumericId } });
+      if (!exists) break;
+
+      if (attempts >= MAX_ID_RETRIES) {
+        throw new Error(`Failed to generate unique publicNumericId after ${MAX_ID_RETRIES} attempts`);
+      }
+    } while (true);
 
     const user = await prisma.user.create({
       data: {

@@ -76,9 +76,21 @@ io.on('connection', async (socket) => {
     refreshConnection(userId, socket.id)
   })
 
-  socket.on("zone:join", (data: { zonePublicId: string }) => {
+  socket.on("zone:join", async (data: { zonePublicId: string }) => {
     const { zonePublicId } = data
     if (!zonePublicId) return
+
+    const member = await prisma.chatParticipant.findFirst({
+      where: {
+        userId,
+        chat: {
+          publicId: zonePublicId,
+          type: "ZONE",
+        },
+      },
+    })
+
+    if (!member) return
 
     socket.join(`zone:${zonePublicId}`)
     addUserToZone(zonePublicId, userId)
@@ -112,5 +124,5 @@ io.on('connection', async (socket) => {
 server.listen(port, () => { console.log(`Server running on port ${port}`) })
 
 process.on("exit", () => {
-  clearInterval(presenceCleanup)
+  presenceCleanup.stop()
 })
