@@ -37,7 +37,7 @@ export function callHandler(io: Server, socket: AuthenticatedSocket) {
   /* =========================
      PERSISTENCE / RECONNECT
   ========================== */
-  socket.on("call:check", async () => {
+  socket.on("call:check", safeHandler(async () => {
     const callId = userToCall.get(userId)
     if (!callId) {
       socket.emit("call:status", { status: "idle" })
@@ -92,7 +92,7 @@ export function callHandler(io: Server, socket: AuthenticatedSocket) {
       isCaller: participant?.isCaller,
       startTime: call.startTime
     })
-  })
+  }))
 
   /* =========================
      START CALL
@@ -182,7 +182,7 @@ export function callHandler(io: Server, socket: AuthenticatedSocket) {
   /* =========================
      ROOM
   ========================== */
-  socket.on("join-room", async ({ chatPublicId }: { chatPublicId: string }) => {
+  socket.on("join-room", safeHandler(async ({ chatPublicId }: { chatPublicId: string }) => {
     if (!chatPublicId) return
 
     const chat = await prisma.chat.findUnique({
@@ -209,7 +209,7 @@ export function callHandler(io: Server, socket: AuthenticatedSocket) {
         }
       }
     }
-  })
+  }))
 
   /* =========================
      DISCONNECT

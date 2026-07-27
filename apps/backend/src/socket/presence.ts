@@ -163,6 +163,7 @@ export async function resetPresenceState() {
 
 export function startPresenceCleanup(io: Server) {
   let timerId: ReturnType<typeof setTimeout> | null = null
+  let stopped = false
 
   async function cleanup() {
     try {
@@ -187,7 +188,9 @@ export function startPresenceCleanup(io: Server) {
         await unregisterConnection(io, removal.userId, removal.socketId)
       }
     } finally {
-      timerId = setTimeout(cleanup, CLEANUP_INTERVAL_MS)
+      if (!stopped) {
+        timerId = setTimeout(cleanup, CLEANUP_INTERVAL_MS)
+      }
     }
   }
 
@@ -195,6 +198,7 @@ export function startPresenceCleanup(io: Server) {
 
   return {
     stop() {
+      stopped = true
       if (timerId !== null) {
         clearTimeout(timerId)
         timerId = null

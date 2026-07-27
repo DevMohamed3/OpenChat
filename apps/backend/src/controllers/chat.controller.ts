@@ -4,9 +4,8 @@ import { generateRandomNumericId } from "../utils/generateRandomNumericId.js";
 import { io } from "../index.js"
 import multer from "multer"
 import path from "path"
-import { fileURLToPath } from "url"
-import fs from "fs"
 import crypto from "crypto"
+import { uploadsDir } from "../config/uploads.js"
 import { encryptMessage, decryptMessage } from "../utils/crypto.js"
 import { validateFileMagicBytes } from "../middlewares/upload.middleware.js"
 import {
@@ -16,15 +15,8 @@ import {
 } from "../validations/chat.validation.js"
 import { isZodError, respondWithZodError } from "../utils/zodError.js"
 
-const __dirname = path.dirname(fileURLToPath(import.meta.url))
-const uploadDir = path.resolve(__dirname, "../../uploads")
-
-if (!fs.existsSync(uploadDir)) {
-  fs.mkdirSync(uploadDir, { recursive: true })
-}
-
 const storage = multer.diskStorage({
-  destination: uploadDir,
+  destination: uploadsDir,
   filename: (_, file, cb) => {
     cb(null, crypto.randomUUID() + path.extname(file.originalname))
   },

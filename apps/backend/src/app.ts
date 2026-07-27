@@ -1,24 +1,17 @@
 import express, { Express } from "express";
 import cors from "cors";
 import helmet from "helmet";
-import fs from "fs";
-import path from "path";
-import { fileURLToPath } from "url";
 import authRoutes from "./routes/auth.routes.js";
 import zonesRoutes from "./routes/zones.routes.js";
 import cookieParser from "cookie-parser";
 import { authMiddleware } from "./middlewares/auth.middleware.js";
+import { csrfGuard } from "./middlewares/csrf.js";
+import { uploadsDir } from "./config/uploads.js";
 import friendRoutes from "./routes/friend.routes.js";
 import chatRoutes from "./routes/chat.routes.js";
 import userRoutes from "./routes/user.routes.js";
 import { isAllowedOrigin } from "./config/origin.js";
 import webrtcRoutes from "./routes/webrtc.routes.js"
-
-const __dirname = path.dirname(fileURLToPath(import.meta.url));
-const uploadsDir = path.resolve(__dirname, "../uploads");
-if (!fs.existsSync(uploadsDir)) {
-  fs.mkdirSync(uploadsDir, { recursive: true });
-}
 
 export const app: Express = express();
 
@@ -61,6 +54,7 @@ app.use((_req, res, next) => {
 });
 
 app.use(cookieParser());
+app.use(csrfGuard);
 app.use(express.json({ limit: "1mb" }));
 
 // API routes

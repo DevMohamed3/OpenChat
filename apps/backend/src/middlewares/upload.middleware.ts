@@ -2,6 +2,7 @@ import multer from "multer";
 import path from "path";
 import crypto from "crypto";
 import fs from "fs";
+import { uploadsDir } from "../config/uploads.js";
 
 const ALLOWED_MIMES = new Set([
   "image/jpeg",
@@ -24,7 +25,7 @@ function validateFileBuffer(buffer: Buffer, mimetype: string): boolean {
 }
 
 const storage = multer.diskStorage({
-  destination: "uploads",
+  destination: uploadsDir,
   filename: (_, file, cb) => {
     const ext = path.extname(file.originalname).toLowerCase();
     cb(null, `${crypto.randomUUID()}${ext}`);

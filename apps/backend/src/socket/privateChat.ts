@@ -2,6 +2,7 @@ import { Server, Socket } from "socket.io"
 import { prisma } from "../config/prisma.js"
 import { encryptMessage } from "../utils/crypto.js"
 import { chatTypingSchema, joinRoomSchema, leaveRoomSchema, privateMessageSchema } from "../validations/socket.validation.js"
+import { safeHandler } from "./safeHandler.js"
 
 async function isUserInChat(userId: number, chatPublicId: string) {
   const chat = await prisma.chat.findUnique({
@@ -22,7 +23,7 @@ export function privateChatHandler(io: Server, socket: Socket) {
   const userId = socket.data.userId
   if (!userId) return
 
-  socket.on("join-room", async ({ chatPublicId, channelPublicId }: { chatPublicId: string; channelPublicId?: string }) => {
+  socket.on("join-room", safeHandler(async ({ chatPublicId, channelPublicId }: { chatPublicId: string; channelPublicId?: string }) => {
     const parsed = joinRoomSchema.safeParse({ chatPublicId, channelPublicId })
     if (!parsed.success) return
     chatPublicId = parsed.data.chatPublicId
@@ -35,7 +36,7 @@ export function privateChatHandler(io: Server, socket: Socket) {
     if (channelPublicId) {
       socket.join(`channel:${channelPublicId}`)
     }
-  })
+  }))
 
   socket.on("leave-room", ({ chatPublicId, channelPublicId }: { chatPublicId: string; channelPublicId?: string }) => {
     const parsed = leaveRoomSchema.safeParse({ chatPublicId, channelPublicId })
@@ -50,7 +51,7 @@ export function privateChatHandler(io: Server, socket: Socket) {
 
   socket.on(
     "private-message",
-    async (
+    safeHandler(async (
       {
         chatPublicId,
         channelPublicId,
@@ -170,11 +171,11 @@ export function privateChatHandler(io: Server, socket: Socket) {
       if (callback) {
         callback(messagePayload)
       }
-    }
+    }))
   )
 
 
-  socket.on("chat:typing", async ({ chatPublicId, isTyping }: { chatPublicId: string, isTyping: boolean }) => {
+  socket.on("chat:typing", safeHandler(async ({ chatPublicId, isTyping }: { chatPublicId: string, isTyping: boolean }) => {
     const parsed = chatTypingSchema.safeParse({ chatPublicId, isTyping })
     if (!parsed.success) return
 
@@ -188,5 +189,5 @@ export function privateChatHandler(io: Server, socket: Socket) {
       userId,
       isTyping
     })
-  })
+  }))
 }
