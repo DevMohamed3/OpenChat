@@ -4,7 +4,7 @@ import { useState, useEffect, useMemo } from 'react'
 import { useSearchParams, useRouter } from 'next/navigation'
 import { Button, Input } from 'packages/ui'
 import { Hash, Plus, Volume2, Search, X } from 'lucide-react'
-import { cn, getAvatarUrl } from '@openchat/lib'
+import { cn, getAvatarUrl } from '@zerozone/lib'
 import { CreateZoneModal } from '../_components/zones/CreateZoneModal'
 import { useChannels } from '@/features/channels/queries'
 import { useZoneNavigation } from '@/features/channels/navigation'
@@ -26,7 +26,7 @@ export default function ZonesHubPage() {
   const [lastZonePublicId] = useState<string | null>(() =>
     typeof window === 'undefined'
       ? null
-      : window.localStorage.getItem('openchat:last-zone-public-id'),
+      : window.localStorage.getItem('zerozone:last-zone-public-id'),
   )
 
   useEffect(() => {

@@ -1,6 +1,6 @@
 import * as React from "react"
 
-import { cn } from "@openchat/lib"
+import { cn } from "@zerozone/lib"
 
 const Card = React.forwardRef<
   HTMLDivElement,

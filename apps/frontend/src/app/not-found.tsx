@@ -35,7 +35,7 @@ export default function NotFound() {
 
           <h1 className="text-3xl md:text-4xl font-bold text-white mb-6 tracking-tight">Page Not Found.</h1>
           <p className="text-zinc-500 text-base max-w-md mx-auto mb-12 leading-relaxed">
-            The resource you are looking for has been moved, deleted, or never existed in the OpenChat protocol.
+            The resource you are looking for has been moved, deleted, or never existed in the ZeroZone protocol.
           </p>
 
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4">

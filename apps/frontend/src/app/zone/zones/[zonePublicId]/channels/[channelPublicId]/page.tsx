@@ -32,7 +32,7 @@ import {
     Trash2,
     Gift,
 } from 'lucide-react'
-import { api, getAvatarUrl, socket } from '@openchat/lib'
+import { api, getAvatarUrl, socket } from '@zerozone/lib'
 import { VisuallyHidden } from '@radix-ui/react-visually-hidden'
 import MessageText from '../../../../_components/chat/MessageText'
 import ZoneSettings from '../../../../_components/zones/ZoneSettings'

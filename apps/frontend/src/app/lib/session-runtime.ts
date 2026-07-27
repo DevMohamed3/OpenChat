@@ -1,6 +1,6 @@
 'use client'
 
-import { socket } from '@openchat/lib'
+import { socket } from '@zerozone/lib'
 import { useCallStore, type CallUser } from '@/app/stores/call-store'
 import { playMuteFeedback, playSessionJoinFeedback, playSessionLeaveFeedback, playSpeakerFeedback } from './audio-feedback'
 

@@ -12,7 +12,7 @@ export default function PrivacyPage() {
         <section>
           <h2 className="text-lg font-semibold mb-2">1. Introduction</h2>
           <p>
-            OpenChat ("we", "our", or "us") values your privacy.
+            ZeroZone ("we", "our", or "us") values your privacy.
             This Privacy Policy explains how we collect, use,
             and safeguard your information when you use our platform.
           </p>
@@ -43,7 +43,7 @@ export default function PrivacyPage() {
         <section>
           <h2 className="text-lg font-semibold mb-2">4. Data Security</h2>
           <p>
-            OpenChat is built with privacy and security in mind.
+            ZeroZone is built with privacy and security in mind.
             We use secure authentication systems and encrypted communication
             channels to protect your data. End-to-end encryption is currently
             in development and will be available in an upcoming release.
@@ -81,7 +81,7 @@ export default function PrivacyPage() {
           <h2 className="text-lg font-semibold mb-2">8. Changes to This Policy</h2>
           <p>
             We may update this Privacy Policy from time to time.
-            Continued use of OpenChat after changes means you accept the updated policy.
+            Continued use of ZeroZone after changes means you accept the updated policy.
           </p>
         </section>
 

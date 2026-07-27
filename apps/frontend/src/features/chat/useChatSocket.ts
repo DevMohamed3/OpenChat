@@ -2,7 +2,7 @@
 
 import { useEffect } from "react"
 import { useQueryClient } from "@tanstack/react-query"
-import { socket } from "@openchat/lib"
+import { socket } from "@zerozone/lib"
 import { messageKeys, mergeIntoFirstPage, updateInAllPages, type ChatMessagePage } from "./queries"
 import type { ChannelMessage } from "./types"
 import type { InfiniteData } from "@tanstack/react-query"

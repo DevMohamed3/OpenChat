@@ -30,7 +30,7 @@ export default function Footer() {
                         </p>
                         <div className="flex items-center gap-4">
                             <Link
-                                href="https://github.com/DevMuhammed3/OpenChat"
+                                href="https://github.com/DevMuhammed3/ZeroZone"
                                 target="_blank"
                                 className="w-9 h-9 rounded-lg bg-white/5 border border-white/10 flex items-center justify-center text-zinc-400 hover:text-white hover:bg-white/10 transition-all"
                             >
@@ -114,7 +114,7 @@ export default function Footer() {
 
                 <div className="pt-8 border-t border-white/5 flex flex-col md:flex-row items-center justify-between gap-4">
                     <p className="text-zinc-600 text-xs">
-                        © {new Date().getFullYear()} OpenChat. Distributed under
+                        © {new Date().getFullYear()} ZeroZone. Distributed under
                         MIT License.
                     </p>
                     <p className="text-zinc-600 text-xs flex items-center gap-1">

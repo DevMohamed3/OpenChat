@@ -1,7 +1,7 @@
 'use client'
 
 import { useMemo, useState } from 'react'
-import { cn, getAvatarUrl } from '@openchat/lib'
+import { cn, getAvatarUrl } from '@zerozone/lib'
 
 export type UserAvatarProps = {
   name?: string | null

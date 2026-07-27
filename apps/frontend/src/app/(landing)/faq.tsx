@@ -10,9 +10,9 @@ import {
 
 const faqs = [
   {
-    question: "Is OpenChat really free? What's the catch?",
+    question: "Is ZeroZone really free? What's the catch?",
     answer:
-      "No catch. OpenChat is 100% free and open-source. We don't sell your data, show ads, or charge hidden fees. The code is public — you can verify everything yourself.",
+      "No catch. ZeroZone is 100% free and open-source. We don't sell your data, show ads, or charge hidden fees. The code is public — you can verify everything yourself.",
   },
   {
     question: "Do I need a phone number to sign up?",
@@ -30,14 +30,14 @@ const faqs = [
       "Only you and the people you're talking to. Not us, not advertisers, not anyone. Your conversations are encrypted and private by default.",
   },
   {
-    question: "Can I use OpenChat on my phone?",
+    question: "Can I use ZeroZone on my phone?",
     answer:
-      "Yes. OpenChat is designed mobile-first — fast, simple, and works great on any device.",
+      "Yes. ZeroZone is designed mobile-first — fast, simple, and works great on any device.",
   },
   {
-    question: "Can I self-host OpenChat?",
+    question: "Can I self-host ZeroZone?",
     answer:
-      "Yes. OpenChat is fully open-source and designed for self-hosting. Deploy it on your own infrastructure with full control over your data and privacy.",
+      "Yes. ZeroZone is fully open-source and designed for self-hosting. Deploy it on your own infrastructure with full control over your data and privacy.",
   },
 ]
 
@@ -58,7 +58,7 @@ export default function FAQ() {
             Frequently Asked Questions
           </h2>
           <p className="text-zinc-400 text-base md:text-lg max-w-xl mx-auto">
-            Everything you need to know about OpenChat, privacy, and how it works under the hood.
+            Everything you need to know about ZeroZone, privacy, and how it works under the hood.
           </p>
         </motion.div>
 

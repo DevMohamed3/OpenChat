@@ -3,7 +3,7 @@
 import { useCallback, useEffect, useRef, useState } from 'react'
 import { useParams, useRouter } from 'next/navigation'
 import dynamic from 'next/dynamic'
-import { cn, socket } from '@openchat/lib'
+import { cn, socket } from '@zerozone/lib'
 import {
   Input,
   Button,
@@ -19,7 +19,7 @@ import {
 } from 'packages/ui'
 import { useChatsStore } from '@/app/stores/chat-store'
 import { ArrowLeft, Paperclip, Pin, Send, ShieldBan, UserMinus, X, Smile, Sticker as StickerIcon, Gift, SquarePen, Trash, Search, PanelRight } from 'lucide-react'
-import { api, getAvatarUrl } from '@openchat/lib'
+import { api, getAvatarUrl } from '@zerozone/lib'
 import MessageText from '../../_components/chat/MessageText'
 const GifPicker = dynamic(() => import('../../_components/chat/GifPicker'), { ssr: false })
 const EmojiPicker = dynamic(() => import('../../_components/chat/EmojiPicker'), { ssr: false })

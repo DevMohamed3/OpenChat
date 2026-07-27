@@ -13,9 +13,9 @@
     "baseUrl": ".",
     "paths": {
       "@/*": ["./packages/*/src"],
-      "@openchat/components": ["./packages/components/src"],
-      "@openchat/lib": ["./packages/lib/src"],
-      "@openchat/types": ["./packages/types/src"],
+      "@zerozone/components": ["./packages/components/src"],
+      "@zerozone/lib": ["./packages/lib/src"],
+      "@zerozone/types": ["./packages/types/src"],
       // "web/*": ["./apps/frontend/src/*"],
       "packages/ui": ["./packages/components/src"],
       "packages/ui/*": ["./packages/components/src/ui/*"],

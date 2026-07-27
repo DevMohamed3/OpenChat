@@ -9,7 +9,7 @@ import {
   DropdownMenuContent,
   DropdownMenuTrigger,
 } from 'packages/ui'
-import { cn } from '@openchat/lib'
+import { cn } from '@zerozone/lib'
 import { UserAvatar } from '@/components/UserAvatar'
 
 export type ChatHeaderUser = {

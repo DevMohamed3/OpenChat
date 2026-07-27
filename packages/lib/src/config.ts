@@ -19,12 +19,12 @@ function normalizeAndValidateApiUrl(value: unknown) {
 }
 
 export function getApiBaseUrl() {
-  const runtimeUrl = normalizeAndValidateApiUrl((globalThis as any)?.openchatConfig?.apiUrl);
+  const runtimeUrl = normalizeAndValidateApiUrl((globalThis as any)?.zerozoneConfig?.apiUrl);
   if (runtimeUrl) return runtimeUrl;
 
   const envUrl = normalizeAndValidateApiUrl(
     typeof process !== "undefined"
-      ? process.env.OPENCHAT_API_URL || process.env.NEXT_PUBLIC_API_URL
+      ? process.env.ZEROZONE_API_URL || process.env.NEXT_PUBLIC_API_URL
       : undefined,
   );
   if (envUrl) return envUrl;

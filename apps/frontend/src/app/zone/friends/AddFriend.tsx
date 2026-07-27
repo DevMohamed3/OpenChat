@@ -3,7 +3,7 @@
 import { useEffect, useState } from 'react'
 import { Input, Button } from 'packages/ui'
 import { Search, Send, UserPlus, Loader2, Sparkles, CheckCircle2, AlertCircle } from 'lucide-react'
-import { api, cn } from '@openchat/lib'
+import { api, cn } from '@zerozone/lib'
 import { motion, AnimatePresence } from 'framer-motion'
 
 export default function AddFriend() {

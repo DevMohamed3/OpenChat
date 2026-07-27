@@ -6,7 +6,7 @@ import {
   Card
 } from 'packages/ui'
 import { Check, X } from 'lucide-react'
-import { api } from '@openchat/lib'
+import { api } from '@zerozone/lib'
 import { useFriendsStore, type FriendRequest, type User } from '@/app/stores/friends-store'
 import { formatDistanceToNow } from 'date-fns'
 import { UserAvatar } from '@/components/UserAvatar'

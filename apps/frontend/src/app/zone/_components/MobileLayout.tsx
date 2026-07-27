@@ -2,7 +2,7 @@
 
 import { useEffect, useMemo, useRef } from 'react'
 import { useRouter, usePathname } from 'next/navigation'
-import { cn, getAvatarUrl } from '@openchat/lib'
+import { cn, getAvatarUrl } from '@zerozone/lib'
 import Link from 'next/link'
 import { Radiation } from 'lucide-react'
 
@@ -103,7 +103,7 @@ export default function MobileLayout({ user, children }: MobileLayoutProps) {
               <path d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm0 14H6l-2 2V4h16v12z"/>
             </svg>
           </div>
-          <span className="font-bold text-white">OpenChat</span>
+          <span className="font-bold text-white">ZeroZone</span>
         </Link>
         <button 
           className="w-9 h-9 rounded-lg bg-white/5 flex items-center justify-center text-zinc-400 hover:text-white hover:bg-white/10 transition-colors"

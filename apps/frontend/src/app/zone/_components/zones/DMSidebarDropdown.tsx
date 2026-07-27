@@ -6,7 +6,7 @@ import { ChevronDown, Grid3X3, Plus, Hash, ArrowRight } from "lucide-react"
 import { Avatar, AvatarFallback, AvatarImage } from "packages/ui"
 import { useZones } from "@/features/zones/queries"
 import { useZoneNavigation } from "@/features/channels/navigation"
-import { cn } from "@openchat/lib"
+import { cn } from "@zerozone/lib"
 
 interface DMSidebarDropdownProps {
   children?: React.ReactNode

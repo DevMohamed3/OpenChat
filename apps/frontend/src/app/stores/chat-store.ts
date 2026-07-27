@@ -249,7 +249,7 @@ export const useChatsStore = create<ChatsState>()(
         }),
     }),
     {
-      name: 'openchat-chats',
+      name: 'zerozone-chats',
       partialize: (state) => ({
         hiddenChats: state.hiddenChats,
         unread: state.unread,

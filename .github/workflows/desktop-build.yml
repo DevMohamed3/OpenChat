@@ -33,5 +33,5 @@ jobs:
       - name: Upload artifacts
         uses: actions/upload-artifact@v4
         with:
-          name: OpenChat-${{ matrix.os }}
+          name: ZeroZone-${{ matrix.os }}
           path: desktop/dist/*

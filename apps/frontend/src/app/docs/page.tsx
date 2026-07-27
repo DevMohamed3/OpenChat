@@ -34,7 +34,7 @@ const categories = [
         title: "Getting Started",
         icon: <Book size={16} />,
         items: [
-            { name: "What is OpenChat", href: "#what-is-openchat" },
+            { name: "What is ZeroZone", href: "#what-is-zerozone" },
             { name: "Tech Stack", href: "#tech-stack" },
             { name: "Architecture", href: "#architecture" },
         ],
@@ -125,7 +125,7 @@ function Endpoint({ method, path, desc }: { method: string; path: string; desc: 
 
 export default function DocsPage() {
     const user = useUserStore((s) => s.user)
-    const [activeSection, setActiveSection] = useState("what-is-openchat")
+    const [activeSection, setActiveSection] = useState("what-is-zerozone")
     const [search, setSearch] = useState("")
     const observerRef = useRef<IntersectionObserver | null>(null)
 
@@ -227,20 +227,20 @@ export default function DocsPage() {
                                 Documentation
                             </h1>
                             <p className="text-lg text-zinc-400 mb-16 leading-relaxed">
-                                Everything you need to build, deploy, and self-host OpenChat.
+                                Everything you need to build, deploy, and self-host ZeroZone.
                             </p>
 
                             {/* ─── Getting Started ──────────────────────────── */}
 
-                            <section id="what-is-openchat" data-section className="mb-20">
+                            <section id="what-is-zerozone" data-section className="mb-20">
                                 <h2 className="text-2xl font-bold text-white mb-4 flex items-center gap-3">
                                     <span className="w-8 h-8 rounded-lg bg-primary/10 border border-primary/20 flex items-center justify-center text-primary text-sm">
                                         1
                                     </span>
-                                    What is OpenChat
+                                    What is ZeroZone
                                 </h2>
                                 <p className="text-zinc-400 text-sm leading-relaxed mb-6">
-                                    OpenChat is a self-hosted, open-source real-time communication platform.
+                                    ZeroZone is a self-hosted, open-source real-time communication platform.
                                     It combines text chat, voice/video calls, and community management
                                     into a single deployable unit. You own the server, the data, and the
                                     infrastructure.
@@ -327,11 +327,11 @@ export default function DocsPage() {
                                     Architecture
                                 </h2>
                                 <p className="text-zinc-400 text-sm leading-relaxed mb-6">
-                                    OpenChat follows a monorepo structure with four packages:
+                                    ZeroZone follows a monorepo structure with four packages:
                                 </p>
                                 <div className="rounded-xl border border-white/10 bg-[#0a0f1a] p-6 mb-6">
                                     <pre className="text-sm text-zinc-300 font-mono leading-relaxed overflow-x-auto">
-{`openchat/
+{`zerozone/
 ├── apps/
 │   ├── frontend/        # Next.js 16 (App Router)
 │   └── backend/         # Express 5 + Socket.io + Prisma
@@ -608,8 +608,8 @@ export default function DocsPage() {
                                     Installation
                                 </h2>
                                 <CodeBlock language="bash" code={`# Clone the repository
-git clone https://github.com/DevMuhammed3/OpenChat.git
-cd OpenChat
+git clone https://github.com/DevMuhammed3/ZeroZone.git
+cd ZeroZone
 
 # Enable pnpm via corepack
 corepack enable
@@ -687,7 +687,7 @@ pnpm build
                                 <p className="text-sm text-zinc-500">
                                     Questions?{" "}
                                     <Link
-                                        href="https://github.com/DevMuhammed3/OpenChat"
+                                        href="https://github.com/DevMuhammed3/ZeroZone"
                                         target="_blank"
                                         className="text-primary hover:underline"
                                     >

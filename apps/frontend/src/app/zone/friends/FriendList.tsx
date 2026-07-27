@@ -12,8 +12,8 @@ import {
   Skeleton,
 } from 'packages/ui'
 import { Info, ShieldBan, UserMinus, Users } from 'lucide-react'
-import { cn } from '@openchat/lib'
-import { api } from '@openchat/lib'
+import { cn } from '@zerozone/lib'
+import { api } from '@zerozone/lib'
 import { useFriendsStore } from '@/app/stores/friends-store'
 import { UserAvatar } from '@/components/UserAvatar'
 

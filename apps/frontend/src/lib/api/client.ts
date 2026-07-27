@@ -1,4 +1,4 @@
-import { getApiBaseUrl, getAvatarUrl } from "@openchat/lib"
+import { getApiBaseUrl, getAvatarUrl } from "@zerozone/lib"
 
 const API_URL = getApiBaseUrl()
 

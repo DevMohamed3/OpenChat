@@ -13,7 +13,7 @@ import {
   SheetHeader,
   SheetTitle,
 } from 'packages/ui'
-import { getAvatarUrl, socket } from '@openchat/lib'
+import { getAvatarUrl, socket } from '@zerozone/lib'
 import { useStartDirectMessageMutation } from '@/features/chat/mutations'
 import { useCreateChannelMutation } from '@/features/channels/mutations'
 import { useChannels } from '@/features/channels/queries'
@@ -23,7 +23,7 @@ import { apiClient } from '@/lib/api/client'
 import { useUser } from '@/features/user/queries'
 import { toast } from 'sonner'
 import { AlertTriangle, Camera, Plus } from 'lucide-react'
-import { cn } from '@openchat/lib'
+import { cn } from '@zerozone/lib'
 
 type Friend = {
   id: number
@@ -158,6 +158,9 @@ export default function ZoneSettings({
       toast.error("File too large. Maximum size is 2MB")
       return
     }
+    if (draftZoneAvatar && draftZoneAvatar.startsWith("blob:")) {
+      URL.revokeObjectURL(draftZoneAvatar)
+    }
     setAvatarFile(file)
     setDraftZoneAvatar(URL.createObjectURL(file))
   }
@@ -176,6 +179,9 @@ export default function ZoneSettings({
       avatar: avatarFile,
     })
 
+    if (draftZoneAvatar && draftZoneAvatar.startsWith("blob:")) {
+      URL.revokeObjectURL(draftZoneAvatar)
+    }
     setDraftZoneName(zone.name)
     setDraftZoneAvatar(zone.avatar ?? null)
     setAvatarFile(null)

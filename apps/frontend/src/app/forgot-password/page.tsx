@@ -7,15 +7,15 @@ import { zodResolver } from "@hookform/resolvers/zod"
 import {
     forgotPasswordSchema,
     resetPasswordSchema,
-} from "@openchat/lib/validations/auth"
+} from "@zerozone/lib/validations/auth"
 import type {
     ForgotPasswordInput,
     ResetPasswordInput,
-} from "@openchat/lib/validations/auth"
+} from "@zerozone/lib/validations/auth"
 import { Mail, Lock, Loader2, ArrowLeft, CheckCircle2, AlertCircle, KeyRound } from "lucide-react"
 import Link from "next/link"
 import { useRouter } from "next/navigation"
-import { api } from "@openchat/lib"
+import { api } from "@zerozone/lib"
 import Image from "next/image"
 
 type Step = "email" | "reset"

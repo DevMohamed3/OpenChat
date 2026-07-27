@@ -29,7 +29,7 @@ export default function CTA() {
                     </h2>
 
                     <p className="text-zinc-400 text-base md:text-lg max-w-xl mx-auto mb-12 leading-relaxed">
-                        Join thousands of developers and teams who have already made the switch to OpenChat.
+                        Join thousands of developers and teams who have already made the switch to ZeroZone.
                         Self-host or use our cloud — your choice.
                     </p>
 
@@ -42,7 +42,7 @@ export default function CTA() {
                         </Button>
 
                         <Button asChild variant="outline" size="lg" className="h-12 px-8 text-sm font-semibold rounded-xl border-white/20 bg-white/5 text-white hover:bg-white/10 transition-all backdrop-blur-sm">
-                            <Link href="https://github.com/DevMuhammed3/OpenChat" target="_blank">
+                            <Link href="https://github.com/DevMuhammed3/ZeroZone" target="_blank">
                                 <Github size={18} className="mr-2" />
                                 Star on GitHub
                             </Link>

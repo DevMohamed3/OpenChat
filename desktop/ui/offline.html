@@ -7,7 +7,7 @@
       http-equiv="Content-Security-Policy"
       content="default-src 'none'; style-src 'unsafe-inline'; img-src 'self' data:; script-src 'unsafe-inline';"
     />
-    <title>OpenChat is offline</title>
+    <title>ZeroZone is offline</title>
     <style>
       :root {
         color-scheme: dark;
@@ -96,10 +96,10 @@
   </head>
   <body>
     <main class="card">
-      <h1 class="title">OpenChat couldn’t load</h1>
+      <h1 class="title">ZeroZone couldn’t load</h1>
       <p class="subtitle">
         The website may be down or your connection may be offline. This app is remote-first and requires access to the
-        OpenChat web app.
+        ZeroZone web app.
       </p>
       <div class="row">
         <button id="retry" type="button">Retry</button>
@@ -131,8 +131,8 @@
       });
 
       open?.addEventListener("click", () => {
-        if (window.openchatDesktop?.openExternal) {
-          window.openchatDesktop.openExternal(url);
+        if (window.zerozoneDesktop?.openExternal) {
+          window.zerozoneDesktop.openExternal(url);
           return;
         }
         window.open(url, "_blank", "noopener,noreferrer");

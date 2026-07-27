@@ -2,7 +2,7 @@
 
 import { Button } from 'packages/ui'
 import { Mic, MicOff, PhoneOff, Users } from 'lucide-react'
-import { cn } from '@openchat/lib'
+import { cn } from '@zerozone/lib'
 import { useCallStore } from '@/app/stores/call-store'
 import { applyGlobalMuteToggle, endCallSession, endVoiceSession } from '@/app/lib/session-runtime'
 

@@ -2,7 +2,7 @@
 
 import { useState, useEffect, useRef, useCallback, Suspense, lazy } from 'react'
 import { X } from 'lucide-react'
-import { cn } from '@openchat/lib'
+import { cn } from '@zerozone/lib'
 
 const Picker = lazy(() => import('@emoji-mart/react'))
 

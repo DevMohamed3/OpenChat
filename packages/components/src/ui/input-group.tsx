@@ -1,7 +1,7 @@
 import * as React from "react"
 import { cva, type VariantProps } from "class-variance-authority"
 
-import { cn } from "@openchat/lib"
+import { cn } from "@zerozone/lib"
 import { Button } from "packages/ui"
 import { Input } from "packages/ui"
 import { Textarea } from "packages/ui"

@@ -1,13 +1,13 @@
 {
-  "name": "@openchat/desktop",
+  "name": "@zerozone/desktop",
   "version": "1.0.0",
-  "description": "OpenChat desktop app",
-  "homepage": "https://openchat.io",
+  "description": "ZeroZone desktop app",
+  "homepage": "https://zerozone.io",
   "repository": {
     "type": "git",
-    "url": "https://github.com/DevMuhammed3/OpenChat.git"
+    "url": "https://github.com/DevMuhammed3/ZeroZone.git"
   },
-  "author": "OpenChat <support@openchat.io>",
+  "author": "ZeroZone <support@zerozone.io>",
   "main": "build/main.js",
   "scripts": {
     "dev": "pnpm run build && pnpm exec electron .",

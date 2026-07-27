@@ -78,7 +78,7 @@ export default function Hero() {
                                 className="h-12 px-8 text-sm font-semibold rounded-xl border-white/10 bg-white/5 text-white hover:bg-white/10 transition-all backdrop-blur-sm"
                             >
                                 <Link
-                                    href="https://github.com/DevMuhammed3/OpenChat"
+                                    href="https://github.com/DevMuhammed3/ZeroZone"
                                     target="_blank"
                                 >
                                     <svg
@@ -176,7 +176,7 @@ export default function Hero() {
                                     {/* Zone name */}
                                     <div className="px-4 py-3">
                                         <h2 className="font-bold text-white text-[15px] truncate leading-tight">
-                                            OpenChat Team
+                                            ZeroZone Team
                                         </h2>
                                     </div>
 

@@ -1,4 +1,4 @@
-import { cn } from "@openchat/lib"
+import { cn } from "@zerozone/lib"
 
 function Skeleton({
   className,

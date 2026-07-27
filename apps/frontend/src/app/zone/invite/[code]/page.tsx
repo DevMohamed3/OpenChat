@@ -94,7 +94,7 @@ export default function ZoneInvitePage() {
     <div className="flex h-full items-center justify-center p-6">
       <div className="w-full max-w-md rounded-3xl border border-white/10 bg-[#111827] p-6 shadow-2xl">
         <p className="text-[11px] font-bold uppercase tracking-[0.28em] text-zinc-500">
-          OpenChat Invite
+          ZeroZone Invite
         </p>
 
         <div className="mt-5 flex items-center gap-4">

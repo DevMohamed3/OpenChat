@@ -3,7 +3,7 @@
 import { useState, useEffect } from 'react'
 import { Button, Card, ScrollArea } from 'packages/ui'
 import { Plus, X, Sticker, Sparkles, Upload } from 'lucide-react'
-import { cn } from '@openchat/lib'
+import { cn } from '@zerozone/lib'
 
 export default function StickerPicker({ 
   onSelect, 

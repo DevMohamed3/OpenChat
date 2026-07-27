@@ -1,6 +1,6 @@
 "use client"
 
-import { api } from "@openchat/lib"
+import { api } from "@zerozone/lib"
 import { useEffect } from "react"
 import { Button, Card, Skeleton } from "packages/ui"
 import { formatDistanceToNow } from "date-fns"

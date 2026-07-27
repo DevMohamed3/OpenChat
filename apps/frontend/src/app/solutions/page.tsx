@@ -65,7 +65,7 @@ export default function SolutionsPage() {
 
             <p className="text-sm md:text-base text-zinc-400 max-w-2xl mx-auto leading-relaxed font-medium">
               From high-security enterprise zones to resilient public networks, 
-              OpenChat empowers sovereign, decentralized digital interaction.
+              ZeroZone empowers sovereign, decentralized digital interaction.
             </p>
           </motion.div>
         </section>
