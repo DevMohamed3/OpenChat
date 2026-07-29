@@ -242,7 +242,7 @@ The most critical feature: **calls survive page refreshes**.
 1. **Environment Variables**
     - Set `DATABASE_URL` to production PostgreSQL instance
     - Use strong `JWT_SECRET` (>32 characters)
-    - Configure `OPENCHAT_ALLOWED_ORIGINS` for your domain(s)
+    - Configure `ZEROZONE_ALLOWED_ORIGINS` for your domain(s)
     - Enable SSL/TLS on database connection
 
 2. **Socket.io Scaling**
@@ -390,7 +390,7 @@ On page refresh while in call:
     JWT_SECRET=your-secret-key-at-least-32-characters
     PORT=4000
     BASE_URL=http://localhost:4000
-    OPENCHAT_ALLOWED_ORIGINS=http://localhost:3000
+    ZEROZONE_ALLOWED_ORIGINS=http://localhost:3000
     ```
 
     Create `apps/frontend/.env.local`:
