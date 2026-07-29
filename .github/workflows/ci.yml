@@ -2,9 +2,9 @@ name: CI/CD
 
 on:
   push:
-    branches: [main, master]
+    branches: [main]
   pull_request:
-    branches: [main, master]
+    branches: [main]
 
 env:
   REGISTRY: ghcr.io
@@ -112,5 +112,6 @@ jobs:
           script: |
             cd /opt/zerozone
             docker compose pull backend
+            docker compose run --rm backend npx prisma migrate deploy || echo "Migration skipped or failed"
             docker compose up -d --no-deps backend
             docker image prune -f

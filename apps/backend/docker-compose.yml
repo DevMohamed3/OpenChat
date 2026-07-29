@@ -1,6 +1,6 @@
 services:
   backend:
-    image: ghcr.io/devmuhammed3/openchat:latest
+    image: ghcr.io/devmuhammed3/zerozone:latest
     build:
       context: ../..
       dockerfile: apps/backend/Dockerfile
@@ -8,4 +8,9 @@ services:
       - "${PORT:-4000}:4000"
     env_file:
       - .env
+    volumes:
+      - uploads:/app/uploads
     restart: unless-stopped
+
+volumes:
+  uploads:

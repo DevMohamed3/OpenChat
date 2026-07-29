@@ -1,7 +1,7 @@
 import { Server, Socket } from "socket.io"
 import { prisma } from "../config/prisma.js"
 import { resolveAssetUrl } from "../utils/resolveAssetUrl.js"
-import { safeHandler } from "./safeHandler.js"
+import { safeHandler } from './safeHandler.js'
 
 type CallStatus = "ringing" | "active"
 
