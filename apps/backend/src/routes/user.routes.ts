@@ -7,7 +7,7 @@ import { respondWithZodError } from "../utils/zodError.js";
 import { usernameParamsSchema, userSearchQuerySchema } from "../validations/user.validation.js";
 import { searchLimiter } from "../middlewares/rateLimit.js";
 
-const router = Router();
+const router: Router = Router();
 
 router.delete('/avatar', authMiddleware, removeAvatar)
 router.patch('/profile', authMiddleware, updateProfile)

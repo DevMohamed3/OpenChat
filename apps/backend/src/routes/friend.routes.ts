@@ -4,7 +4,7 @@ import { authMiddleware } from "../middlewares/auth.middleware.js";
 import { requireVerified } from "../middlewares/requireVerified.js";
 import { searchLimiter, apiLimiter } from "../middlewares/rateLimit.js";
 
-const router = Router();
+const router: Router = Router();
 
 // Protected routes
 router.get("/search", authMiddleware, searchLimiter, friendController.searchUser);

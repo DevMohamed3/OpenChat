@@ -3,7 +3,7 @@ RUN corepack enable && corepack prepare pnpm@10.20.0 --activate
 WORKDIR /app
 
 FROM base AS build
-COPY pnpm-lock.yaml pnpm-workspace.yaml package.json tsconfig.json ./
+COPY .npmrc pnpm-lock.yaml pnpm-workspace.yaml package.json tsconfig.json ./
 COPY apps/backend apps/backend
 COPY packages packages
 RUN pnpm install --frozen-lockfile

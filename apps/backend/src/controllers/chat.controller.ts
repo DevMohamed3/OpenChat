@@ -1,4 +1,4 @@
-import { Request, Response } from "express";
+import { Request, RequestHandler, Response } from "express";
 import { prisma } from "../config/prisma.js";
 import { generateRandomNumericId } from "../utils/generateRandomNumericId.js";
 import { io } from "../index.js"
@@ -314,7 +314,7 @@ export const startChat = async (req: Request, res: Response) => {
   }
 };
 
-export const uploadFile = [
+export const uploadFile: RequestHandler[] = [
   upload.single("file"),
   validateFileMagicBytes,
   async (req: Request, res: Response) => {

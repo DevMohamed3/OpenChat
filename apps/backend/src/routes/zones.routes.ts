@@ -20,7 +20,7 @@ import {
 } from "../controllers/zones.controller.js";
 import { uploadFile } from "../controllers/chat.controller.js";
 
-const router = Router();
+const router: Router = Router();
 
 router.get("/", authMiddleware, apiLimiter, getZones);
 router.get("/invites/:code", authMiddleware, apiLimiter, getZoneInvite);

@@ -1,4 +1,4 @@
-import { Request, Response } from "express"
+import { Request, RequestHandler, Response } from "express"
 import { prisma } from "../config/prisma.js"
 import crypto from "crypto"
 import multer from "multer"
@@ -170,7 +170,7 @@ export const getZoneMembers = async (req: Request, res: Response) => {
   }
 }
 
-export const createGroup = [
+export const createGroup: RequestHandler[] = [
   upload.single("avatar"),
   async (req: Request, res: Response) => {
     try {
@@ -223,7 +223,7 @@ export const createGroup = [
   }
 ]
 
-export const updateZone = [
+export const updateZone: RequestHandler[] = [
   upload.single("avatar"),
   async (req: Request, res: Response) => {
     try {
