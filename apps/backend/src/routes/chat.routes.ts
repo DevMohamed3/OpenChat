@@ -12,7 +12,7 @@ import {
   uploadFile,
 } from "../controllers/chat.controller.js";
 
-const router = Router();
+const router: Router = Router();
 
 router.get("/", authMiddleware, apiLimiter, getChats)
 router.get("/:chatPublicId", authMiddleware, apiLimiter, getChat)

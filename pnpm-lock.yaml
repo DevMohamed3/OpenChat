@@ -211,9 +211,6 @@ importers:
       '@types/express':
         specifier: ^5.0.5
         version: 5.0.5
-      '@types/express-rate-limit':
-        specifier: ^6.0.2
-        version: 6.0.2(express@5.1.0)
       '@types/jsonwebtoken':
         specifier: ^9.0.10
         version: 9.0.10
@@ -2092,10 +2089,6 @@ packages:
 
   '@types/estree@1.0.8':
     resolution: {integrity: sha512-dWHzHa2WqEXI/O1E9OjrocMTKJl2mSrEolh1Iomrv6U+JuNwaHXsXx9bLu5gG7BUWFIN0skIQJQ/L1rIex4X6w==}
-
-  '@types/express-rate-limit@6.0.2':
-    resolution: {integrity: sha512-e1xZLOOlxCDvplAGq7rDcXtbdBu2CWRsMjaIu1LVqGxWtKvwr884YE5mPs3IvHeG/OMDhf24oTaqG5T1bV3rBQ==}
-    deprecated: This is a stub types definition. express-rate-limit provides its own type definitions, so you do not need this installed.
 
   '@types/express-serve-static-core@5.1.0':
     resolution: {integrity: sha512-jnHMsrd0Mwa9Cf4IdOzbz543y4XJepXrbia2T4b6+spXC2We3t1y6K44D3mR8XMFSXMCf3/l7rCgddfx7UNVBA==}
@@ -7254,13 +7247,6 @@ snapshots:
   '@types/dom-mediacapture-record@1.0.22': {}
 
   '@types/estree@1.0.8': {}
-
-  '@types/express-rate-limit@6.0.2(express@5.1.0)':
-    dependencies:
-      express-rate-limit: 8.6.0(express@5.1.0)
-    transitivePeerDependencies:
-      - express
-      - supports-color
 
   '@types/express-serve-static-core@5.1.0':
     dependencies:
