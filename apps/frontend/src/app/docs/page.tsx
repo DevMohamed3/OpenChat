@@ -644,7 +644,7 @@ pnpm dev`} />
                                     <p><span className="text-primary">JWT_SECRET</span>=your-secret-key</p>
                                     <p><span className="text-primary">PORT</span>=4000</p>
                                     <p><span className="text-primary">BASE_URL</span>=http://localhost:4000</p>
-                                    <p><span className="text-primary">OPENCHAT_ALLOWED_ORIGINS</span>=http://localhost:3000</p>
+                                    <p><span className="text-primary">ZEROZONE_ALLOWED_ORIGINS</span>=http://localhost:3000</p>
                                     <p><span className="text-primary">COOKIE_DOMAIN</span>=localhost</p>
                                     <p><span className="text-primary">LIVEKIT_URL</span>=wss://your-livekit-server</p>
                                     <p><span className="text-primary">LIVEKIT_API_KEY</span>=...</p>

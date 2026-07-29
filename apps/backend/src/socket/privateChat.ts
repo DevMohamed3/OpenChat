@@ -172,8 +172,6 @@ export function privateChatHandler(io: Server, socket: Socket) {
         callback(messagePayload)
       }
     }))
-  )
-
 
   socket.on("chat:typing", safeHandler(async ({ chatPublicId, isTyping }: { chatPublicId: string, isTyping: boolean }) => {
     const parsed = chatTypingSchema.safeParse({ chatPublicId, isTyping })
