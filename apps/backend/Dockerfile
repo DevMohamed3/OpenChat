@@ -8,7 +8,10 @@ COPY apps/backend apps/backend
 COPY packages packages
 RUN pnpm install --frozen-lockfile
 RUN cd apps/backend && pnpm prisma generate && pnpm build
-RUN pnpm deploy --filter backend --prod /app/deploy
+RUN pnpm deploy --filter backend --prod /app/deploy \
+    && rm -rf /app/deploy/node_modules/.prisma \
+    && cp -r /app/node_modules/.prisma /app/deploy/node_modules/.prisma
+RUN cd /app/deploy && node -e "import('@prisma/client').then(m=>{if(!('ZoneRole' in m)){console.error('Prisma client missing generated enums');process.exit(1)}})"
 
 FROM base AS production
 ENV NODE_ENV=production
