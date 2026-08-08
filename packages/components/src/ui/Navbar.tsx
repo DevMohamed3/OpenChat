@@ -145,7 +145,7 @@ export default function Navbar({ user }: { user?: NavbarUser | null }) {
              </DropdownMenuContent>
             </DropdownMenu>
           ) : (
-            <Button asChild size="sm" className="h-10 px-6 rounded-xl bg-primary text-white hover:opacity-90 border-0 font-bold transition-all shadow-lg shadow-primary/20">
+            <Button asChild size="sm" className="h-10 px-6 rounded-full bg-white text-black hover:bg-zinc-200 border-0 font-semibold transition-all">
               <Link href="/auth">Get Started</Link>
             </Button>
           )}
