@@ -18,7 +18,8 @@ import {
   DropdownMenuTrigger,
 } from "./dropdown-menu";
 import { usePathname, useRouter } from "next/navigation";
-import { Settings, LogOut,  Home } from "lucide-react";
+import { useState } from "react";
+import { Settings, LogOut, Home, Menu, X } from "lucide-react";
 
 
 type NavbarUser = {
@@ -29,61 +30,66 @@ type NavbarUser = {
   avatar?: string | null
 }
 
+const links = [
+  { name: "Features", href: "/#features" },
+  { name: "Docs", href: "/docs" },
+  { name: "Open Source", href: "/open-source" },
+  { name: "Solutions", href: "/solutions" },
+];
+
 export default function Navbar({ user }: { user?: NavbarUser | null }) {
   const pathname = usePathname();
   const router = useRouter();
+  const [menuOpen, setMenuOpen] = useState(false);
 
-  const links = [
-    { name: "Features", href: "/#features" },
-    { name: "Docs", href: "/docs" },
-    { name: "Open Source", href: "/open-source" },
-  ];
+  const closeMenu = () => setMenuOpen(false);
+
+  const renderLinks = (onNavigate?: () => void, activeClassName = "") =>
+    links.map((link) => {
+      const isActive = pathname === link.href || (link.href === "/#features" && pathname === "/");
+      return (
+        <Link
+          key={link.name}
+          href={link.href}
+          onClick={onNavigate}
+          className={`text-sm font-medium transition-colors relative ${
+            isActive ? `text-white ${activeClassName}` : "text-zinc-400 hover:text-white"
+          }`}
+        >
+          {link.name}
+          {isActive && (
+            <motion.div
+              layoutId="active-link"
+              className="absolute -bottom-2 left-0 right-0 h-px bg-white"
+            />
+          )}
+        </Link>
+      );
+    });
 
   return (
     <motion.header
       initial={{ y: -100 }}
       animate={{ y: 0 }}
-      className="fixed top-0 left-0 right-0 z-50 border-b border-white/5 bg-background/50 backdrop-blur-xl"
+      className="fixed top-0 left-0 right-0 z-50 border-b border-white/5 bg-background/70 backdrop-blur-xl"
     >
       <div className="container mx-auto flex items-center justify-between h-20 px-6">
         <div className="flex items-center gap-8">
-          <Link href="/" className="flex items-center gap-2 group">
- <Image
-      src="/iconX2.png"
-      width={25}
-      height={25}
-      alt="Picture of the author"
-    />
-            <div className="flex items-center gap-2">
-              <span className="text-xl font-bold tracking-tight text-white">Zone</span>
-            </div>
+          <Link href="/" className="flex items-center gap-2 group" onClick={closeMenu}>
+            <Image
+              src="/iconX2.png"
+              width={25}
+              height={25}
+              alt="ZeroZone logo"
+              className="transition-transform group-hover:scale-105"
+            />
+            <span className="font-display text-xl font-normal tracking-tight text-white">Zone</span>
           </Link>
 
-          <nav className="hidden lg:flex items-center gap-8 ml-8">
-            {links.map((link) => {
-              const isActive = pathname === link.href;
-              return (
-                <Link 
-                  key={link.name} 
-                  href={link.href}
-                  className={`text-sm font-medium transition-colors relative group ${
-                    isActive ? "text-white" : "text-zinc-400 hover:text-white"
-                  }`}
-                >
-                  {link.name}
-                  {isActive && (
-                    <motion.div 
-                      layoutId="active-link"
-                      className="absolute -bottom-8 left-0 right-0 h-0.5 bg-primary"
-                    />
-                  )}
-                </Link>
-              );
-            })}
-          </nav>
+          <nav className="hidden lg:flex items-center gap-8 ml-8">{renderLinks()}</nav>
         </div>
 
-        <div className="flex items-center gap-6">
+        <div className="flex items-center gap-4">
           {user ? (
              <DropdownMenu>
              <DropdownMenuTrigger asChild>
@@ -95,7 +101,7 @@ export default function Navbar({ user }: { user?: NavbarUser | null }) {
                        alt={user.username} 
                      />
                    ) : (
-                     <AvatarFallback className="bg-gradient-to-br from-purple-500/20 to-cyan-500/20 text-xs text-white">
+                     <AvatarFallback className="bg-white/10 text-xs text-white">
                        {user.username?.[0]?.toUpperCase()}
                      </AvatarFallback>
                    )}
@@ -104,7 +110,6 @@ export default function Navbar({ user }: { user?: NavbarUser | null }) {
                </button>
              </DropdownMenuTrigger>
              <DropdownMenuContent className="w-56 mt-4 glass-dark border-white/10 text-white" align="end">
-                {/* ... existing menu content ... */}
                 <DropdownMenuLabel>
                   <div className="flex flex-col">
                     <p className="text-sm font-bold">{user.name || user.username}</p>
@@ -149,8 +154,30 @@ export default function Navbar({ user }: { user?: NavbarUser | null }) {
               <Link href="/auth">Get Started</Link>
             </Button>
           )}
+
+          <button
+            onClick={() => setMenuOpen((open) => !open)}
+            className="lg:hidden flex items-center justify-center w-10 h-10 rounded-full border border-white/10 text-white hover:bg-white/5 transition-colors"
+            aria-label="Toggle menu"
+          >
+            {menuOpen ? <X size={18} /> : <Menu size={18} />}
+          </button>
         </div>
       </div>
+
+      {menuOpen && (
+        <motion.div
+          initial={{ opacity: 0, y: -8 }}
+          animate={{ opacity: 1, y: 0 }}
+          exit={{ opacity: 0, y: -8 }}
+          transition={{ duration: 0.2 }}
+          className="lg:hidden border-t border-white/5 bg-background/95 backdrop-blur-xl"
+        >
+          <div className="container mx-auto px-6 py-6 flex flex-col items-start gap-5">
+            {renderLinks(closeMenu)}
+          </div>
+        </motion.div>
+      )}
     </motion.header>
   );
 }
