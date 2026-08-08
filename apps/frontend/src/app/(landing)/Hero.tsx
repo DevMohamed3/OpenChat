@@ -22,7 +22,7 @@ export default function Hero() {
                         transition={{ duration: 0.8, ease: 'easeOut' }}
                     >
                         {/* Headline */}
-                        <h1 className="font-display text-5xl sm:text-6xl md:text-7xl lg:text-[84px] font-normal tracking-tight text-white leading-[1.02] mb-8 max-w-4xl mx-auto">
+                        <h1 className="font-display text-4xl sm:text-5xl md:text-6xl lg:text-[64px] font-normal tracking-tight text-white leading-[1.02] mb-8 max-w-4xl mx-auto">
                             The chat app that
                             <br className="hidden sm:block" />
                             respects you.
