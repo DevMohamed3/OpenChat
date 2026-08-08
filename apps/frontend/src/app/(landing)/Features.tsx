@@ -26,39 +26,37 @@ const features = [
 
 export default function Features() {
   return (
-    <section id="features" className="relative py-24 px-6 bg-background">
-      <div className="absolute inset-0 bg-[radial-gradient(ellipse_60%_40%_at_50%_0%,hsla(263,70%,50%,0.08),transparent)]" />
-
+    <section id="features" className="relative py-32 px-6 bg-background">
       <div className="container mx-auto max-w-5xl relative z-10">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.5 }}
-          className="text-center mb-16"
+          transition={{ duration: 0.6 }}
+          className="text-center mb-20"
         >
-          <h2 className="text-3xl md:text-4xl font-bold tracking-tight text-white mb-4">
+          <h2 className="font-display text-4xl md:text-5xl lg:text-6xl font-normal tracking-tight text-white mb-6">
             Everything you need.
           </h2>
-          <p className="text-zinc-400 text-base md:text-lg max-w-xl mx-auto">
+          <p className="text-lg text-zinc-400 max-w-xl mx-auto">
             Not a bloated platform. A focused tool that does what matters.
           </p>
         </motion.div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           {features.map((f, i) => (
             <motion.div
               key={i}
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: i * 0.1 }}
-              className="rounded-2xl border border-white/5 bg-white/[0.02] p-7 hover:bg-white/[0.04] transition-colors"
+              transition={{ duration: 0.6, delay: i * 0.1 }}
+              className="rounded-2xl bg-white/[0.03] p-8"
             >
-              <div className={`w-11 h-11 rounded-xl ${f.color} flex items-center justify-center mb-5`}>
+              <div className={`w-12 h-12 rounded-full ${f.color} flex items-center justify-center mb-6`}>
                 <f.icon size={20} />
               </div>
-              <h3 className="text-base font-semibold text-white mb-2">
+              <h3 className="text-lg font-semibold text-white mb-2">
                 {f.title}
               </h3>
               <p className="text-sm text-zinc-400 leading-relaxed">

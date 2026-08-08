@@ -43,18 +43,16 @@ const faqs = [
 
 export default function FAQ() {
   return (
-    <section id="faq" className="relative py-24 px-6 overflow-hidden bg-background">
-      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-3/4 h-px bg-gradient-to-r from-transparent via-zinc-800 to-transparent" />
-
+    <section id="faq" className="relative py-32 px-6 overflow-hidden bg-background">
       <div className="max-w-3xl mx-auto relative z-10">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.5 }}
+          transition={{ duration: 0.6 }}
           className="text-center mb-16"
         >
-          <h2 className="text-3xl md:text-4xl font-bold tracking-tight text-white mb-4">
+          <h2 className="font-display text-4xl md:text-5xl font-normal tracking-tight text-white mb-6">
             Frequently Asked Questions
           </h2>
           <p className="text-zinc-400 text-base md:text-lg max-w-xl mx-auto">
@@ -66,16 +64,20 @@ export default function FAQ() {
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.5, delay: 0.2 }}
+          transition={{ duration: 0.6, delay: 0.15 }}
         >
-          <Accordion type="single" collapsible className="w-full space-y-4">
+          <Accordion
+            type="single"
+            collapsible
+            className="w-full border-y border-white/10 divide-y divide-white/10"
+          >
             {faqs.map((faq, i) => (
               <AccordionItem
                 key={i}
                 value={`item-${i}`}
-                className="border border-white/5 rounded-xl px-6 bg-white/[0.02] hover:bg-white/[0.04] transition-colors"
+                className="border-none"
               >
-                <AccordionTrigger className="text-left text-base font-medium text-zinc-100 hover:text-cyan-400 transition-colors hover:no-underline py-5">
+                <AccordionTrigger className="text-left text-base font-medium text-white hover:text-white py-5 transition-colors hover:no-underline">
                   {faq.question}
                 </AccordionTrigger>
 

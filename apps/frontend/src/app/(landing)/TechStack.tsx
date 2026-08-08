@@ -14,19 +14,20 @@ const tech = [
 
 export default function TechStack() {
   return (
-    <section className="relative py-20 px-6 bg-background overflow-hidden">
-      <div className="absolute inset-0 bg-[radial-gradient(ellipse_50%_30%_at_50%_50%,hsla(263,70%,50%,0.04),transparent)]" />
-
+    <section className="relative py-28 px-6 bg-background overflow-hidden">
       <div className="container mx-auto max-w-4xl relative z-10">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.5 }}
-          className="text-center mb-10"
+          transition={{ duration: 0.6 }}
+          className="text-center mb-16"
         >
-          <p className="text-xs font-semibold tracking-widest uppercase text-zinc-500 mb-3">
-            Built with
+          <h2 className="font-display text-3xl md:text-4xl lg:text-5xl font-normal tracking-tight text-white mb-6">
+            Built with care
+          </h2>
+          <p className="text-zinc-400 text-base max-w-md mx-auto">
+            A modern, open-source stack you can audit and self-host.
           </p>
         </motion.div>
 
