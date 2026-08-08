@@ -2,6 +2,14 @@
 @tailwind components;
 @tailwind utilities;
 
+@font-face {
+  font-family: 'Season Mix VF';
+  src: url('/fonts/sesame-serif.woff2') format('woff2');
+  font-display: swap;
+  font-weight: 200 900;
+  font-style: normal;
+}
+
 html {
   scroll-behavior: smooth;
 }
@@ -124,6 +132,7 @@ body {
 
 @layer base {
   :root {
+    --font-display: 'Season Mix VF', ui-serif, Georgia, Cambria, serif;
     --background: 0 0% 100%;
     --foreground: 222 47% 11%;
     --card: 0 0% 100%;
