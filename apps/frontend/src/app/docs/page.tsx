@@ -223,7 +223,7 @@ export default function DocsPage() {
                                 <span className="text-white">Documentation</span>
                             </nav>
 
-                            <h1 className="text-3xl md:text-4xl font-bold text-white mb-4 tracking-tight">
+                            <h1 className="font-display text-4xl md:text-6xl font-normal tracking-tight text-white mb-4">
                                 Documentation
                             </h1>
                             <p className="text-lg text-zinc-400 mb-16 leading-relaxed">
@@ -233,8 +233,8 @@ export default function DocsPage() {
                             {/* ─── Getting Started ──────────────────────────── */}
 
                             <section id="what-is-zerozone" data-section className="mb-20">
-                                <h2 className="text-2xl font-bold text-white mb-4 flex items-center gap-3">
-                                    <span className="w-8 h-8 rounded-lg bg-primary/10 border border-primary/20 flex items-center justify-center text-primary text-sm">
+                                <h2 className="font-display text-3xl font-normal tracking-tight text-white mb-6 flex items-center gap-3">
+                                    <span className="w-8 h-8 rounded-lg bg-white/5 border border-white/10 flex items-center justify-center text-zinc-400 text-sm">
                                         1
                                     </span>
                                     What is ZeroZone
@@ -287,8 +287,8 @@ export default function DocsPage() {
                             </section>
 
                             <section id="tech-stack" data-section className="mb-20">
-                                <h2 className="text-2xl font-bold text-white mb-4 flex items-center gap-3">
-                                    <span className="w-8 h-8 rounded-lg bg-primary/10 border border-primary/20 flex items-center justify-center text-primary text-sm">
+                                <h2 className="font-display text-3xl font-normal tracking-tight text-white mb-6 flex items-center gap-3">
+                                    <span className="w-8 h-8 rounded-lg bg-white/5 border border-white/10 flex items-center justify-center text-zinc-400 text-sm">
                                         2
                                     </span>
                                     Tech Stack
@@ -320,8 +320,8 @@ export default function DocsPage() {
                             </section>
 
                             <section id="architecture" data-section className="mb-20">
-                                <h2 className="text-2xl font-bold text-white mb-4 flex items-center gap-3">
-                                    <span className="w-8 h-8 rounded-lg bg-primary/10 border border-primary/20 flex items-center justify-center text-primary text-sm">
+                                <h2 className="font-display text-3xl font-normal tracking-tight text-white mb-6 flex items-center gap-3">
+                                    <span className="w-8 h-8 rounded-lg bg-white/5 border border-white/10 flex items-center justify-center text-zinc-400 text-sm">
                                         3
                                     </span>
                                     Architecture
@@ -356,8 +356,8 @@ export default function DocsPage() {
                             {/* ─── Features ──────────────────────────────────── */}
 
                             <section id="zones-channels" data-section className="mb-20">
-                                <h2 className="text-2xl font-bold text-white mb-4 flex items-center gap-3">
-                                    <span className="w-8 h-8 rounded-lg bg-cyan-400/10 border border-cyan-400/20 flex items-center justify-center text-cyan-400 text-sm">
+                                <h2 className="font-display text-3xl font-normal tracking-tight text-white mb-6 flex items-center gap-3">
+                                    <span className="w-8 h-8 rounded-lg bg-white/5 border border-white/10 flex items-center justify-center text-zinc-400 text-sm">
                                         4
                                     </span>
                                     Zones & Channels
@@ -373,7 +373,7 @@ export default function DocsPage() {
                                         { icon: <Key size={14} />, label: "Invites", desc: "Generate invite links with 7-day expiry. Members join via /zone/invite/[code]." },
                                     ].map((f) => (
                                         <div key={f.label} className="flex gap-3 p-4 rounded-xl border border-white/5 bg-white/[0.02]">
-                                            <div className="w-8 h-8 rounded-lg bg-cyan-400/10 border border-cyan-400/20 flex items-center justify-center text-cyan-400 flex-shrink-0">
+                                            <div className="w-8 h-8 rounded-lg bg-white/5 border border-white/10 flex items-center justify-center text-zinc-400 flex-shrink-0">
                                                 {f.icon}
                                             </div>
                                             <div>
@@ -386,8 +386,8 @@ export default function DocsPage() {
                             </section>
 
                             <section id="direct-messages" data-section className="mb-20">
-                                <h2 className="text-2xl font-bold text-white mb-4 flex items-center gap-3">
-                                    <span className="w-8 h-8 rounded-lg bg-cyan-400/10 border border-cyan-400/20 flex items-center justify-center text-cyan-400 text-sm">
+                                <h2 className="font-display text-3xl font-normal tracking-tight text-white mb-6 flex items-center gap-3">
+                                    <span className="w-8 h-8 rounded-lg bg-white/5 border border-white/10 flex items-center justify-center text-zinc-400 text-sm">
                                         5
                                     </span>
                                     Direct Messages
@@ -414,8 +414,8 @@ export default function DocsPage() {
                             </section>
 
                             <section id="voice-video" data-section className="mb-20">
-                                <h2 className="text-2xl font-bold text-white mb-4 flex items-center gap-3">
-                                    <span className="w-8 h-8 rounded-lg bg-cyan-400/10 border border-cyan-400/20 flex items-center justify-center text-cyan-400 text-sm">
+                                <h2 className="font-display text-3xl font-normal tracking-tight text-white mb-6 flex items-center gap-3">
+                                    <span className="w-8 h-8 rounded-lg bg-white/5 border border-white/10 flex items-center justify-center text-zinc-400 text-sm">
                                         6
                                     </span>
                                     Voice & Video
@@ -440,8 +440,8 @@ export default function DocsPage() {
                             </section>
 
                             <section id="friends-system" data-section className="mb-20">
-                                <h2 className="text-2xl font-bold text-white mb-4 flex items-center gap-3">
-                                    <span className="w-8 h-8 rounded-lg bg-cyan-400/10 border border-cyan-400/20 flex items-center justify-center text-cyan-400 text-sm">
+                                <h2 className="font-display text-3xl font-normal tracking-tight text-white mb-6 flex items-center gap-3">
+                                    <span className="w-8 h-8 rounded-lg bg-white/5 border border-white/10 flex items-center justify-center text-zinc-400 text-sm">
                                         7
                                     </span>
                                     Friends System
@@ -463,8 +463,8 @@ export default function DocsPage() {
                             {/* ─── API Reference ─────────────────────────────── */}
 
                             <section id="api-auth" data-section className="mb-20">
-                                <h2 className="text-2xl font-bold text-white mb-4 flex items-center gap-3">
-                                    <span className="w-8 h-8 rounded-lg bg-purple-400/10 border border-purple-400/20 flex items-center justify-center text-purple-400 text-sm">
+                                <h2 className="font-display text-3xl font-normal tracking-tight text-white mb-6 flex items-center gap-3">
+                                    <span className="w-8 h-8 rounded-lg bg-white/5 border border-white/10 flex items-center justify-center text-zinc-400 text-sm">
                                         8
                                     </span>
                                     Authentication API
@@ -484,8 +484,8 @@ export default function DocsPage() {
                             </section>
 
                             <section id="api-zones" data-section className="mb-20">
-                                <h2 className="text-2xl font-bold text-white mb-4 flex items-center gap-3">
-                                    <span className="w-8 h-8 rounded-lg bg-purple-400/10 border border-purple-400/20 flex items-center justify-center text-purple-400 text-sm">
+                                <h2 className="font-display text-3xl font-normal tracking-tight text-white mb-6 flex items-center gap-3">
+                                    <span className="w-8 h-8 rounded-lg bg-white/5 border border-white/10 flex items-center justify-center text-zinc-400 text-sm">
                                         9
                                     </span>
                                     Zones API
@@ -508,8 +508,8 @@ export default function DocsPage() {
                             </section>
 
                             <section id="api-messages" data-section className="mb-20">
-                                <h2 className="text-2xl font-bold text-white mb-4 flex items-center gap-3">
-                                    <span className="w-8 h-8 rounded-lg bg-purple-400/10 border border-purple-400/20 flex items-center justify-center text-purple-400 text-sm">
+                                <h2 className="font-display text-3xl font-normal tracking-tight text-white mb-6 flex items-center gap-3">
+                                    <span className="w-8 h-8 rounded-lg bg-white/5 border border-white/10 flex items-center justify-center text-zinc-400 text-sm">
                                         10
                                     </span>
                                     Messages API
@@ -529,8 +529,8 @@ export default function DocsPage() {
                             </section>
 
                             <section id="api-websocket" data-section className="mb-20">
-                                <h2 className="text-2xl font-bold text-white mb-4 flex items-center gap-3">
-                                    <span className="w-8 h-8 rounded-lg bg-purple-400/10 border border-purple-400/20 flex items-center justify-center text-purple-400 text-sm">
+                                <h2 className="font-display text-3xl font-normal tracking-tight text-white mb-6 flex items-center gap-3">
+                                    <span className="w-8 h-8 rounded-lg bg-white/5 border border-white/10 flex items-center justify-center text-zinc-400 text-sm">
                                         11
                                     </span>
                                     WebSocket Events
@@ -579,8 +579,8 @@ export default function DocsPage() {
                             {/* ─── Self-Hosting ──────────────────────────────── */}
 
                             <section id="prerequisites" data-section className="mb-20">
-                                <h2 className="text-2xl font-bold text-white mb-4 flex items-center gap-3">
-                                    <span className="w-8 h-8 rounded-lg bg-emerald-400/10 border border-emerald-400/20 flex items-center justify-center text-emerald-400 text-sm">
+                                <h2 className="font-display text-3xl font-normal tracking-tight text-white mb-6 flex items-center gap-3">
+                                    <span className="w-8 h-8 rounded-lg bg-white/5 border border-white/10 flex items-center justify-center text-zinc-400 text-sm">
                                         12
                                     </span>
                                     Prerequisites
@@ -601,8 +601,8 @@ export default function DocsPage() {
                             </section>
 
                             <section id="installation" data-section className="mb-20">
-                                <h2 className="text-2xl font-bold text-white mb-4 flex items-center gap-3">
-                                    <span className="w-8 h-8 rounded-lg bg-emerald-400/10 border border-emerald-400/20 flex items-center justify-center text-emerald-400 text-sm">
+                                <h2 className="font-display text-3xl font-normal tracking-tight text-white mb-6 flex items-center gap-3">
+                                    <span className="w-8 h-8 rounded-lg bg-white/5 border border-white/10 flex items-center justify-center text-zinc-400 text-sm">
                                         13
                                     </span>
                                     Installation
@@ -630,8 +630,8 @@ pnpm dev`} />
                             </section>
 
                             <section id="env-vars" data-section className="mb-20">
-                                <h2 className="text-2xl font-bold text-white mb-4 flex items-center gap-3">
-                                    <span className="w-8 h-8 rounded-lg bg-emerald-400/10 border border-emerald-400/20 flex items-center justify-center text-emerald-400 text-sm">
+                                <h2 className="font-display text-3xl font-normal tracking-tight text-white mb-6 flex items-center gap-3">
+                                    <span className="w-8 h-8 rounded-lg bg-white/5 border border-white/10 flex items-center justify-center text-zinc-400 text-sm">
                                         14
                                     </span>
                                     Environment Variables
@@ -660,8 +660,8 @@ pnpm dev`} />
                             </section>
 
                             <section id="deployment" data-section className="mb-20">
-                                <h2 className="text-2xl font-bold text-white mb-4 flex items-center gap-3">
-                                    <span className="w-8 h-8 rounded-lg bg-emerald-400/10 border border-emerald-400/20 flex items-center justify-center text-emerald-400 text-sm">
+                                <h2 className="font-display text-3xl font-normal tracking-tight text-white mb-6 flex items-center gap-3">
+                                    <span className="w-8 h-8 rounded-lg bg-white/5 border border-white/10 flex items-center justify-center text-zinc-400 text-sm">
                                         15
                                     </span>
                                     Deployment

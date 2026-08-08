@@ -104,7 +104,7 @@ export default function DashboardPage() {
           animate={{ x: 0, opacity: 1 }}
           transition={{ duration: 0.5 }}
         >
-          <h1 className="text-3xl md:text-4xl font-bold tracking-tight bg-gradient-to-r from-white to-gray-400 bg-clip-text text-transparent">
+          <h1 className="font-display text-4xl md:text-5xl font-normal tracking-tight text-white">
             Welcome back, {user.name || user.username}
           </h1>
           <p className="text-muted-foreground mt-2">
@@ -133,7 +133,7 @@ export default function DashboardPage() {
             animate={{ y: 0, opacity: 1 }}
             transition={{ delay: i * 0.1 }}
           >
-            <Card className="bg-[#111a2b] border-white/5 hover:border-white/10 transition-all group">
+            <Card className="bg-white/[0.03] border-white/5 hover:border-white/10 transition-all group">
               <CardContent className="p-6">
                 <div className="flex items-center justify-between">
                   <div className={`p-2 rounded-lg ${stat.bg}`}>
@@ -152,7 +152,7 @@ export default function DashboardPage() {
 
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
         {/* Recent Chats */}
-        <Card className="lg:col-span-2 bg-[#111a2b] border-white/5">
+        <Card className="lg:col-span-2 bg-white/[0.03] border-white/5">
           <CardHeader className="flex flex-row items-center justify-between">
             <div>
               <CardTitle>Recent Conversations</CardTitle>
@@ -211,7 +211,7 @@ export default function DashboardPage() {
 
         {/* Online Friends / Notifications */}
         <div className="space-y-8">
-          <Card className="bg-[#111a2b] border-white/5">
+          <Card className="bg-white/[0.03] border-white/5">
             <CardHeader className="flex flex-row items-center justify-between pb-2">
               <CardTitle className="text-lg">Online Friends</CardTitle>
               <div className="h-2 w-2 bg-green-500 rounded-full animate-pulse" />
@@ -254,7 +254,7 @@ export default function DashboardPage() {
           </Card>
 
           {/* Pending Requests */}
-          <Card className="bg-[#111a2b] border-white/5 border-l-4 border-l-primary/50">
+          <Card className="bg-white/[0.03] border-white/5 border-l-4 border-l-primary/50">
             <CardHeader>
               <CardTitle className="text-lg flex items-center gap-2">
                 <Bell className="w-4 h-4 text-primary" />
@@ -280,7 +280,7 @@ export default function DashboardPage() {
             </CardContent>
           </Card>
 
-          <Card className="bg-gradient-to-br from-primary/20 to-purple-500/10 border-white/10 overflow-hidden relative">
+          <Card className="bg-white/[0.03] border-white/5 overflow-hidden relative">
             <div className="absolute top-0 right-0 p-4 opacity-10">
               <Zap className="w-24 h-24" />
             </div>

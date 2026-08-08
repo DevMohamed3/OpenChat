@@ -19,7 +19,7 @@ export default function SolutionsPage() {
       description: "Isolated communication environments for high-stakes professional teams. Audit logs, hardware keys, and 100% data lockdown.",
       features: ["Role-based Access Control", "Compliance-ready auditing", "On-premise deployment"],
       cta: "Deploy Zone",
-      ctaStyle: "bg-primary text-white border-0",
+      ctaStyle: "bg-white text-black border-0 hover:bg-zinc-200",
     },
     {
       icon: Rocket,
@@ -28,7 +28,7 @@ export default function SolutionsPage() {
       description: "Host large-scale public or private communities without relying on central tech giants. You own the members, the content, and the network.",
       features: ["Unlimited member capacity", "Custom plugin system", "Decentralized moderation"],
       cta: "Start Community",
-      ctaStyle: "bg-cyan-400/10 text-cyan-400 border border-cyan-400/20 hover:bg-cyan-400/20",
+      ctaStyle: "bg-white text-black border-0 hover:bg-zinc-200",
     },
     {
       icon: Code2,
@@ -37,7 +37,7 @@ export default function SolutionsPage() {
       description: "Build custom chat experiences using our low-latency protocol. Headless, API-first, and ready for any platform.",
       features: ["WebSocket-first architecture", "Open Source client SDKs", "Native mobile support"],
       cta: "View API Docs",
-      ctaStyle: "bg-purple-400/10 text-purple-400 border border-purple-400/20 hover:bg-purple-400/20",
+      ctaStyle: "bg-white text-black border-0 hover:bg-zinc-200",
     },
   ]
 
@@ -53,14 +53,15 @@ export default function SolutionsPage() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5 }}
           >
-            <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-primary/10 border border-primary/20 text-primary text-[10px] font-bold mb-8 uppercase tracking-[0.2em]">
-              <Rocket size={12} className="animate-pulse" />
+            <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/5 border border-white/10 text-zinc-400 text-[10px] font-bold mb-8 uppercase tracking-[0.2em]">
+              <Rocket size={12} />
               Tailored for Every Need
             </div>
             
-            <h1 className="text-4xl md:text-5xl font-bold text-white mb-6 tracking-tight">
-              Identity-First Solutions for <br />
-              <span className="bg-gradient-to-r from-cyan-400 to-primary bg-clip-text text-transparent">Open Communities.</span>
+            <h1 className="font-display text-4xl md:text-6xl font-normal tracking-tight text-white mb-6 leading-tight">
+              Identity-first solutions for
+              <br className="hidden sm:block" />
+              open communities.
             </h1>
 
             <p className="text-sm md:text-base text-zinc-400 max-w-2xl mx-auto leading-relaxed font-medium">
@@ -80,13 +81,13 @@ export default function SolutionsPage() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: i * 0.1 }}
-                className="p-8 rounded-3xl border border-white/5 bg-white/[0.02] group hover:border-white/10 transition-all flex flex-col"
+                className="p-8 rounded-2xl border border-white/5 bg-white/[0.03] group hover:border-white/10 transition-all flex flex-col"
               >
-                <div className={`w-12 h-12 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center ${sol.iconColor} mb-6 group-hover:scale-110 transition-transform`}>
-                  <sol.icon size={24} />
+                <div className={`w-12 h-12 rounded-full bg-white/5 border border-white/10 flex items-center justify-center ${sol.iconColor} mb-6 group-hover:scale-110 transition-transform`}>
+                  <sol.icon size={20} />
                 </div>
                 
-                <h3 className="text-xl font-bold text-white mb-3">{sol.title}</h3>
+                <h3 className="text-lg font-semibold text-white mb-3">{sol.title}</h3>
                 <p className="text-zinc-400 text-sm leading-relaxed mb-8 flex-1">
                   {sol.description}
                 </p>
@@ -100,7 +101,7 @@ export default function SolutionsPage() {
                   ))}
                 </ul>
 
-                <Button asChild className={`h-12 w-full rounded-xl ${sol.ctaStyle} font-semibold`}>
+                <Button asChild className={`h-12 w-full rounded-full ${sol.ctaStyle} font-semibold`}>
                   <Link href="/auth" className="flex items-center justify-center gap-2">
                     {sol.cta}
                     <ArrowRight size={16} className="group-hover:translate-x-1 transition-transform" />
