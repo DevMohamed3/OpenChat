@@ -43,6 +43,7 @@ app.options(/.*/, cors({
 app.use(helmet({
   contentSecurityPolicy: false,
   crossOriginEmbedderPolicy: false,
+  crossOriginResourcePolicy: false,
 }));
 
 app.use((_req, res, next) => {
