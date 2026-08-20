@@ -88,23 +88,6 @@ export default function Hero() {
                             </Button>
                         </div>
                     </motion.div>
-
-                    {/* App screenshot — real product */}
-                    <motion.div
-                        initial={{ opacity: 0, y: 40 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        transition={{ duration: 1, delay: 0.2, ease: 'easeOut' }}
-                        className="w-full max-w-6xl"
-                    >
-                        <Image
-                            src="/form-zone-for-landing-page.png"
-                            alt="ZeroZone app screenshot"
-                            width={2880}
-                            height={1970}
-                            priority
-                            className="w-full h-auto rounded-2xl ring-1 ring-white/10 shadow-2xl shadow-black/50"
-                        />
-                    </motion.div>
                 </div>
             </div>
         </section>
