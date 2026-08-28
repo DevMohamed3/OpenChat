@@ -18,6 +18,9 @@ export const getCurrentUser = cache(async function getCurrentUser() {
         Cookie: cookieHeader,
       },
       cache: "no-store",
+      // Never let a slow/hung backend stall SSR of any page (including
+      // not-found); a timed-out session just renders as anonymous.
+      signal: AbortSignal.timeout(5000),
     })
 
     return user ?? null;
