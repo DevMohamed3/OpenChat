@@ -97,7 +97,8 @@ export default function ZonesHubPage() {
           zones.length === 0 ? (
             <div className="flex min-h-full flex-col items-center justify-center rounded-[32px] border border-dashed border-white/10 bg-surface px-6 py-12 text-center">
               <div className="mb-4 flex h-16 w-16 items-center justify-center rounded-3xl bg-primary/15 text-primary">
-                <Hash className="h-7 w-7" />
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img src="/iconX2.png" alt="" className="h-7 w-7 object-contain" />
               </div>
               <h2 className="text-xl font-bold text-foreground">No zones yet</h2>
               <p className="mt-2 max-w-xs text-sm text-muted-foreground">

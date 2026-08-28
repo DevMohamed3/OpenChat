@@ -1,5 +1,6 @@
 'use client'
 
+import ZeroLoader from '../_components/ZeroLoader'
 import { useEffect, useState } from 'react'
 import { useRouter } from 'next/navigation'
 import { Settings, Shield, Bell, Lock, LogOut, ChevronRight, User, LogOut as LogOutIcon, Heart, UserPlus, Users, MessageCircle } from 'lucide-react'
@@ -70,28 +71,28 @@ export default function ProfilePage() {
   }
 
   const menuItems = [
-    { icon: User, label: 'Edit Profile', href: '/settings/profile', color: 'text-blue-400' },
-    { icon: Bell, label: 'Notifications', href: '/settings/notifications', color: 'text-yellow-400' },
-    { icon: Lock, label: 'Privacy & Security', href: '/settings/privacy', color: 'text-green-400' },
-    { icon: Shield, label: 'Account Safety', href: '/settings/security', color: 'text-purple-400' },
+    { icon: User, label: 'Edit Profile', href: '/settings/profile', color: 'text-zinc-400' },
+    { icon: Bell, label: 'Notifications', href: '/settings/notifications', color: 'text-zinc-400' },
+    { icon: Lock, label: 'Privacy & Security', href: '/settings/privacy', color: 'text-zinc-400' },
+    { icon: Shield, label: 'Account Safety', href: '/settings/security', color: 'text-zinc-400' },
   ]
 
   if (loading) {
     return (
-      <div className="h-full flex items-center justify-center bg-[#0b1220]">
-        <div className="w-8 h-8 border-2 border-primary border-t-transparent rounded-full animate-spin" />
+      <div className="h-full flex items-center justify-center bg-background">
+        <ZeroLoader />
       </div>
     )
   }
 
   return (
-    <div className="h-full bg-[#0b1220] pb-4">
+    <div className="h-full bg-background pb-4">
       {/* Profile Header */}
       <div className="relative">
         <div className="h-24 bg-gradient-to-br from-primary/50 to-cyan-500/30" />
         <div className="px-4 pb-4">
           <div className="relative -mt-12 mb-4">
-            <div className="w-20 h-20 rounded-full bg-gradient-to-br from-primary to-cyan-500 flex items-center justify-center text-white text-2xl font-bold border-4 border-[#0b1220] overflow-hidden">
+            <div className="w-20 h-20 rounded-full bg-gradient-to-br from-primary to-cyan-500 flex items-center justify-center text-white text-2xl font-bold border-4 border-background overflow-hidden">
               {user?.avatar ? (
                 <img
                   src={getAvatarUrl(user.avatar)}
@@ -148,7 +149,7 @@ export default function ProfilePage() {
             <button
               key={item.label}
               onClick={() => router.push(item.href)}
-              className="w-full flex items-center justify-between p-4 bg-[#1a1d23] rounded-xl hover:bg-[#22252b] transition-colors"
+              className="w-full flex items-center justify-between p-4 bg-white/[0.03] rounded-xl hover:bg-white/[0.06] transition-colors"
             >
               <div className="flex items-center gap-3">
                 <div className="w-10 h-10 rounded-lg bg-white/10 flex items-center justify-center">
