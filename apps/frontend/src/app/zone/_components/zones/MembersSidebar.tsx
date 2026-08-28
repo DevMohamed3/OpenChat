@@ -7,7 +7,7 @@ import { useZoneMembers } from '@/features/zones/queries'
 import { useFriendsStore } from '@/app/stores/friends-store'
 import { cn } from '@zerozone/lib'
 
-export function MembersSidebar() {
+export function MembersSidebarContent() {
   const params = useParams<{ zonePublicId?: string }>()
   const { data: members = [], isLoading } = useZoneMembers(params.zonePublicId)
   const onlineUsers = useFriendsStore((s) => s.onlineUsers)
@@ -21,8 +21,8 @@ export function MembersSidebar() {
   if (!params.zonePublicId) return null
 
   return (
-    <div className="w-60 h-full bg-background border-l border-white/5 flex flex-col shrink-0">
-      <div className="h-12 px-4 border-b border-white/5 flex items-center">
+    <div className="w-full h-full flex flex-col">
+      <div className="h-12 px-4 border-b border-white/5 flex items-center shrink-0">
         <h3 className="text-sm font-semibold text-white/70 uppercase tracking-wide">
           Members — {members.length}
         </h3>
@@ -39,7 +39,7 @@ export function MembersSidebar() {
           <div className="space-y-4">
             {onlineMembers.length > 0 && (
               <div>
-                <p className="px-2 mb-2 text-[11px] font-bold text-green-400 uppercase tracking-wide">
+                <p className="px-2 mb-2 text-[11px] font-bold text-emerald-400 uppercase tracking-wide">
                   Online — {onlineMembers.length}
                 </p>
                 <div className="space-y-[2px]">
@@ -98,7 +98,7 @@ function MemberItem({ member, isOnline }: MemberItemProps) {
           </AvatarFallback>
         </Avatar>
         {isOnline && (
-          <div className="absolute -bottom-0.5 -right-0.5 w-3 h-3 rounded-full bg-green-500 border-2 border-[#0f0f13]" />
+          <div className="absolute -bottom-0.5 -right-0.5 w-3 h-3 rounded-full bg-emerald-500 border-2 border-background" />
         )}
       </div>
       <div className="flex-1 text-left min-w-0">
@@ -120,5 +120,15 @@ function MemberItem({ member, isOnline }: MemberItemProps) {
         </span>
       )}
     </button>
+  )
+}
+
+// Persistent column on desktop; mobile uses the MembersSidebarContent
+// inside a sheet from the channel header.
+export function MembersSidebar() {
+  return (
+    <aside className="hidden lg:flex w-60 h-full bg-background border-l border-white/5 shrink-0">
+      <MembersSidebarContent />
+    </aside>
   )
 }

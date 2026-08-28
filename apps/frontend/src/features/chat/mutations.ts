@@ -5,15 +5,13 @@ import { mergeIntoFirstPage, updateInAllPages, messageKeys, type ChatMessagePage
 import type { ChannelMessage, SendChannelMessageInput } from "@/features/chat/types"
 import { useUser } from "@/features/user/queries"
 import type { InfiniteData } from "@tanstack/react-query"
+import { buildMessagePayload, hasMessageContent, type UploadedMessageFile } from "./messagePayload"
 
 type StartChatResponse = {
   chatPublicId: string
 }
 
-type UploadResponse = {
-  fileUrl: string
-  fileType: string
-}
+type UploadResponse = UploadedMessageFile
 
 function emitChannelMessage(message: {
   chatPublicId: string
@@ -78,10 +76,8 @@ export function useSendChannelMessageMutation(chatPublicId: string, channelPubli
   const { data: currentUser } = useUser()
 
   return useMutation({
-    mutationFn: async ({ text, file }: SendChannelMessageInput) => {
-      const nextText = text?.trim() ?? ""
-
-      if (!nextText && !file) {
+    mutationFn: async ({ text, file, stickerUrl }: SendChannelMessageInput) => {
+      if (!hasMessageContent({ text, file, stickerUrl })) {
         throw new Error("Message content is empty")
       }
 
@@ -93,16 +89,23 @@ export function useSendChannelMessageMutation(chatPublicId: string, channelPubli
         uploadedFile = await apiClient.post<UploadResponse>(`/zones/${chatPublicId}/upload`, formData)
       }
 
-      return emitChannelMessage({
+      return emitChannelMessage(buildMessagePayload({
         chatPublicId,
         channelPublicId,
-        text: nextText || null,
-        fileUrl: uploadedFile?.fileUrl ?? null,
-        fileType: uploadedFile?.fileType ?? file?.type ?? null,
-      })
+        text,
+        file,
+        stickerUrl,
+      }, uploadedFile))
     },
-    onMutate({ file, previewUrl, text }) {
+    onMutate({ file, previewUrl, stickerUrl, text }) {
       const temporaryId = -Date.now()
+      const optimisticPayload = buildMessagePayload({
+        chatPublicId,
+        channelPublicId,
+        text,
+        file,
+        stickerUrl,
+      })
       const previousMessages = queryClient.getQueryData<InfiniteData<ChatMessagePage>>(
         messageKeys.list(chatPublicId, channelPublicId),
       )
@@ -114,7 +117,7 @@ export function useSendChannelMessageMutation(chatPublicId: string, channelPubli
             id: temporaryId,
             chatPublicId,
             channelPublicId,
-            text: text?.trim() || null,
+            text: optimisticPayload.text,
             senderId: currentUser?.id ?? -1,
             sender: currentUser
               ? {
@@ -123,8 +126,8 @@ export function useSendChannelMessageMutation(chatPublicId: string, channelPubli
                   avatar: currentUser.avatar ?? null,
                 }
               : undefined,
-            fileUrl: previewUrl ?? null,
-            fileType: file?.type ?? null,
+            fileUrl: previewUrl ?? optimisticPayload.fileUrl,
+            fileType: optimisticPayload.fileType,
             createdAt: new Date().toISOString(),
           }),
       )
@@ -168,10 +171,8 @@ export function useSendDirectMessageMutation(chatPublicId: string) {
   const { data: currentUser } = useUser()
 
   return useMutation({
-    mutationFn: async ({ text, file }: SendChannelMessageInput) => {
-      const nextText = text?.trim() ?? ""
-
-      if (!nextText && !file) {
+    mutationFn: async ({ text, file, stickerUrl }: SendChannelMessageInput) => {
+      if (!hasMessageContent({ text, file, stickerUrl })) {
         throw new Error("Message content is empty")
       }
 
@@ -183,15 +184,21 @@ export function useSendDirectMessageMutation(chatPublicId: string) {
         uploadedFile = await apiClient.post<UploadResponse>(`/chats/${chatPublicId}/upload`, formData)
       }
 
-      return emitDirectMessage({
+      return emitDirectMessage(buildMessagePayload({
         chatPublicId,
-        text: nextText || null,
-        fileUrl: uploadedFile?.fileUrl ?? null,
-        fileType: uploadedFile?.fileType ?? file?.type ?? null,
-      })
+        text,
+        file,
+        stickerUrl,
+      }, uploadedFile))
     },
-    onMutate({ file, previewUrl, text }) {
+    onMutate({ file, previewUrl, stickerUrl, text }) {
       const temporaryId = -Date.now()
+      const optimisticPayload = buildMessagePayload({
+        chatPublicId,
+        text,
+        file,
+        stickerUrl,
+      })
       const previousMessages = queryClient.getQueryData<InfiniteData<ChatMessagePage>>(
         messageKeys.list(chatPublicId, chatPublicId),
       )
@@ -202,7 +209,7 @@ export function useSendDirectMessageMutation(chatPublicId: string) {
           mergeIntoFirstPage(current, {
             id: temporaryId,
             chatPublicId,
-            text: text?.trim() || null,
+            text: optimisticPayload.text,
             senderId: currentUser?.id ?? -1,
             sender: currentUser
               ? {
@@ -211,8 +218,8 @@ export function useSendDirectMessageMutation(chatPublicId: string) {
                   avatar: currentUser.avatar ?? null,
                 }
               : undefined,
-            fileUrl: previewUrl ?? null,
-            fileType: file?.type ?? null,
+            fileUrl: previewUrl ?? optimisticPayload.fileUrl,
+            fileType: optimisticPayload.fileType,
             createdAt: new Date().toISOString(),
           }),
       )

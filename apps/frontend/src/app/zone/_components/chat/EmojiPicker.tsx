@@ -1,10 +1,25 @@
 'use client'
 
-import { useState, useEffect, useRef, useCallback, Suspense, lazy } from 'react'
+import { useEffect, useRef, useCallback, Suspense, lazy } from 'react'
+import { createPortal } from 'react-dom'
 import { X } from 'lucide-react'
 import { cn } from '@zerozone/lib'
 
 const Picker = lazy(() => import('@emoji-mart/react'))
+
+// emoji-mart mutates `data.categories` (unshifting its own "frequent"
+// category) behind an init guard that is checked BEFORE an await — so
+// concurrent inits (StrictMode double-mount) can unshift twice into any
+// SHARED object, duplicating the section. Hand every init its own fresh
+// clone with exactly one frequent entry instead of caching one instance.
+async function loadPickerData() {
+    const dataModule = await import('@emoji-mart/data')
+    const cloned = JSON.parse(JSON.stringify(dataModule.default))
+    cloned.categories = cloned.categories.filter(
+        (category: { id: string }) => category.id !== 'frequent'
+    )
+    return cloned
+}
 
 function PickerFallback() {
   return (
@@ -21,12 +36,7 @@ type EmojiPickerProps = {
 }
 
 export default function EmojiPicker({ onSelect, onClose, className }: EmojiPickerProps) {
-  const [isMounted, setIsMounted] = useState(false)
   const pickerRef = useRef<HTMLDivElement>(null)
-
-  useEffect(() => {
-    setIsMounted(true)
-  }, [])
 
   const handleClickOutside = useCallback((event: MouseEvent) => {
     const target = event.target as Node
@@ -42,20 +52,19 @@ export default function EmojiPicker({ onSelect, onClose, className }: EmojiPicke
   }, [onClose])
 
   useEffect(() => {
-    if (!isMounted) return
-    
     document.addEventListener('mousedown', handleClickOutside)
     document.addEventListener('keydown', handleKeyDown)
-    
+
     return () => {
       document.removeEventListener('mousedown', handleClickOutside)
       document.removeEventListener('keydown', handleKeyDown)
     }
-  }, [isMounted, handleClickOutside, handleKeyDown])
+  }, [handleClickOutside, handleKeyDown])
 
-  if (!isMounted) return null
-
-  return (
+  // Portal to <body> so the picker escapes the composer footer's
+  // backdrop-blur stacking context and always owns pointer events above
+  // the message layer.
+  return createPortal(
     <div
       ref={pickerRef}
       className={cn(
@@ -74,12 +83,9 @@ export default function EmojiPicker({ onSelect, onClose, className }: EmojiPicke
         
         <Suspense fallback={<PickerFallback />}>
           <Picker
-            data={async () => {
-              const module = await import('@emoji-mart/data')
-              return module.default
-            }}
-            onEmojiClick={(emoji: { native: string }) => {
-              onSelect(emoji.native)
+            data={loadPickerData}
+            onEmojiSelect={(emoji: { native?: string }) => {
+              onSelect(emoji.native ?? '')
               onClose()
             }}
             theme="dark"
@@ -113,6 +119,7 @@ export default function EmojiPicker({ onSelect, onClose, className }: EmojiPicke
           />
         </Suspense>
       </div>
-    </div>
+    </div>,
+    document.body
   )
 }

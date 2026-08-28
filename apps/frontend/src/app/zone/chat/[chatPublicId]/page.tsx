@@ -15,12 +15,13 @@ import {
   SheetContent,
   SheetDescription,
   SheetTitle,
-  Skeleton,
 } from 'packages/ui'
 import { useChatsStore } from '@/app/stores/chat-store'
-import { ArrowLeft, Paperclip, Pin, Send, ShieldBan, UserMinus, X, Smile, Sticker as StickerIcon, Gift, SquarePen, Trash, Search, PanelRight } from 'lucide-react'
+import { ArrowLeft, Paperclip, Pin, Send, ShieldBan, UserMinus, X, Smile, Sticker as StickerIcon, Gift, SquarePen, Trash, Search, PanelRight, Loader2 } from 'lucide-react'
 import { api, getAvatarUrl } from '@zerozone/lib'
 import MessageText from '../../_components/chat/MessageText'
+import { ChatBackgroundPattern } from '../../_components/chat/ChatBackgroundPattern'
+import { insertAtCursor } from '../../_components/chat/insertAtCursor'
 const GifPicker = dynamic(() => import('../../_components/chat/GifPicker'), { ssr: false })
 const EmojiPicker = dynamic(() => import('../../_components/chat/EmojiPicker'), { ssr: false })
 const StickerPicker = dynamic(() => import('../../_components/chat/StickerPicker'), { ssr: false })
@@ -584,12 +585,13 @@ export default function ChatPage() {
       />
 
       <div className="flex min-h-0 flex-1">
-        <div className="flex flex-col min-h-0 flex-1">
+        <div className="relative flex flex-col min-h-0 flex-1">
+          <ChatBackgroundPattern />
           <div
             ref={messagesRef}
             dir="ltr"
             className={cn(
-              'flex-1 min-h-0 overflow-x-hidden p-4 w-full overscroll-y-contain',
+              'relative z-10 flex-1 min-h-0 overflow-x-hidden p-4 w-full overscroll-y-contain',
               messages.length === 0 && !messagesLoading ? 'overflow-hidden' : 'overflow-y-auto',
             )}
           >
@@ -604,7 +606,7 @@ export default function ChatPage() {
 
                 {isFetchingNextPage && (
                   <div className="flex justify-center py-4">
-                    <Skeleton className="h-8 w-8 rounded-full" />
+                    <Loader2 className="h-5 w-5 animate-spin text-primary/60" />
                   </div>
                 )}
 
@@ -873,11 +875,11 @@ export default function ChatPage() {
               />
 
               <div className="hidden sm:flex items-center gap-0.5 shrink-0">
-                <Button size="icon" variant="ghost" className="h-9 w-9 text-zinc-400 hover:text-zinc-200" title="Gift Nitro">
+                <Button size="icon" variant="ghost" className="h-9 w-9 text-zinc-400 hover:text-zinc-200 hidden sm:inline-flex" title="Gift Nitro">
                   <Gift className="h-5 w-5" />
                 </Button>
 
-                <div className="relative">
+                <div className="relative hidden sm:block">
                   <Button
                     size="icon"
                     variant="ghost"
@@ -909,17 +911,21 @@ export default function ChatPage() {
                     <Smile className="h-5 w-5" />
                   </Button>
                   {showEmojis && (
-                    <EmojiPicker
-                      onClose={() => setShowEmojis(false)}
-                      onSelect={(emoji) => {
-                        setInput(prev => prev + emoji)
+                  <EmojiPicker
+                    onClose={() => setShowEmojis(false)}
+                    onSelect={(emoji) => {
+                      if (inputRef.current) {
+                        insertAtCursor(inputRef.current, emoji, setInput)
                         inputRef.current?.focus()
-                      }}
-                    />
+                      } else {
+                        setInput(prev => prev + emoji)
+                      }
+                    }}
+                  />
                   )}
                 </div>
 
-                <div className="relative">
+                <div className="relative hidden sm:block">
                   <Button
                     size="icon"
                     variant="ghost"
@@ -933,18 +939,47 @@ export default function ChatPage() {
                     <StickerPicker
                       onClose={() => setShowStickers(false)}
                       onSelect={(url) => {
-                        socket.emit("private-message", {
-                          chatPublicId,
-                          text: null,
-                          fileUrl: url,
-                          fileType: "image/gif"
-                        })
+                        void sendMessageMutation
+                          .mutateAsync({ stickerUrl: url })
+                          .then(() => {
+                            useChatsStore.getState().bumpChat(chatPublicId, {
+                              text: 'Sent a sticker',
+                              createdAt: new Date().toISOString(),
+                            })
+                          })
+                          .catch(() => {})
                         setShowStickers(false)
                       }}
                     />
                   )}
                 </div>
-              </div>
+                </div>
+
+                {/* Mobile-only emoji trigger; desktop uses the one inside the group above */}
+                <div className="relative sm:hidden">
+                  <Button
+                    size="icon"
+                    variant="ghost"
+                    className={cn("h-9 w-9 transition-colors", showEmojis ? "text-primary" : "text-zinc-400 hover:text-zinc-200")}
+                    onClick={() => { setShowEmojis(!showEmojis); setShowGifs(false); setShowStickers(false); }}
+                    title="Pick an Emoji"
+                  >
+                    <Smile className="h-5 w-5" />
+                  </Button>
+                  {showEmojis && (
+                    <EmojiPicker
+                      onClose={() => setShowEmojis(false)}
+                      onSelect={(emoji) => {
+                        if (inputRef.current) {
+                          insertAtCursor(inputRef.current, emoji, setInput)
+                          inputRef.current?.focus()
+                        } else {
+                          setInput(prev => prev + emoji)
+                        }
+                      }}
+                    />
+                  )}
+                </div>
 
               <Button
                 size="icon"

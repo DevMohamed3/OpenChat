@@ -24,4 +24,5 @@ export type SendChannelMessageInput = {
   text?: string
   file?: File | null
   previewUrl?: string | null
+  stickerUrl?: string | null
 }

@@ -9,7 +9,6 @@ import {
     AvatarImage,
     Button,
     Input,
-    Skeleton,
     Sheet,
     SheetContent,
     SheetTitle,
@@ -31,15 +30,23 @@ import {
     Pencil,
     Trash2,
     Gift,
+    X,
+    Sticker as StickerIcon,
+    Loader2,
+    Users,
 } from 'lucide-react'
 import { api, getAvatarUrl, socket } from '@zerozone/lib'
 import { VisuallyHidden } from '@radix-ui/react-visually-hidden'
 import MessageText from '../../../../_components/chat/MessageText'
+import { ChatBackgroundPattern } from '../../../../_components/chat/ChatBackgroundPattern'
+import { insertAtCursor } from '../../../../_components/chat/insertAtCursor'
+import { MembersSidebarContent } from '../../../../_components/zones/MembersSidebar'
 import ZoneSettings from '../../../../_components/zones/ZoneSettings'
 import ZoneSidebar from '../../../../_components/ZoneSidebar'
 import ZonesList from '../../../../_components/zones/ZonesList'
 const GifPicker = dynamic(() => import('../../../../_components/chat/GifPicker'), { ssr: false })
 const EmojiPicker = dynamic(() => import('../../../../_components/chat/EmojiPicker'), { ssr: false })
+const StickerPicker = dynamic(() => import('../../../../_components/chat/StickerPicker'), { ssr: false })
 import { useChatsStore } from '@/app/stores/chat-store'
 import {
     useSendChannelMessageMutation,
@@ -127,9 +134,11 @@ export default function ChannelPage() {
     const [dashboardOpen, setDashboardOpen] = useState(false)
     const [showGifs, setShowGifs] = useState(false)
     const [showEmojis, setShowEmojis] = useState(false)
+    const [showStickers, setShowStickers] = useState(false)
     const [editingId, setEditingId] = useState<number | null>(null)
     const [editText, setEditText] = useState('')
     const [pinnedPanelOpen, setPinnedPanelOpen] = useState(false)
+    const [membersOpen, setMembersOpen] = useState(false)
     const [typingUsers, setTypingUsers] = useState<Set<number>>(new Set())
 
     const messagesRef = useRef<HTMLDivElement>(null)
@@ -341,24 +350,11 @@ export default function ChannelPage() {
 
     if (zoneLoading || channelLoading || messagesLoading || !zone || !channel) {
         return (
-            <div className="flex h-full min-h-0 flex-col bg-background">
-                <div className="h-12 border-b border-border flex items-center px-4 gap-2">
-                    <Skeleton className="h-5 w-5 rounded-full" />
-                    <Skeleton className="h-4 w-24" />
-                </div>
-                <div className="flex-1 p-4 space-y-6 overflow-hidden">
-                    {[...Array(6)].map((_, index) => (
-                        <div key={index} className="flex gap-4">
-                            <Skeleton className="h-10 w-10 rounded-full" />
-                            <div className="flex-1 space-y-2">
-                                <Skeleton className="h-4 w-32" />
-                                <Skeleton className="h-20 w-full" />
-                            </div>
-                        </div>
-                    ))}
-                </div>
-                <div className="hidden md:flex p-4">
-                    <Skeleton className="h-12 w-full rounded-lg" />
+            <div className="relative flex h-full min-h-0 flex-col bg-background">
+                <ChatBackgroundPattern />
+                <div className="relative z-10 h-12 shrink-0 border-b border-border bg-background" />
+                <div className="relative z-10 flex flex-1 min-h-0 items-center justify-center">
+                    <Loader2 className="h-5 w-5 animate-spin text-primary/60" />
                 </div>
             </div>
         )
@@ -367,10 +363,11 @@ export default function ChannelPage() {
     const currentUserId = currentUser?.id
 
     return (
-        <div className="flex h-full min-h-0 flex-col bg-background">
-            <div className="h-12 shrink-0 border-b border-border flex items-center px-4 justify-between shadow-sm bg-background">
-                <div className="flex items-center gap-2">
-                    <div className="md:hidden">
+        <div className="relative flex h-full min-h-0 flex-col bg-background">
+            <ChatBackgroundPattern />
+            <div className="relative z-10 h-12 shrink-0 border-b border-border flex items-center px-4 justify-between shadow-sm bg-background">
+                <div className="flex items-center gap-2 min-w-0 flex-1">
+                    <div className="md:hidden shrink-0">
                         <Sheet>
                             <SheetTrigger asChild>
                                 <button className="rounded-md p-1 text-muted-foreground hover:bg-muted hover:text-foreground">
@@ -388,12 +385,12 @@ export default function ChannelPage() {
                             </SheetContent>
                         </Sheet>
                     </div>
-                    <Hash className="w-5 h-5 text-muted-foreground" />
-                    <h1 className="font-bold text-sm tracking-tight">
+                    <Hash className="w-5 h-5 text-muted-foreground shrink-0" />
+                    <h1 className="font-bold text-sm tracking-tight truncate min-w-0">
                         {channel.name}
                     </h1>
                 </div>
-                <div className="flex items-center gap-2">
+                <div className="flex items-center gap-1.5 sm:gap-2 shrink-0">
                     {pinnedMessages.length > 0 && (
                         <button
                             type="button"
@@ -404,6 +401,15 @@ export default function ChannelPage() {
                             {pinnedMessages.length} pinned
                         </button>
                     )}
+                    <Button
+                        size="icon"
+                        variant="ghost"
+                        onClick={() => setMembersOpen(true)}
+                        className="h-8 w-8 lg:hidden"
+                        title="Members"
+                    >
+                        <Users size={18} />
+                    </Button>
                     <Button
                         size="icon"
                         variant="ghost"
@@ -430,6 +436,15 @@ export default function ChannelPage() {
                     </Button>
                 </div>
             </div>
+
+            <Sheet open={membersOpen} onOpenChange={setMembersOpen}>
+                <SheetContent side="right" className="w-80 p-0 border-white/5">
+                    <VisuallyHidden>
+                        <SheetTitle>Members</SheetTitle>
+                    </VisuallyHidden>
+                    <MembersSidebarContent />
+                </SheetContent>
+            </Sheet>
 
             <Sheet open={pinnedPanelOpen} onOpenChange={setPinnedPanelOpen}>
                 <SheetContent side="right" className="w-full sm:max-w-md">
@@ -503,14 +518,14 @@ export default function ChannelPage() {
 
             <div
                 ref={messagesRef}
-                className="flex-1 min-h-0 overflow-y-auto overscroll-y-contain p-4 space-y-4"
+                className="relative z-10 flex-1 min-h-0 overflow-y-auto overscroll-y-contain p-4 space-y-4"
             >
                 <div className="flex flex-col min-h-full justify-end">
                     <div ref={topSentinelRef} className="h-1" />
 
                     {isFetchingNextPage && (
                         <div className="flex justify-center py-4">
-                            <Skeleton className="h-8 w-8 rounded-full" />
+                            <Loader2 className="h-5 w-5 animate-spin text-primary/60" />
                         </div>
                     )}
 
@@ -762,17 +777,19 @@ export default function ChannelPage() {
             </div>
 
             <div
-                className="shrink-0 border-t border-border bg-background/95 px-4 pt-2 safe-bottom backdrop-blur"
+                className="relative z-10 shrink-0 border-t border-white/5 bg-background/95 px-2 pt-2 safe-bottom backdrop-blur"
                 style={{
                     paddingBottom:
-                        'calc(env(safe-area-inset-bottom, 0px) + 1rem)',
+                        'calc(env(safe-area-inset-bottom, 0px) + 0.5rem)',
                 }}
             >
                 {showGifs && (
                     <div className="mb-2">
                         <GifPicker
                             onSelect={(gifUrl) => {
-                                setInput((prev) => prev + gifUrl)
+                                void sendMessageMutation
+                                    .mutateAsync({ stickerUrl: gifUrl })
+                                    .catch(() => {})
                                 setShowGifs(false)
                                 inputRef.current?.focus()
                             }}
@@ -785,90 +802,122 @@ export default function ChannelPage() {
                     <div className="mb-2">
                         <EmojiPicker
                             onSelect={(emoji) => {
-                                setInput((prev) => prev + emoji)
-                                inputRef.current?.focus()
+                                if (inputRef.current) {
+                                    insertAtCursor(inputRef.current, emoji, setInput)
+                                    inputRef.current?.focus()
+                                } else {
+                                    setInput((prev) => prev + emoji)
+                                }
                             }}
                             onClose={() => setShowEmojis(false)}
                         />
                     </div>
                 )}
 
-                <div className="bg-muted rounded-lg p-2.5 flex flex-col gap-2 shadow-sm border focus-within:border-primary transition-colors">
-                    {previewUrl && (
-                        <div className="relative w-24 h-24 mb-2 group">
+                {showStickers && (
+                    <div className="mb-2">
+                        <StickerPicker
+                            onClose={() => setShowStickers(false)}
+                            onSelect={(url) => {
+                                void sendMessageMutation
+                                    .mutateAsync({ stickerUrl: url })
+                                    .catch(() => {})
+                                setShowStickers(false)
+                                inputRef.current?.focus()
+                            }}
+                        />
+                    </div>
+                )}
+
+                {previewUrl && (
+                    <div className="px-4 mb-2">
+                        <div className="absolute bottom-20 left-2 w-fit bg-background rounded-2xl p-2 shadow-md">
                             <img
                                 src={previewUrl}
-                                className="w-full h-full object-cover rounded-md ring-1 ring-border"
+                                className="max-h-40 rounded-xl object-cover"
+                                alt="Preview"
                             />
                             <button
                                 onClick={clearSelectedFile}
-                                className="absolute -top-2 -right-2 bg-red-500 text-white rounded-full p-1 opacity-0 group-hover:opacity-100 transition-opacity"
+                                className="absolute top-1 right-1 bg-black/70 text-white text-xs px-2 py-1 rounded"
                             >
                                 <span className="sr-only">Remove</span>
-                                <Plus className="w-3 h-3 rotate-45" />
+                                <X />
                             </button>
                         </div>
-                    )}
-
-                    <div className="flex items-center gap-2">
-                        <Button
-                            size="icon"
-                            variant="ghost"
-                            onClick={() => fileInputRef.current?.click()}
-                            className="h-8 w-8 shrink-0"
-                        >
-                            <Plus className="h-5 w-5" />
-                        </Button>
-
-                        <Input
-                            ref={inputRef}
-                            value={input}
-                            onChange={(event) => {
-                                setInput(event.target.value)
-                                emitTyping()
-                            }}
-                            placeholder={`Message #${channel.name}`}
-                            className="bg-transparent border-none focus-visible:ring-0 px-0 h-auto text-sm"
-                            onKeyDown={(event) => {
-                                if (event.key === 'Enter' && !event.shiftKey) {
-                                    event.preventDefault()
-                                    void send()
-                                }
-                            }}
-                        />
-
-                        <Button
-                            size="icon"
-                            variant="ghost"
-                            onClick={() => setShowGifs(!showGifs)}
-                            className={`h-8 w-8 shrink-0 ${showGifs ? 'bg-muted' : ''}`}
-                        >
-                            <Gift className="h-5 w-5" />
-                        </Button>
-
-                        <Button
-                            size="icon"
-                            variant="ghost"
-                            onClick={() => setShowEmojis(!showEmojis)}
-                            className={`h-8 w-8 shrink-0 ${showEmojis ? 'bg-muted' : ''}`}
-                        >
-                            <Smile className="h-5 w-5" />
-                        </Button>
-
-                        <Button
-                            size="icon"
-                            disabled={
-                                (!input.trim() && !selectedFile) ||
-                                sendMessageMutation.isPending
-                            }
-                            onClick={() => {
-                                void send()
-                            }}
-                            className="h-8 w-8 shrink-0"
-                        >
-                            <Send className="h-4 w-4" />
-                        </Button>
                     </div>
+                )}
+
+                <div className="flex items-center gap-1.5 px-3 py-2 bg-background/50 rounded-2xl border border-white/5 relative">
+                    <Button
+                        size="icon"
+                        variant="ghost"
+                        onClick={() => fileInputRef.current?.click()}
+                        className="text-zinc-400 hover:text-zinc-200 shrink-0 h-9 w-9"
+                    >
+                        <Plus className="h-5 w-5" />
+                    </Button>
+
+                    <Input
+                        ref={inputRef}
+                        value={input}
+                        onChange={(event) => {
+                            setInput(event.target.value)
+                            emitTyping()
+                        }}
+                        placeholder={`Message #${channel.name}`}
+                        className="border-0 bg-transparent focus-visible:ring-0 text-white placeholder:text-zinc-500 min-w-0"
+                        onKeyDown={(event) => {
+                            if (event.key === 'Enter' && !event.shiftKey) {
+                                event.preventDefault()
+                                void send()
+                            }
+                        }}
+                    />
+
+                    <Button
+                        size="icon"
+                        variant="ghost"
+                        onClick={() => { setShowGifs(!showGifs); setShowEmojis(false); setShowStickers(false) }}
+                        className={`h-9 w-9 shrink-0 transition-colors hidden sm:inline-flex ${showGifs ? 'text-primary' : 'text-zinc-400 hover:text-zinc-200'}`}
+                        title="Send GIF"
+                    >
+                        <Gift className="h-5 w-5" />
+                    </Button>
+
+                    <Button
+                        size="icon"
+                        variant="ghost"
+                        onClick={() => { setShowEmojis(!showEmojis); setShowGifs(false); setShowStickers(false) }}
+                        className={`h-9 w-9 shrink-0 transition-colors ${showEmojis ? 'text-primary' : 'text-zinc-400 hover:text-zinc-200'}`}
+                        title="Pick an Emoji"
+                    >
+                        <Smile className="h-5 w-5" />
+                    </Button>
+
+                    <Button
+                        size="icon"
+                        variant="ghost"
+                        onClick={() => { setShowStickers(!showStickers); setShowGifs(false); setShowEmojis(false) }}
+                        className={`h-9 w-9 shrink-0 transition-colors hidden sm:inline-flex ${showStickers ? 'text-primary' : 'text-zinc-400 hover:text-zinc-200'}`}
+                        title="Custom Stickers"
+                    >
+                        <StickerIcon className="h-5 w-5" />
+                    </Button>
+
+                    <Button
+                        size="icon"
+                        disabled={
+                            (!input.trim() && !selectedFile) ||
+                            sendMessageMutation.isPending
+                        }
+                        onClick={() => {
+                            void send()
+                        }}
+                        className="bg-primary hover:bg-primary/90 text-white rounded-xl h-9 w-9 flex-shrink-0 ml-1"
+                    >
+                        <Send className="h-4 w-4" />
+                    </Button>
                 </div>
 
                 <input
@@ -887,9 +936,6 @@ export default function ChannelPage() {
                         setPreviewUrl(URL.createObjectURL(file))
                     }}
                 />
-                <p className="text-[10px] text-muted-foreground mt-2 px-2">
-                    Press Enter to send. Use Shift+Enter for new line.
-                </p>
             </div>
         </div>
     )

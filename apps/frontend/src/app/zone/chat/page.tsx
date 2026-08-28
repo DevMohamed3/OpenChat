@@ -1,9 +1,10 @@
 'use client'
 
+import ZeroLoader from '../_components/ZeroLoader'
 import { useState, useEffect } from 'react'
 import { api, socket, getAvatarUrl } from '@zerozone/lib'
 import { useRouter } from 'next/navigation'
-import { Search, MessageCircle, Plus } from 'lucide-react'
+import { Search, Plus } from 'lucide-react'
 
 interface Chat {
   chatPublicId: string
@@ -126,11 +127,14 @@ export default function ChatListPage() {
       <div className="flex-1 min-h-0 overflow-y-auto overscroll-y-contain px-4 py-4">
         {loading ? (
           <div className="flex items-center justify-center py-12">
-            <div className="w-8 h-8 border-2 border-primary border-t-transparent rounded-full animate-spin" />
+            <ZeroLoader size={36} />
           </div>
         ) : filteredChats.length === 0 ? (
           <div className="flex flex-col items-center justify-center rounded-[32px] border border-dashed border-white/10 bg-white/[0.03] px-4 py-12 text-center">
-            <MessageCircle className="w-12 h-12 text-zinc-600 mb-4" />
+            <div className="mb-4 flex h-14 w-14 items-center justify-center rounded-full bg-primary/15">
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img src="/iconX2.png" alt="" className="h-6 w-6 object-contain opacity-90" />
+            </div>
             <h3 className="text-lg font-semibold text-white mb-2">No messages yet</h3>
             <p className="text-sm text-zinc-500">Start a conversation with a friend</p>
           </div>
