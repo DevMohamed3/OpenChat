@@ -5,6 +5,7 @@ import { getCurrentUser } from '@/lib/getCurrentUser'
 const Hero = dynamic(() => import('./(landing)/Hero'))
 const Features = dynamic(() => import('./(landing)/Features'))
 const TechStack = dynamic(() => import('./(landing)/TechStack'))
+const Architecture = dynamic(() => import('./(landing)/Architecture'))
 const FAQ = dynamic(() => import('./(landing)/faq'))
 const CTA = dynamic(() => import('./(landing)/CTA'))
 const Footer = dynamic(() => import('./(landing)/Footer'))
@@ -20,6 +21,7 @@ export default async function LandingPage() {
                 <Hero />
                 <Features />
                 <TechStack />
+                <Architecture />
                 <FAQ />
                 <CTA />
             </main>

@@ -1,6 +1,7 @@
 'use client'
 
 import { motion } from 'framer-motion'
+import { SectionBackdrop } from './SectionBackdrop'
 
 const tech = [
   { name: 'Next.js', file: 'nextjs.svg' },

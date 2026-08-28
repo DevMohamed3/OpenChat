@@ -1,20 +1,46 @@
 'use client'
 
 import { motion } from 'framer-motion'
-import { MessageCircle, Phone, Lock } from 'lucide-react'
+import {
+  MessageCircle,
+  Phone,
+  RefreshCw,
+  Wifi,
+  UserCheck,
+  Lock,
+} from 'lucide-react'
+import { SectionBackdrop } from './SectionBackdrop'
 
 const features = [
   {
     icon: MessageCircle,
     title: 'Real-Time Messaging',
-    desc: 'Instant delivery, channels, groups, and file sharing — no ads, no tracking.',
+    desc: 'Instant delivery, channels, groups, and file sharing.',
     color: 'bg-primary/15 text-primary',
   },
   {
     icon: Phone,
     title: 'Voice & Video',
-    desc: 'Crystal-clear calls powered by LiveKit. No third-party services, no leaks.',
+    desc: 'Crystal-clear calls powered by LiveKit.',
     color: 'bg-cyan-500/15 text-cyan-400',
+  },
+  {
+    icon: RefreshCw,
+    title: 'Calls survive refresh',
+    desc: 'Active voice calls persist through page reloads and reconnect automatically (server-side call state).',
+    color: 'bg-violet-500/15 text-violet-400',
+  },
+  {
+    icon: Wifi,
+    title: 'Graceful reconnection',
+    desc: 'A 10-second grace period absorbs network drops before ending a call.',
+    color: 'bg-amber-500/15 text-amber-400',
+  },
+  {
+    icon: UserCheck,
+    title: 'Friend-only presence',
+    desc: 'Online/offline status is only broadcast to friends, not the whole system.',
+    color: 'bg-sky-500/15 text-sky-400',
   },
   {
     icon: Lock,
@@ -26,7 +52,8 @@ const features = [
 
 export default function Features() {
   return (
-    <section id="features" className="relative py-32 px-6 bg-background">
+    <section id="features" className="relative py-32 px-6 overflow-hidden bg-background">
+      <SectionBackdrop variant="dark" />
       <div className="container mx-auto max-w-5xl relative z-10">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -43,7 +70,7 @@ export default function Features() {
           </p>
         </motion.div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
           {features.map((f, i) => (
             <motion.div
               key={i}

@@ -7,6 +7,7 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "packages/ui"
+import { SectionBackdrop } from "./SectionBackdrop"
 
 const faqs = [
   {
@@ -44,6 +45,7 @@ const faqs = [
 export default function FAQ() {
   return (
     <section id="faq" className="relative py-32 px-6 overflow-hidden bg-background">
+      <SectionBackdrop variant="minimal" />
       <div className="max-w-3xl mx-auto relative z-10">
         <motion.div
           initial={{ opacity: 0, y: 20 }}

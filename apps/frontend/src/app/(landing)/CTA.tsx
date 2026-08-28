@@ -4,11 +4,12 @@ import { motion } from 'framer-motion'
 import { Github, ArrowRight } from 'lucide-react'
 import Link from 'next/link'
 import { Button } from 'packages/ui'
+import { SectionBackdrop } from './SectionBackdrop'
 
 export default function CTA() {
     return (
         <section className="py-40 relative overflow-hidden bg-background">
-            <div className="absolute inset-0 bg-[radial-gradient(ellipse_60%_40%_at_50%_50%,rgba(120,80,255,0.1),transparent)]" />
+            <SectionBackdrop variant="cta" />
 
             <div className="container mx-auto px-6 text-center relative z-10">
                 <motion.div

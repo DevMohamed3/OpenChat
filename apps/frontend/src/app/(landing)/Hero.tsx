@@ -6,6 +6,7 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { Button } from 'packages/ui'
 import { useUserStore } from '@/app/stores/user-store'
+import { SectionBackdrop } from './SectionBackdrop'
 
 export default function Hero() {
     const user = useUserStore((s) => s.user)
@@ -15,10 +16,10 @@ export default function Hero() {
 
     return (
         <section className="relative min-h-screen flex items-center justify-center pt-40 pb-24 overflow-hidden bg-background">
-            <div className="absolute inset-0 bg-[radial-gradient(ellipse_70%_50%_at_50%_0%,rgba(120,80,255,0.08),transparent)]" />
+            <SectionBackdrop variant="hero" />
 
             {/* Spinning zero of dots */}
-            <div className="absolute inset-0 flex items-center justify-center pointer-events-none -translate-y-[38%]" aria-hidden>
+            <div className="hero-zero-dots absolute inset-0 flex items-center justify-center pointer-events-none -translate-y-[38%]" aria-hidden>
                 <div className="relative h-[680px] w-[680px] max-w-[90vw] max-h-[90vh] animate-[spin_45s_linear_infinite]">
                     {outerDots.map((_, i) => (
                         <span

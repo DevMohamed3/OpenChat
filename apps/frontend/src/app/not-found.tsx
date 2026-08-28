@@ -3,6 +3,7 @@
 import { motion } from "framer-motion"
 import { Home, ArrowLeft } from "lucide-react"
 import Link from "next/link"
+import { useRouter } from "next/navigation"
 import { Button } from "packages/ui"
 import Navbar from "packages/ui/ui/Navbar"
 import Footer from "./(landing)/Footer"
@@ -10,6 +11,22 @@ import { useUserStore } from "./stores/user-store"
 
 export default function NotFound() {
   const user = useUserStore(s => s.user)
+  const router = useRouter()
+
+  // history.back() is a silent no-op when the 404 was opened directly
+  // (no in-app history), so fall back to navigating home instead.
+  const goBack = () => {
+    const hasInAppHistory =
+      typeof document !== "undefined" &&
+      document.referrer.startsWith(window.location.origin) &&
+      window.history.length > 1
+
+    if (hasInAppHistory) {
+      router.back()
+    } else {
+      router.push("/")
+    }
+  }
 
   return (
     <div className="dark min-h-screen bg-background flex flex-col">
@@ -37,7 +54,7 @@ export default function NotFound() {
               </Link>
             </Button>
             <Button asChild variant="outline" className="h-12 px-8 rounded-full border-white/15 text-white hover:bg-white/5 transition-all cursor-pointer">
-              <button onClick={() => window.history.back()}>
+              <button onClick={goBack}>
                 <ArrowLeft size={18} className="mr-2" />
                 Go Back
               </button>
