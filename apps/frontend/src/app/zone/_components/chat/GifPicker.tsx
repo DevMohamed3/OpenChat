@@ -24,7 +24,7 @@ export default function GifPicker({
   ]
 
   return (
-    <Card className="absolute bottom-16 right-4 w-80 h-[450px] bg-[#2b2d31] border-white/5 shadow-2xl flex flex-col overflow-hidden animate-in fade-in slide-in-from-bottom-2 duration-300 z-50">
+    <Card className="absolute bottom-16 right-4 w-80 h-[450px] bg-card border-white/5 shadow-2xl flex flex-col overflow-hidden animate-in fade-in slide-in-from-bottom-2 duration-300 z-50">
       <div className="p-4 border-b border-white/5 space-y-3">
          <div className="flex items-center justify-between">
             <div className="flex items-center gap-2">
@@ -41,7 +41,7 @@ export default function GifPicker({
               value={search}
               onChange={(e) => setSearch(e.target.value)}
               placeholder="Search Tenor..." 
-              className="w-full bg-[#1e1f22] border-0 rounded-lg h-10 pl-10 pr-4 text-sm text-white placeholder:text-zinc-600 focus:outline-none transition-all focus:ring-1 focus:ring-primary/50"
+              className="w-full bg-muted border-0 rounded-lg h-10 pl-10 pr-4 text-sm text-white placeholder:text-zinc-600 focus:outline-none transition-all focus:ring-1 focus:ring-primary/50"
             />
          </div>
       </div>

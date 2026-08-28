@@ -66,7 +66,7 @@ export default function ZoneInvitePage() {
   if (loading) {
     return (
       <div className="flex h-full items-center justify-center p-6">
-        <div className="w-full max-w-md rounded-3xl border border-white/10 bg-[#111827] p-6 shadow-2xl">
+        <div className="w-full max-w-md rounded-3xl border border-white/10 bg-card p-6 shadow-2xl">
           <div className="flex items-center gap-4">
             <Skeleton className="h-16 w-16 rounded-full" />
             <div className="flex-1 space-y-2">
@@ -82,7 +82,7 @@ export default function ZoneInvitePage() {
   if (!invite) {
     return (
       <div className="flex h-full items-center justify-center p-6">
-        <div className="w-full max-w-md rounded-3xl border border-red-500/20 bg-[#111827] p-6 text-center shadow-2xl">
+        <div className="w-full max-w-md rounded-3xl border border-red-500/20 bg-card p-6 text-center shadow-2xl">
           <p className="text-lg font-semibold text-white">Invite not available</p>
           <p className="mt-2 text-sm text-zinc-400">{error || 'This invite is invalid or expired.'}</p>
         </div>
@@ -92,7 +92,7 @@ export default function ZoneInvitePage() {
 
   return (
     <div className="flex h-full items-center justify-center p-6">
-      <div className="w-full max-w-md rounded-3xl border border-white/10 bg-[#111827] p-6 shadow-2xl">
+      <div className="w-full max-w-md rounded-3xl border border-white/10 bg-card p-6 shadow-2xl">
         <p className="text-[11px] font-bold uppercase tracking-[0.28em] text-zinc-500">
           ZeroZone Invite
         </p>

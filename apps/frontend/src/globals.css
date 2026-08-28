@@ -43,6 +43,25 @@ body {
 }
 
 @layer utilities {
+  /* Sparse star field — pure CSS, static, extremely subtle.
+     Large tile = low density; used sparingly via SectionBackdrop. */
+  .star-field::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background-image:
+      radial-gradient(1px 1px at 12% 22%, rgba(255, 255, 255, 0.4) 50%, transparent 51%),
+      radial-gradient(1px 1px at 68% 8%, rgba(255, 255, 255, 0.3) 50%, transparent 51%),
+      radial-gradient(1px 1px at 84% 38%, rgba(165, 180, 252, 0.32) 50%, transparent 51%),
+      radial-gradient(1px 1px at 34% 64%, rgba(255, 255, 255, 0.26) 50%, transparent 51%),
+      radial-gradient(1px 1px at 55% 85%, rgba(103, 232, 249, 0.28) 50%, transparent 51%),
+      radial-gradient(1px 1px at 92% 78%, rgba(255, 255, 255, 0.2) 50%, transparent 51%),
+      radial-gradient(1px 1px at 6% 88%, rgba(196, 181, 253, 0.28) 50%, transparent 51%),
+      radial-gradient(1px 1px at 45% 40%, rgba(255, 255, 255, 0.16) 50%, transparent 51%);
+    background-size: 620px 620px;
+  }
+
   .bg-dots {
     background-image: radial-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 0);
     background-size: 32px 32px;
@@ -159,28 +178,31 @@ body {
   }
 
   .dark {
+    /* ZeroZone dark identity — near-black navy base, violet accent,
+       slate surfaces. Mirrors the landing page's palette. */
     --background: 210 50% 2%;
     --foreground: 210 20% 98%;
-    --card: 210 50% 4%;
+    --card: 222 47% 4%;
     --card-foreground: 210 20% 98%;
-    --popover: 210 50% 2%;
+    --popover: 224 44% 5%;
     --popover-foreground: 210 20% 98%;
-    --primary: 180 70% 30%;
+    --primary: 258 84% 62%;
     --primary-foreground: 210 20% 98%;
-    --secondary: 190 30% 12%;
+    --secondary: 220 14% 11%;
     --secondary-foreground: 210 20% 98%;
-    --muted: 190 30% 12%;
-    --muted-foreground: 190 10% 60%;
-    --accent: 190 30% 12%;
+    --muted: 220 14% 10%;
+    --muted-foreground: 218 11% 65%;
+    --accent: 220 14% 12%;
     --accent-foreground: 210 20% 98%;
-    --destructive: 0 62.8% 30.6%;
+    --destructive: 0 72% 45%;
     --destructive-foreground: 210 20% 98%;
-    --border: 190 30% 12%;
-    --input: 190 30% 12%;
-    --ring: 180 70% 30%;
+    --border: 220 13% 13%;
+    --input: 220 13% 13%;
+    --ring: 258 84% 62%;
+    --radius: 0.75rem;
     --sidebar: 210 50% 2%;
     --bg-main: 210 50% 2%;
-    --surface: 200 35% 7%;
+    --surface: 222 47% 6%;
   }
 }
 
@@ -258,4 +280,13 @@ body {
     scrollbar-color: hsl(var(--muted)) transparent;
   }
 
+}
+
+/* Respect reduced motion for the hero's ambient dot rings.
+   The background system itself is static CSS and needs no guard. */
+@media (prefers-reduced-motion: reduce) {
+  .hero-zero-dots,
+  .hero-zero-dots * {
+    animation: none !important;
+  }
 }

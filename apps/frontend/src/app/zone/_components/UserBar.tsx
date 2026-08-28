@@ -128,7 +128,7 @@ export default function UserBar({ user: serverUser }: { user: SidebarUser | null
       {showMenu && (
         <div
           ref={menuRef}
-          className="absolute bottom-full left-0 right-0 mb-2 mx-2 bg-[#111214] rounded-lg border border-white/5 shadow-xl overflow-hidden animate-in slide-in-from-bottom-2 duration-200"
+          className="absolute bottom-full left-0 right-0 mb-2 mx-2 bg-card rounded-lg border border-white/5 shadow-xl overflow-hidden animate-in slide-in-from-bottom-2 duration-200"
         >
           <button
             onClick={() => {

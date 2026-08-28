@@ -61,7 +61,7 @@ export function DMSidebarDropdown({ children }: DMSidebarDropdownProps) {
       </button>
 
       {isOpen && (
-        <div className="absolute top-full left-0 right-0 mt-1 bg-[#18181b] border border-white/10 rounded-lg shadow-xl overflow-hidden z-50">
+        <div className="absolute top-full left-0 right-0 mt-1 bg-popover border border-white/10 rounded-lg shadow-xl overflow-hidden z-50">
           <div className="py-1">
             <button
               onClick={handleViewAllZones}

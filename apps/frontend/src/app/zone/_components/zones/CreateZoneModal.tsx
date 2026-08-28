@@ -76,7 +76,7 @@ export function CreateZoneModal({ open, onClose, onCreate }: ModalProps) {
         >
           <div className="
             relative overflow-hidden
-            bg-[#0f0f13]/95 backdrop-blur-xl
+            bg-popover/95 backdrop-blur-xl
             border border-white/10
             rounded-2xl
             shadow-2xl shadow-black/50

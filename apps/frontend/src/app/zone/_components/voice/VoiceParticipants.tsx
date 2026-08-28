@@ -40,7 +40,7 @@ export default function VoiceParticipants({
                                 fallbackClassName="bg-white/10 text-[10px] font-bold text-zinc-300"
                             />
                             {isSpeaking && (
-                                <div className="absolute -bottom-0.5 -right-0.5 w-2.5 h-2.5 bg-emerald-500 rounded-full border-2 border-[#1e1f22] animate-pulse" />
+                                <div className="absolute -bottom-0.5 -right-0.5 w-2.5 h-2.5 bg-emerald-500 rounded-full border-2 border-background animate-pulse" />
                             )}
                         </div>
                         <span

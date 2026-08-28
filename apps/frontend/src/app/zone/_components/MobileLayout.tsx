@@ -96,7 +96,7 @@ export default function MobileLayout({ user, children }: MobileLayoutProps) {
     <div className="flex h-full min-h-0 flex-col bg-background md:min-h-full">
       {/* Mobile Header */}
       {!immersiveRoute && (
-        <header className="md:hidden flex items-center justify-between h-14 px-4 bg-[#0b1220] border-b border-white/5 z-40 shrink-0 safe-top">
+        <header className="md:hidden flex items-center justify-between h-14 px-4 bg-background border-b border-white/5 z-40 shrink-0 safe-top">
         <Link href="/zone" className="flex items-center gap-3">
           <div className="w-8 h-8 rounded-lg bg-primary flex items-center justify-center">
             <svg className="w-4 h-4 text-white" fill="currentColor" viewBox="0 0 24 24">
@@ -128,7 +128,7 @@ export default function MobileLayout({ user, children }: MobileLayoutProps) {
       
       {/* Bottom Navigation */}
       {!immersiveRoute && (
-        <nav className="md:hidden fixed bottom-0 left-0 right-0 z-50 bg-[#0b1220]/95 backdrop-blur-xl border-t border-white/10 safe-bottom-nav">
+        <nav className="md:hidden fixed bottom-0 left-0 right-0 z-50 bg-background/95 backdrop-blur-xl border-t border-white/10 safe-bottom-nav">
         <div className="flex items-center justify-around h-16 px-2">
           {MOBILE_TABS.map((tab) => {
             const isActive = activeTab === tab.id
@@ -186,7 +186,7 @@ function TabIcon({ tabId, isActive, user }: { tabId: string; isActive: boolean; 
           alt="Profile"
           className={cn(
             'w-6 h-6 rounded-full object-cover',
-            isActive && 'ring-2 ring-primary ring-offset-1 ring-offset-[#0b1220]'
+            isActive && 'ring-2 ring-primary ring-offset-1 ring-offset-background'
           )}
         />
       ) : (

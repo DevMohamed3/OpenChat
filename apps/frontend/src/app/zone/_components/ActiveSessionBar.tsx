@@ -30,7 +30,7 @@ export default function ActiveSessionBar({
     : `${participantCount ?? participants.length} ${(participantCount ?? participants.length) === 1 ? 'person' : 'people'} here`
 
   return (
-    <div className="mx-2 mb-2 rounded-xl border border-emerald-500/10 bg-[#232428] p-2 shadow-lg animate-in slide-in-from-bottom-2 duration-300">
+    <div className="mx-2 mb-2 rounded-xl border border-emerald-500/10 bg-card p-2 shadow-lg animate-in slide-in-from-bottom-2 duration-300">
       <div className="flex items-center justify-between gap-2">
         <div className="min-w-0">
           <div className="flex items-center gap-1.5">

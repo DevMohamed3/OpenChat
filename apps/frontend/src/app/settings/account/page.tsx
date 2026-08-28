@@ -100,7 +100,7 @@ export default function AccountPage() {
       </Card>
 
       {/* Danger Zone */}
-      <Card className="bg-[#1a1216] border border-red-500/20">
+      <Card className="bg-destructive/10 border border-destructive/30">
         <CardHeader>
           <CardTitle className="text-red-400">
             Danger Zone

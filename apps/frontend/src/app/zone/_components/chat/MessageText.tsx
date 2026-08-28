@@ -33,8 +33,8 @@ export default function MessageText({ text }: { text: string }) {
             rel="noreferrer"
             className={
               invite
-                ? "mx-0.5 inline-flex items-center rounded-xl bg-emerald-500/12 px-2.5 py-1 text-emerald-300 ring-1 ring-emerald-500/20 transition hover:bg-emerald-500/18"
-                : "mx-0.5 inline-flex items-center rounded-xl bg-sky-500/12 px-2.5 py-1 text-sky-300 ring-1 ring-sky-500/20 transition hover:bg-sky-500/18"
+                ? "mx-0.5 inline-flex items-center rounded-xl bg-cyan-400/10 px-2.5 py-1 text-cyan-300 ring-1 ring-cyan-400/20 transition hover:bg-cyan-400/15"
+                : "mx-0.5 inline-flex items-center rounded-xl bg-cyan-400/10 px-2.5 py-1 text-cyan-300 ring-1 ring-cyan-400/20 transition hover:bg-cyan-400/15"
             }
           >
             {invite ? `Invite: ${part}` : part}

@@ -91,7 +91,7 @@ export function ChatPageLoadingSkeleton() {
 
 export function ChannelPageLoadingSkeleton() {
   return (
-    <div className="flex h-[100svh] flex-col bg-[#0b1220]">
+    <div className="flex h-[100svh] flex-col bg-background">
       <div className="flex items-center justify-between border-b border-white/5 px-4 py-3">
         <Skeleton className="h-5 w-32 rounded-lg" />
         <div className="flex gap-2">

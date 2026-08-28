@@ -51,7 +51,7 @@ export default function StickerPicker({
   ]
 
   return (
-    <Card className="absolute bottom-16 right-4 w-72 h-96 bg-[#2b2d31] border-white/5 shadow-2xl flex flex-col overflow-hidden animate-in fade-in slide-in-from-bottom-2 duration-300 z-50">
+    <Card className="absolute bottom-16 right-4 w-72 h-96 bg-card border-white/5 shadow-2xl flex flex-col overflow-hidden animate-in fade-in slide-in-from-bottom-2 duration-300 z-50">
       <div className="p-3 border-b border-white/5 flex items-center justify-between">
          <div className="flex items-center gap-2">
             <Sticker className="w-4 h-4 text-primary" />

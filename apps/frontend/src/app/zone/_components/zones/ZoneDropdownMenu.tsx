@@ -114,7 +114,7 @@ export function ZoneDropdownMenu({
                 </button>
 
                 {isOpen && (
-                    <div className="absolute top-full left-0 mt-1 w-56 bg-[#18181b] border border-white/10 rounded-lg shadow-xl overflow-hidden z-50">
+                    <div className="absolute top-full left-0 mt-1 w-56 bg-popover border border-white/10 rounded-lg shadow-xl overflow-hidden z-50">
                         {isEditing ? (
                             <div className="p-3 space-y-2">
                                 <p className="text-xs text-white/50 uppercase tracking-wide font-semibold">
@@ -201,7 +201,7 @@ export function ZoneDropdownMenu({
                         }}
                     />
                     <div className="fixed inset-0 flex items-center justify-center p-4">
-                        <div className="bg-[#18181b] border border-white/10 rounded-xl p-6 w-full max-w-sm">
+                        <div className="bg-popover border border-white/10 rounded-xl p-6 w-full max-w-sm">
                             <div className="flex items-center gap-2 mb-4">
                                 <AlertTriangle className="w-5 h-5 text-red-500" />
                                 <h3 className="text-lg font-bold text-white">
@@ -255,7 +255,7 @@ export function ZoneDropdownMenu({
                         onClick={() => setShowLeaveConfirm(false)}
                     />
                     <div className="fixed inset-0 flex items-center justify-center p-4">
-                        <div className="bg-[#18181b] border border-white/10 rounded-xl p-6 w-full max-w-sm">
+                        <div className="bg-popover border border-white/10 rounded-xl p-6 w-full max-w-sm">
                             <h3 className="text-lg font-bold text-white mb-2">
                                 Leave Zone?
                             </h3>

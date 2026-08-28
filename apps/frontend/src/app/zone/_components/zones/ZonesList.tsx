@@ -70,7 +70,7 @@ export default function ZonesList() {
 
       <Button
         onClick={() => setOpen(true)}
-        className="w-12 h-12 rounded-[24px] hover:rounded-[16px] bg-muted hover:bg-emerald-500 text-emerald-500 hover:text-white transition-all duration-200 flex items-center justify-center group"
+        className="w-12 h-12 rounded-[24px] hover:rounded-[16px] bg-muted text-zinc-400 hover:bg-primary hover:text-primary-foreground transition-all duration-200 flex items-center justify-center group"
       >
         <Plus size={22} />
       </Button>
