@@ -11,15 +11,19 @@ const config: Config = {
   		fontFamily: {
   			display: ['var(--font-display)', 'ui-serif', 'Georgia', 'Cambria', 'serif'],
   		},
-  		colors: {
-  			background: 'hsl(var(--background))',
-  			foreground: 'hsl(var(--foreground))',
-  			primary: 'hsl(var(--primary))',
-  			muted: {
-  				DEFAULT: 'hsl(var(--muted))',
-  				foreground: 'hsl(var(--muted-foreground))'
-  			}
-  		},
+   		colors: {
+   			background: 'hsl(var(--background))',
+   			foreground: 'hsl(var(--foreground))',
+   			primary: 'hsl(var(--primary))',
+   			muted: {
+   				DEFAULT: 'hsl(var(--muted))',
+   				foreground: 'hsl(var(--muted-foreground))'
+   			},
+   			popover: {
+   				DEFAULT: 'hsl(var(--popover))',
+   				foreground: 'hsl(var(--popover-foreground))'
+   			}
+   		},
   		keyframes: {
   			'accordion-down': {
   				from: {
