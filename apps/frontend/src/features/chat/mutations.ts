@@ -89,13 +89,16 @@ export function useSendChannelMessageMutation(chatPublicId: string, channelPubli
         uploadedFile = await apiClient.post<UploadResponse>(`/zones/${chatPublicId}/upload`, formData)
       }
 
-      return emitChannelMessage(buildMessagePayload({
-        chatPublicId,
+      return emitChannelMessage({
+        ...buildMessagePayload({
+          chatPublicId,
+          channelPublicId,
+          text,
+          file,
+          stickerUrl,
+        }, uploadedFile),
         channelPublicId,
-        text,
-        file,
-        stickerUrl,
-      }, uploadedFile))
+      })
     },
     onMutate({ file, previewUrl, stickerUrl, text }) {
       const temporaryId = -Date.now()
