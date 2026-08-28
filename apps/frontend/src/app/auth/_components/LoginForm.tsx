@@ -87,7 +87,7 @@ export function LoginForm({ onSuccess }: LoginFormProps) {
     })
 
     return (
-        <form onSubmit={handleSubmit(onSubmit)} className="space-y-5">
+        <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
             <AlertBanner type="error" message={error} />
 
             <AuthInput
@@ -139,11 +139,11 @@ export function LoginForm({ onSuccess }: LoginFormProps) {
             <button
                 type="submit"
                 disabled={isSubmitting}
-                className="w-full h-12 bg-primary hover:bg-primary/90 text-white font-semibold rounded-xl transition-all disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2 shadow-lg shadow-primary/25 hover:shadow-primary/40 active:scale-[0.98]"
+                className="w-full h-11 rounded-full font-semibold bg-primary text-primary-foreground hover:bg-primary/90 transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2 shadow-lg shadow-black/25 active:scale-[0.98]"
             >
                 {isSubmitting ? (
                     <>
-                        <Loader2 className="w-5 h-5 animate-spin" />
+                        <Loader2 className="w-4 h-4 animate-spin" />
                         Signing in...
                     </>
                 ) : (
@@ -151,20 +151,17 @@ export function LoginForm({ onSuccess }: LoginFormProps) {
                 )}
             </button>
 
-            <div className="relative flex items-center justify-center my-6">
-                <div className="absolute inset-0 flex items-center">
-                    <div className="w-full border-t border-white/10" />
-                </div>
-                <span className="relative px-4 bg-[#020617] text-sm text-zinc-500">
-                    or
-                </span>
+            <div className="flex items-center gap-4 my-5">
+                <div className="h-px flex-1 bg-white/10" />
+                <span className="text-sm text-zinc-500">or</span>
+                <div className="h-px flex-1 bg-white/10" />
             </div>
 
             <button
                 type="button"
                 onClick={() => login()}
                 disabled={isSubmitting}
-                className="w-full h-12 bg-white/5 hover:bg-white/10 border border-white/10 text-white font-medium rounded-xl transition-all flex items-center justify-center gap-3 disabled:opacity-50 hover:border-white/20 active:scale-[0.98]"
+                className="w-full h-11 border border-white/15 hover:bg-white/5 text-white font-medium rounded-full transition-all flex items-center justify-center gap-3 disabled:opacity-50 hover:border-white/20 active:scale-[0.98]"
             >
                 <svg className="w-5 h-5" viewBox="0 0 24 24">
                     <path

@@ -14,23 +14,23 @@ const tabs = [
 
 export function TabSwitcher({ activeTab, onTabChange }: TabSwitcherProps) {
     return (
-        <div className="flex gap-2 p-1.5 bg-white/5 rounded-xl mb-8 backdrop-blur-xl border border-white/10">
+        <div className="flex gap-1 p-1 bg-white/[0.06] rounded-full mb-6 backdrop-blur-xl border border-white/[0.08]">
             {tabs.map((tab) => (
                 <button
                     key={tab.id}
                     onClick={() => onTabChange(tab.id)}
-                    className="relative flex-1 py-3 px-4 rounded-lg text-sm font-semibold transition-colors z-10"
+                    className="relative flex-1 py-2 px-4 rounded-full text-sm font-semibold transition-colors z-10"
                 >
                     {activeTab === tab.id && (
                         <motion.div
                             layoutId="auth-tab"
-                            className="absolute inset-0 bg-primary rounded-lg shadow-lg shadow-primary/25"
+                            className="absolute inset-0 bg-white rounded-full shadow-lg shadow-black/20"
                             transition={{ type: "spring", bounce: 0.2, duration: 0.5 }}
                         />
                     )}
                     <span
                         className={`relative z-10 ${
-                            activeTab === tab.id ? "text-white" : "text-zinc-400 hover:text-white"
+                            activeTab === tab.id ? "text-black" : "text-zinc-400 hover:text-white"
                         }`}
                     >
                         {tab.label}

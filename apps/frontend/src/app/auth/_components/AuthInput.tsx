@@ -54,8 +54,8 @@ export const AuthInput = forwardRef<HTMLInputElement, AuthInputProps>(
                         placeholder={placeholder}
                         disabled={disabled}
                         className={cn(
-                            "w-full h-12 bg-white/5 border rounded-xl text-white placeholder:text-zinc-500",
-                            "focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-[#020617] transition-all",
+                            "w-full h-11 bg-white/[0.04] border rounded-xl text-white placeholder:text-zinc-500",
+                            "focus:outline-none focus:ring-2 transition-all",
                             "disabled:opacity-50 disabled:cursor-not-allowed",
                             prefix ? "pl-10" : "pl-12",
                             isPassword ? "pr-12" : "pr-4",

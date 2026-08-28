@@ -55,12 +55,12 @@ export function SignupForm({ onSuccess }: SignupFormProps) {
     const onSubmit = async (data: SignupInput) => {
         setError("")
         try {
-            const { confirmPassword: _, ...registerData } = data
+            const { confirmPassword: _, username, ...registerData } = data
             const res = await api("/auth/register", {
                 method: "POST",
                 credentials: "include",
                 headers: { "Content-Type": "application/json" },
-                body: JSON.stringify(registerData),
+                body: JSON.stringify({ ...registerData, username: username.trim().toLowerCase() }),
             })
 
             const result = await res.json()
@@ -77,7 +77,7 @@ export function SignupForm({ onSuccess }: SignupFormProps) {
     }
 
     return (
-        <form onSubmit={handleSubmit(onSubmit)} className="space-y-5">
+        <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
             <AlertBanner type="error" message={error} />
 
             <div className="grid grid-cols-2 gap-4">
@@ -169,16 +169,16 @@ export function SignupForm({ onSuccess }: SignupFormProps) {
             <button
                 type="submit"
                 disabled={isSubmitting}
-                className="w-full h-12 bg-primary hover:bg-primary/90 text-white font-semibold rounded-xl transition-all disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2 shadow-lg shadow-primary/25 hover:shadow-primary/40 active:scale-[0.98]"
+                className="w-full h-11 rounded-full font-semibold bg-primary text-primary-foreground hover:bg-primary/90 transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2 shadow-lg shadow-black/25 active:scale-[0.98]"
             >
                 {isSubmitting ? (
                     <>
-                        <Loader2 className="w-5 h-5 animate-spin" />
+                        <Loader2 className="w-4 h-4 animate-spin" />
                         Creating account...
                     </>
                 ) : (
                     <>
-                        <Sparkles className="w-5 h-5" />
+                        <Sparkles className="w-4 h-4" />
                         Create Account
                     </>
                 )}
