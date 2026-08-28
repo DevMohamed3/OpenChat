@@ -23,7 +23,7 @@ export class UserService {
     }
 
     if (data.username !== undefined) {
-      const username = data.username.trim()
+      const username = data.username.trim().toLowerCase()
       if (username.length < 3) {
         throw new Error('Username must be at least 3 characters')
       }
