@@ -39,32 +39,40 @@ export const io = new Server(server, {
 
 io.use(socketAuth)
 
-await resetPresenceState()
+const PRESENCE_RESET_ATTEMPTS = 5
+const PRESENCE_RESET_RETRY_MS = 2000
+
+async function bootstrapPresenceState() {
+  for (let attempt = 1; attempt <= PRESENCE_RESET_ATTEMPTS; attempt++) {
+    try {
+      await resetPresenceState()
+      return
+    } catch (err) {
+      console.error(
+        `[Presence] Failed to reset presence state (attempt ${attempt}/${PRESENCE_RESET_ATTEMPTS}):`,
+        err
+      )
+      if (attempt < PRESENCE_RESET_ATTEMPTS) {
+        await new Promise((resolve) => setTimeout(resolve, PRESENCE_RESET_RETRY_MS * attempt))
+      }
+    }
+  }
+  console.warn(
+    '[Presence] Starting without presence reset — users may stay flagged online until their next connect/disconnect cycle'
+  )
+}
+
+await bootstrapPresenceState()
 const presenceCleanup = startPresenceCleanup(io)
 
-io.on('connection', async (socket) => {
+io.on('connection', (socket) => {
   const userId = socket.data.userId
   if (!userId) return
 
   socket.join(`user:${userId}`)
-  await registerConnection(io, userId, socket.id)
-  await emitFriendState(io, userId)
 
-  const chats = await prisma.chat.findMany({
-    where: {
-      participants: {
-        some: { userId },
-      },
-    },
-    select: {
-      publicId: true,
-    },
-  })
-
-  for (const chat of chats) {
-    socket.join(`chat:${chat.publicId}`)
-  }
-
+  // Register every handler synchronously — before any awaited DB work — so
+  // events emitted right after connect are never silently dropped.
   privateChatHandler(io, socket)
   callHandler(io, socket)
   channelCallHandler(io, socket)
@@ -120,7 +128,33 @@ io.on('connection', async (socket) => {
   socket.on('disconnect', safeHandler(async () => {
     await unregisterConnection(io, userId, socket.id)
   }))
+
+  void initializeConnection(socket, userId)
 })
+
+async function initializeConnection(socket: import('socket.io').Socket, userId: number) {
+  try {
+    await registerConnection(io, userId, socket.id)
+    await emitFriendState(io, userId)
+
+    const chats = await prisma.chat.findMany({
+      where: {
+        participants: {
+          some: { userId },
+        },
+      },
+      select: {
+        publicId: true,
+      },
+    })
+
+    for (const chat of chats) {
+      socket.join(`chat:${chat.publicId}`)
+    }
+  } catch (err) {
+    console.error('[Socket] Connection initialization failed:', err)
+  }
+}
 
 server.listen(port, () => { console.log(`Server running on port ${port}`) })
 

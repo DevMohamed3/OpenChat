@@ -187,6 +187,8 @@ export function startPresenceCleanup(io: Server) {
 
         await unregisterConnection(io, removal.userId, removal.socketId)
       }
+    } catch (err) {
+      console.error("[Presence] Cleanup tick failed:", err)
     } finally {
       if (!stopped) {
         timerId = setTimeout(cleanup, CLEANUP_INTERVAL_MS)
