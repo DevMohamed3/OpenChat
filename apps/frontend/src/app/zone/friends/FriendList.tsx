@@ -170,7 +170,8 @@ export default function FriendList({ onSelectFriend }: FriendListProps) {
           <ScrollArea className="h-[400px]">
             <div className="space-y-1">
               {friends.map((friend) => {
-                const isActive = username === friend.username
+                const isActive =
+                  username?.toLowerCase() === friend.username.toLowerCase()
 
                 return (
                   <div
@@ -193,7 +194,7 @@ export default function FriendList({ onSelectFriend }: FriendListProps) {
                             fallbackText={friend.username}
                           />
                           {onlineUsers.has(friend.id) && (
-                            <div className="absolute bottom-0 right-0 w-3 h-3 bg-green-500 border-2 border-background rounded-full" />
+                            <div className="absolute bottom-0 right-0 w-3 h-3 bg-emerald-500 border-2 border-background rounded-full" />
                           )}
                         </div>
 

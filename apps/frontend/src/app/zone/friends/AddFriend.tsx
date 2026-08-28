@@ -15,7 +15,7 @@ export default function AddFriend() {
   })
 
   const sendRequest = async () => {
-    const value = username.trim()
+    const value = username.trim().toLowerCase()
     if (!value || loading) return
 
     setLoading(true)
@@ -81,12 +81,12 @@ export default function AddFriend() {
               "bg-primary/20 group-focus-within:opacity-40"
             )} />
             
-            <div className="relative flex flex-col sm:flex-row gap-3 p-2 bg-[#111214] border border-white/10 rounded-2xl shadow-2xl">
+            <div className="relative flex flex-col sm:flex-row gap-3 p-2 bg-card border border-white/10 rounded-2xl shadow-2xl">
               <div className="flex-1 relative flex items-center">
                 <Search className="absolute left-4 w-5 h-5 text-zinc-500" />
                 <input
                   value={username}
-                  onChange={(e) => setUsername(e.target.value)}
+                  onChange={(e) => setUsername(e.target.value.toLowerCase())}
                   onKeyDown={(e) => e.key === 'Enter' && sendRequest()}
                   placeholder="Enter a username (e.g. muhammed_dev)"
                   disabled={loading}

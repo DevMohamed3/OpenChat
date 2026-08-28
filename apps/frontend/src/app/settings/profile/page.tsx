@@ -115,12 +115,19 @@ export default function ProfilePage() {
     try {
       setLoading(true)
 
+      const payload = {
+        ...data,
+        ...(data.username !== undefined
+          ? { username: data.username.trim().toLowerCase() }
+          : {}),
+      }
+
       const res = await api('/users/profile', {
         method: 'PATCH',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify(data),
+        body: JSON.stringify(payload),
       })
 
       const result = await res.json()
@@ -304,7 +311,15 @@ export default function ProfilePage() {
                 <label className="text-sm font-medium">
                   Username
                 </label>
-                <Input {...register('username')} />
+                <Input
+                  {...register('username', {
+                    onChange: (e) => {
+                      e.target.value = e.target.value
+                        .toLowerCase()
+                        .replace(/[^a-z0-9_]/g, '')
+                    },
+                  })}
+                />
               </div>
             </div>
 
