@@ -47,6 +47,7 @@ export default function Footer() {
                     <div className="lg:col-span-1">
                         <Link
                             href="/"
+                            prefetch={false}
                             className="flex items-center gap-2 mb-6 group"
                         >
                             <Image
@@ -90,6 +91,7 @@ export default function Footer() {
                             <li>
                                 <Link
                                     href="/#features"
+                                    prefetch={false}
                                     className="hover:text-white transition-colors"
                                 >
                                     Features
@@ -98,6 +100,7 @@ export default function Footer() {
                             <li>
                                 <Link
                                     href="/open-source"
+                                    prefetch={false}
                                     className="hover:text-white transition-colors"
                                 >
                                     Open Source
@@ -106,6 +109,7 @@ export default function Footer() {
                             <li>
                                 <Link
                                     href="/docs"
+                                    prefetch={false}
                                     className="hover:text-white transition-colors"
                                 >
                                     Documentation
@@ -114,6 +118,7 @@ export default function Footer() {
                             <li>
                                 <Link
                                     href="/solutions"
+                                    prefetch={false}
                                     className="hover:text-white transition-colors"
                                 >
                                     Solutions
@@ -130,6 +135,7 @@ export default function Footer() {
                             <li>
                                 <Link
                                     href="/infrastructure"
+                                    prefetch={false}
                                     className="hover:text-white transition-colors"
                                 >
                                     Infrastructure
@@ -138,6 +144,7 @@ export default function Footer() {
                             <li>
                                 <Link
                                     href="/#faq"
+                                    prefetch={false}
                                     className="hover:text-white transition-colors"
                                 >
                                     FAQ
@@ -163,6 +170,7 @@ export default function Footer() {
                             <li>
                                 <Link
                                     href="/privacy"
+                                    prefetch={false}
                                     className="hover:text-white transition-colors"
                                 >
                                     Privacy Policy
@@ -171,6 +179,7 @@ export default function Footer() {
                             <li>
                                 <Link
                                     href="/terms"
+                                    prefetch={false}
                                     className="hover:text-white transition-colors"
                                 >
                                     Terms of Service

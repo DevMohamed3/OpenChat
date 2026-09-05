@@ -51,6 +51,7 @@ export default function Navbar({ user }: { user?: NavbarUser | null }) {
         <Link
           key={link.name}
           href={link.href}
+          prefetch={false}
           onClick={onNavigate}
           className={`text-sm font-medium transition-colors relative ${
             isActive ? `text-white ${activeClassName}` : "text-zinc-400 hover:text-white"
@@ -75,7 +76,7 @@ export default function Navbar({ user }: { user?: NavbarUser | null }) {
     >
       <div className="container mx-auto flex items-center justify-between h-20 px-6">
         <div className="flex items-center gap-8">
-          <Link href="/" className="flex items-center gap-2 group" onClick={closeMenu}>
+          <Link href="/" prefetch={false} className="flex items-center gap-2 group" onClick={closeMenu}>
             <Image
               src="/iconX2.png"
               width={25}
@@ -118,13 +119,13 @@ export default function Navbar({ user }: { user?: NavbarUser | null }) {
                 </DropdownMenuLabel>
                 <DropdownMenuSeparator className="bg-white/5" />
                 <DropdownMenuItem asChild>
-                  <Link href="/zone" className="flex items-center gap-2 py-2 cursor-pointer">
+                  <Link href="/zone" prefetch={false} className="flex items-center gap-2 py-2 cursor-pointer">
                     <Home className="h-4 w-4" />
                     <span>Home</span>
                   </Link>
                 </DropdownMenuItem>
                 <DropdownMenuItem asChild>
-                  <Link href="/settings/profile" className="flex items-center gap-2 py-2 cursor-pointer">
+                  <Link href="/settings/profile" prefetch={false} className="flex items-center gap-2 py-2 cursor-pointer">
                     <Settings className="h-4 w-4" />
                     <span>Settings</span>
                   </Link>
@@ -151,7 +152,7 @@ export default function Navbar({ user }: { user?: NavbarUser | null }) {
             </DropdownMenu>
           ) : (
             <Button asChild size="sm" className="h-10 px-6 rounded-full bg-white text-black hover:bg-zinc-200 border-0 font-semibold transition-all">
-              <Link href="/auth">Get Started</Link>
+              <Link href="/auth" prefetch={false}>Get Started</Link>
             </Button>
           )}
 
