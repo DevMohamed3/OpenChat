@@ -27,7 +27,7 @@ import {
 import Link from "next/link"
 import Navbar from "packages/ui/ui/Navbar"
 import Footer from "../(landing)/Footer"
-import { useUserStore } from "../stores/user-store"
+import { useUserStore } from "../../stores/user-store"
 
 const categories = [
     {

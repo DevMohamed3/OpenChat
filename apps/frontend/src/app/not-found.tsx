@@ -6,7 +6,7 @@ import Link from "next/link"
 import { useRouter } from "next/navigation"
 import { Button } from "packages/ui"
 import Navbar from "packages/ui/ui/Navbar"
-import Footer from "./(landing)/Footer"
+import Footer from "@/app/(site)/(landing)/Footer"
 import { useUserStore } from "./stores/user-store"
 
 export default function NotFound() {

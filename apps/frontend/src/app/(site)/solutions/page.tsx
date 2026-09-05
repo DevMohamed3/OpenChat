@@ -6,7 +6,7 @@ import Link from "next/link"
 import { Button } from "packages/ui"
 import Navbar from "packages/ui/ui/Navbar"
 import Footer from "../(landing)/Footer"
-import { useUserStore } from "../stores/user-store"
+import { useUserStore } from "../../stores/user-store"
 
 export default function SolutionsPage() {
   const user = useUserStore(s => s.user)
