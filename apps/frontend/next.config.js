@@ -51,12 +51,13 @@ const nextConfig = {
 
   images: {
     formats: ['image/avif', 'image/webp'],
-    domains: [
-      'localhost',
-      '0zone.site',
-      'via.placeholder.com',
-      'lh3.googleusercontent.com',
-      'avatars.githubusercontent.com',
+    remotePatterns: [
+      { protocol: 'http', hostname: 'localhost' },
+      { protocol: 'https', hostname: '0zone.site' },
+      { protocol: 'https', hostname: 'api.0zone.site' },
+      { protocol: 'https', hostname: 'via.placeholder.com' },
+      { protocol: 'https', hostname: 'lh3.googleusercontent.com' },
+      { protocol: 'https', hostname: 'avatars.githubusercontent.com' },
     ],
     minimumCacheTTL: 60,
   },
