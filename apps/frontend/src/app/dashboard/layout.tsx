@@ -1,5 +1,6 @@
 import { getCurrentUser } from '@/lib/getCurrentUser'
 import { redirect } from 'next/navigation'
+import ClientProviders from '../providers/ClientProviders'
 
 export default async function DashboardLayout({
   children,
@@ -13,8 +14,10 @@ export default async function DashboardLayout({
   }
 
   return (
-    <div className="min-h-screen bg-sidebar text-foreground">
-      {children}
-    </div>
+    <ClientProviders initialUser={user}>
+      <div className="min-h-screen bg-sidebar text-foreground">
+        {children}
+      </div>
+    </ClientProviders>
   )
 }

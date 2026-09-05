@@ -2,6 +2,7 @@
 
 import { getCurrentUser } from '@/lib/getCurrentUser'
 import { redirect } from 'next/navigation'
+import ClientProviders from '../providers/ClientProviders'
 import SettingsSidebar from './_components/SettingsSidebar'
 import SettingsClientWrapper from './SettingsClientWrapper'
 
@@ -17,16 +18,18 @@ export default async function SettingsLayout({
   }
 
   return (
-    <SettingsClientWrapper>
-      <div className="flex min-h-screen bg-main">
-        <SettingsSidebar />
+    <ClientProviders initialUser={user}>
+      <SettingsClientWrapper>
+        <div className="flex min-h-screen bg-main">
+          <SettingsSidebar />
 
-        <div className="flex-1 flex justify-center md:pl-64">
-          <div className="w-full max-w-4xl p-4 md:p-12">
-            {children}
+          <div className="flex-1 flex justify-center md:pl-64">
+            <div className="w-full max-w-4xl p-4 md:p-12">
+              {children}
+            </div>
           </div>
         </div>
-      </div>
-    </SettingsClientWrapper>
+      </SettingsClientWrapper>
+    </ClientProviders>
   )
 }

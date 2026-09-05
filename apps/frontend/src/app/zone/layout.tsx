@@ -1,5 +1,6 @@
 // app/zone/layout.tsx  (Server Component)
 import { getCurrentUser } from '@/lib/getCurrentUser'
+import ClientProviders from '../providers/ClientProviders'
 import ZoneSidebar from './_components/ZoneSidebar'
 import { redirect } from 'next/navigation'
 import ZonesList from './_components/zones/ZonesList'
@@ -17,20 +18,22 @@ export default async function ZoneLayout({
   }
 
   return (
-    <div className="flex h-[100dvh] overflow-hidden bg-background">
-      {/* Desktop: Discord-like Sidebar */}
-      <div className="hidden md:flex">
-        <ZonesList />
-        <ZoneSidebar user={user} />
-      </div>
+    <ClientProviders initialUser={user}>
+      <div className="flex h-[100dvh] overflow-hidden bg-background">
+        {/* Desktop: Discord-like Sidebar */}
+        <div className="hidden md:flex">
+          <ZonesList />
+          <ZoneSidebar user={user} />
+        </div>
 
-      {/* Main Content */}
-      <div className="flex-1 flex flex-col min-w-0 min-h-0 h-full">
-        {/* Content with Mobile Layout for mobile screens */}
-        <MobileLayout user={user}>
-          {children}
-        </MobileLayout>
+        {/* Main Content */}
+        <div className="flex-1 flex flex-col min-w-0 min-h-0 h-full">
+          {/* Content with Mobile Layout for mobile screens */}
+          <MobileLayout user={user}>
+            {children}
+          </MobileLayout>
+        </div>
       </div>
-    </div>
+    </ClientProviders>
   )
 }

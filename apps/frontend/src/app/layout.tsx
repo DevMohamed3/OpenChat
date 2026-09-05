@@ -1,7 +1,5 @@
-// root layout (server)
-import { getCurrentUser } from '@/lib/getCurrentUser'
+// root layout (server) — slim shell only; app/landing specifics live in nested layouts
 import '../globals.css'
-import ClientProviders from './providers/ClientProviders'
 import { Metadata } from 'next'
 
 
@@ -32,20 +30,23 @@ export const metadata: Metadata = {
   },
 }
 
-export default async function RootLayout({
+export default function RootLayout({
   children,
 }: {
   children: React.ReactNode
 }) {
-  const user = await getCurrentUser()
-
   return (
-    <html lang="en" suppressHydrationWarning>
+    <html lang="en" suppressHydrationWarning className="dark">
       <body className="min-h-screen bg-main antialiased">
-        < ClientProviders initialUser={user} >
-          {children}
-        </ClientProviders >
-      </body >
-    </html >
+        <link
+          rel="preload"
+          href="/fonts/sesame-serif.woff2"
+          as="font"
+          type="font/woff2"
+          crossOrigin="anonymous"
+        />
+        {children}
+      </body>
+    </html>
   )
 }
