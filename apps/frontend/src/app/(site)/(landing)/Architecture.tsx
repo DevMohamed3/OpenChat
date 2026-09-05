@@ -1,7 +1,6 @@
 'use client'
 
 import { Fragment } from 'react'
-import { motion } from 'framer-motion'
 import {
     ArrowDown,
     ArrowRight,
@@ -11,6 +10,7 @@ import {
     type LucideIcon,
 } from 'lucide-react'
 import { SectionBackdrop } from './SectionBackdrop'
+import { Reveal } from './Reveal'
 
 const steps: { icon: LucideIcon; title: string; sub: string; color: string }[] = [
     {
@@ -38,26 +38,17 @@ export default function Architecture() {
         <section className="relative py-32 px-6 overflow-hidden bg-background">
             <SectionBackdrop variant="orbit" />
             <div className="container mx-auto max-w-5xl relative z-10">
-                <motion.div
-                    initial={{ opacity: 0, y: 20 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ duration: 0.6 }}
-                    className="text-center mb-16"
-                >
+                <Reveal className="text-center mb-16">
                     <h2 className="font-display text-3xl md:text-4xl lg:text-5xl font-normal tracking-tight text-white mb-6">
                         How it works.
                     </h2>
                     <p className="text-zinc-400 text-base max-w-md mx-auto">
                         Three moving parts — easy to run, easy to audit.
                     </p>
-                </motion.div>
+                </Reveal>
 
-                <motion.div
-                    initial={{ opacity: 0 }}
-                    whileInView={{ opacity: 1 }}
-                    viewport={{ once: true }}
-                    transition={{ duration: 0.6, delay: 0.15 }}
+                <Reveal
+                    delay={150}
                     className="flex flex-col md:flex-row items-stretch md:items-center justify-center gap-4 md:gap-6"
                 >
                     {steps.map((step, i) => (
@@ -85,15 +76,9 @@ export default function Architecture() {
                             )}
                         </Fragment>
                     ))}
-                </motion.div>
+                </Reveal>
 
-                <motion.p
-                    initial={{ opacity: 0 }}
-                    whileInView={{ opacity: 1 }}
-                    viewport={{ once: true }}
-                    transition={{ duration: 0.6, delay: 0.3 }}
-                    className="text-center mt-12"
-                >
+                <Reveal delay={300} className="text-center mt-12">
                     {/* PLACEHOLDER: confirm wording of the "see full architecture on GitHub" link */}
                     <a
                         href="https://github.com/DevMuhammed3/ZeroZone"
@@ -103,7 +88,7 @@ export default function Architecture() {
                     >
                         See full architecture on GitHub →
                     </a>
-                </motion.p>
+                </Reveal>
             </div>
         </section>
     )

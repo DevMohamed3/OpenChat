@@ -1,10 +1,10 @@
 'use client'
 
-import { motion } from 'framer-motion'
 import { Github, ArrowRight } from 'lucide-react'
 import Link from 'next/link'
 import { Button } from 'packages/ui'
 import { SectionBackdrop } from './SectionBackdrop'
+import { Reveal } from './Reveal'
 
 export default function CTA() {
     return (
@@ -12,13 +12,7 @@ export default function CTA() {
             <SectionBackdrop variant="cta" />
 
             <div className="container mx-auto px-6 text-center relative z-10">
-                <motion.div
-                    initial={{ opacity: 0, scale: 0.98 }}
-                    whileInView={{ opacity: 1, scale: 1 }}
-                    viewport={{ once: true }}
-                    transition={{ duration: 0.6 }}
-                    className="max-w-3xl mx-auto"
-                >
+                <Reveal className="max-w-3xl mx-auto">
                     <h2 className="font-display text-4xl md:text-5xl lg:text-6xl font-normal tracking-tight text-white mb-6 leading-tight">
                         Ready to build your
                         <br className="hidden sm:block" />
@@ -53,7 +47,7 @@ export default function CTA() {
                             </Link>
                         </Button>
                     </div>
-                </motion.div>
+                </Reveal>
             </div>
         </section>
     )

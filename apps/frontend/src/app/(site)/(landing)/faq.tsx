@@ -1,6 +1,5 @@
 "use client"
 
-import { motion } from "framer-motion"
 import {
   Accordion,
   AccordionContent,
@@ -8,6 +7,7 @@ import {
   AccordionTrigger,
 } from "packages/ui"
 import { SectionBackdrop } from "./SectionBackdrop"
+import { Reveal } from "./Reveal"
 
 const faqs = [
   {
@@ -47,27 +47,16 @@ export default function FAQ() {
     <section id="faq" className="relative py-32 px-6 overflow-hidden bg-background">
       <SectionBackdrop variant="minimal" />
       <div className="max-w-3xl mx-auto relative z-10">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
-          className="text-center mb-16"
-        >
+        <Reveal className="text-center mb-16">
           <h2 className="font-display text-4xl md:text-5xl font-normal tracking-tight text-white mb-6">
             Frequently Asked Questions
           </h2>
           <p className="text-zinc-400 text-base md:text-lg max-w-xl mx-auto">
             Everything you need to know about ZeroZone, privacy, and how it works under the hood.
           </p>
-        </motion.div>
+        </Reveal>
 
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6, delay: 0.15 }}
-        >
+        <Reveal delay={150}>
           <Accordion
             type="single"
             collapsible
@@ -89,7 +78,7 @@ export default function FAQ() {
               </AccordionItem>
             ))}
           </Accordion>
-        </motion.div>
+        </Reveal>
       </div>
     </section>
   )
