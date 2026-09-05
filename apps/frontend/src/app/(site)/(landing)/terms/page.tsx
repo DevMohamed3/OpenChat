@@ -1,13 +1,10 @@
-import { getCurrentUser } from '@/lib/getCurrentUser'
 import Navbar from 'packages/ui/ui/Navbar'
 import Footer from '../Footer'
 
-export default async function TermsPage() {
-  const user = await getCurrentUser()
-
+export default function TermsPage() {
   return (
     <div className="dark min-h-screen bg-background">
-      <Navbar user={user} />
+      <Navbar user={null} />
       <main className="max-w-3xl mx-auto px-6 pt-40 pb-24">
         <h1 className="font-display text-4xl md:text-5xl font-normal tracking-tight text-white mb-4">Terms of Service</h1>
 
